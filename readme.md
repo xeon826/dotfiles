@@ -1,4 +1,6 @@
-Getting Started
+https://www.elliotdenolf.com/blog/bootstrap-your-dotfiles-with-dotbot
+
+# Getting Started
 
 The first step is to get a git repository started and add dotbot as a submodule
 
