@@ -12,6 +12,7 @@
     ~/.config/mpd: mpd
     ~/.ncmpcpp: ncmpcpp
     ~/.config/kitty: kitty
+    ~/.vim: vim
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
