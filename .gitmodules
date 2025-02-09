@@ -5,3 +5,4 @@
 [submodule "awesome-copycats"]
 	path = awesome-copycats
 	url = https://github.com/xeon826/awesome-copycats/
+    branch = master
