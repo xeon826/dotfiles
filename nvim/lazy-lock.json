@@ -44,7 +44,7 @@
   "telescope.nvim": { "branch": "master", "commit": "415af52339215926d705cccc08145f3782c4d132" },
   "toggle-lsp-diagnostics.nvim": { "branch": "main", "commit": "4c515b1625433306807e4a47756592fde0b83c82" },
   "tree-sitter-blade": { "branch": "main", "commit": "47baa7ba1f9d5f436c7a72b052d2dac2166abf92" },
-  "venv-selector.nvim": { "branch": "main", "commit": "f212a424fb29949cb5e683928bdd4038bbe0062d" },
+  "venv-selector.nvim": { "branch": "regexp", "commit": "e82594274bf7b54387f9a2abe65f74909ac66e97" },
   "vim-floaterm": { "branch": "master", "commit": "4e28c8dd0271e10a5f55142fb6fe9b1599ee6160" },
   "vim-jukit": { "branch": "master", "commit": "73214c9a8abc4b6aa7a6266b5bc2ddbf8b3e3c00" },
   "vim-plugin-AnsiEsc": { "branch": "master", "commit": "690f820d20b6e3a79ba20499874eb7333aa4ca5c" },

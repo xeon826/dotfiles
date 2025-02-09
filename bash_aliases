@@ -53,7 +53,7 @@ alias fix-usb='sudo ntfsfix -d /dev/sdb1'
 alias django-ipython='python manage.py shell -i ipython'
 alias trw='tmux rename-window '
 alias x='exit'
-alias nv='nvim'
+alias nv='kitty @ set-window-title "$(realpath --relative-to="$HOME" "$(pwd)")"; nvim'
 alias django-ipython='python manage.py shell -i ipython'
 alias pip-i='pip install -r requirements.txt'
 
