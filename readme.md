@@ -96,5 +96,5 @@ git pull
 
 to update submodules
 ```
-cmds.lua
+git submodule update --remote
 ```
