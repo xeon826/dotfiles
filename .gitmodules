@@ -1,0 +1,7 @@
+[submodule "dotbot"]
+	path = dotbot
+	url = https://github.com/anishathalye/dotbot
+
+[submodule "awesome-copycats"]
+	path = awesome-copycats
+	url = https://github.com/xeon826/awesome-copycats/

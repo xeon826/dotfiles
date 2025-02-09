@@ -1,0 +1,16 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.bashrc: bashrc
+    ~/.bash_aliases: bash_aliases
+    ~/.vimrc: vimrc
+    ~/.config/awesome: awesome-copycats
+    ~/.config/mpd: mpd
+    ~/.ncmpcpp: ncmpcpp
+
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]
