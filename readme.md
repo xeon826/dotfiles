@@ -92,3 +92,9 @@ Any new changes can be retrieved from the repository and installed using the fol
 
 git pull
 ./install
+
+
+to update submodules
+```
+cmds.lua
+```
