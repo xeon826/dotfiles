@@ -98,7 +98,7 @@ opt.updatetime = 100 -- signify default updatetime 4000ms is not good for async 
 opt.termguicolors = true -- enable 24-bit RGB colors
 
 opt.title = true -- enable window title
-opt.titlestring = "%<%F%=%l/%L - nvim" -- what the title of the window will be set to
+opt.titlestring = "%{expand('%:t') == '' ? fnamemodify(getcwd(), ':t') : expand('%:p')}%=%l/%L - nvim" -- what the title of the window will be set to
 
 -- persistent undo
 -- Don"t forget to create folder $HOME/.local/share/nvim/undo
