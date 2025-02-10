@@ -96,8 +96,10 @@ function brightness {
 #     fi
 # fi
 
-# if [ -z "$TMUX" ]; then
-#   # Create a new session with a random UUID as the name
-#   session_name=$(uuidgen | cut -c1-8)
-#   tmux new-session -s "$session_name" -d && tmux attach-session -t "$session_name"
+
+# Launch tmux if USE_TMUX is set and we're not already in a tmux session
+# if [ -n "$USE_TMUX" ] && [ -z "$TMUX" ]; then
+#     # Create a new session with a random UUID as the name
+#     session_name=$(uuidgen | cut -c1-8)
+#     tmux new-session -s "$session_name" -d && tmux attach-session -t "$session_name"
 # fi
