@@ -14,6 +14,7 @@
     ~/.config/kitty: kitty
     ~/.vim: vim
     ~/.config/nvim: nvim
+    ~/.tmux.conf: tmux.conf
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
