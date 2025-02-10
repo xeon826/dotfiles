@@ -53,7 +53,7 @@ alias fix-usb='sudo ntfsfix -d /dev/sdb1'
 alias django-ipython='python manage.py shell -i ipython'
 alias trw='tmux rename-window '
 alias x='exit'
-alias nv='kitty @ set-window-title "$(realpath --relative-to="$HOME" "$(pwd)")"; nvim'
+alias nv='nvim'
 alias django-ipython='python manage.py shell -i ipython'
 alias pip-i='pip install -r requirements.txt'
 alias ..='cd ..'
@@ -68,3 +68,4 @@ alias vi=vim
 alias update-cv-kit-demo-website="gcloud compute scp --recurse ./build/* \"meta-input\":~/build --zone \"us-central1-f\" --project \"pict-app\""
 
 alias icat="kitty +kitten icat"
+# map f1 launch --type=overlay bash -i -c 'rg "^\s*(map|mouse_map)\s+.*" ~/.config/kitty/kitty.conf | fzf'

@@ -12,9 +12,9 @@ call plug#begin()
 Plug 'powerman/vim-plugin-AnsiEsc'
 
 " Shorthand notation for GitHub; translates to https://github.com/junegunn/vim-easy-align
-Plug 'junegunn/vim-easy-align'
+"Plug 'junegunn/vim-easy-align'
 
-Plug 'https://github.com/junegunn/seoul256.vim.git'
+"Plug 'https://github.com/junegunn/seoul256.vim.git'
 
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
 
@@ -26,3 +26,7 @@ call plug#end()
 "   filetype indent off   " Disable file-type-specific indentation
 "   syntax off            " Disable syntax highlighting
 autocmd BufReadPost * AnsiEsc
+
+" Map q to quit all without saving
+nnoremap q :qa!<CR>
+nnoremap <C-s> :w<CR>
