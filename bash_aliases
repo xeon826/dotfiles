@@ -56,6 +56,13 @@ alias x='exit'
 alias nv='kitty @ set-window-title "$(realpath --relative-to="$HOME" "$(pwd)")"; nvim'
 alias django-ipython='python manage.py shell -i ipython'
 alias pip-i='pip install -r requirements.txt'
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../..'
+alias vi=vim
 
 # meta input demo website
 alias update-cv-kit-demo-website="gcloud compute scp --recurse ./build/* \"meta-input\":~/build --zone \"us-central1-f\" --project \"pict-app\""
