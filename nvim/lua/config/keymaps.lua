@@ -12,6 +12,7 @@
 local utils = require("config/utils")
 -- Close all windows and exit from Neovim with <leader> and q
 vim.keymap.set("n", "<leader>qa", ":qa!<CR>", {})
+vim.keymap.set("n", "q", ":qa!<CR>", {})
 -- Fast saving with <leader> and s
 vim.keymap.set("n", "<leader>s", ":w<CR>", {})
 -- Move around splits
