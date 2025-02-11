@@ -54,14 +54,10 @@ if [ -f ~/.bash_api_keys ]; then
     . ~/.bash_api_keys
 fi
 
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
 activate() {
     local search_dir="${1:-.}"  # Use $1 if provided, otherwise use current directory
     source $(find "$search_dir" -iname "activate")
 }
-
-eval "$(rbenv init -)"
 
 # Shell-GPT integration BASH v0.2
 _sgpt_bash() {
