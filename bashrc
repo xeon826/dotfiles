@@ -74,28 +74,3 @@ function brightness {
 
 
 
-# if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-#     if tmux has-session -t template 2>/dev/null; then
-#         # Clone the template session into a new session named after a pattern or use a unique identifier
-#         NEW_SESSION=$(tmux new-session -d -t template -P)
-#         tmux attach-session -t "$NEW_SESSION"
-#     else
-#         # Create a template session to clone from
-#         tmux new-session -s template -d
-#         # Add windows and commands to the template as needed
-# 	#tmux new-window -t template -n 'Window1' 'top'
-#         #tmux new-window -t template -n 'Window2' 'htop'
-#         # Return to the first window if needed
-#         tmux select-window -t template:0
-#         # Attach to the template session
-#         tmux attach-session -t template
-#     fi
-# fi
-
-
-# Launch tmux if USE_TMUX is set and we're not already in a tmux session
-# if [ -n "$USE_TMUX" ] && [ -z "$TMUX" ]; then
-#     # Create a new session with a random UUID as the name
-#     session_name=$(uuidgen | cut -c1-8)
-#     tmux new-session -s "$session_name" -d && tmux attach-session -t "$session_name"
-# fi
