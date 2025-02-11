@@ -98,3 +98,7 @@ to update submodules
 ```
 git submodule update --remote --recursive
 ```
+```
+git submodule sync
+git submodule update --init --recursive
+```
