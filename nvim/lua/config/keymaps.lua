@@ -12,7 +12,6 @@
 local utils = require("config/utils")
 -- Close all windows and exit from Neovim with <leader> and q
 -- vim.keymap.set("n", "<leader>qa", ":qa!<CR>", {})
-vim.keymap.set("n", "<leader>q", ":qa!<CR>", {})
 -- Fast saving with <leader> and s
 vim.keymap.set("n", "<leader>s", ":w<CR>", {})
 -- Move around splits
@@ -64,7 +63,7 @@ vim.keymap.set(
 	{ noremap = true, silent = true, desc = "Close all aside from open buffer." }
 )
 vim.keymap.set("n", "<leader>bca", "<cmd>%bdelete<CR>", { noremap = true, silent = true, desc = "Close all buffers" })
-vim.keymap.set("n", "<leader>q", "<cmd>q!<cr>", { desc = "Quit All" })
+vim.keymap.set("n", "<leader>q", "<cmd>bufdo bd!<cr><cmd>qa!<cr>", { desc = "Quit All" })
 vim.keymap.set("n", "<leader>ud", ":silent :ToggleDiag<cr>", { desc = "Toggle Diagnostics" })
 vim.keymap.set("n", "<leader>ti", "A # type: ignore<esc>", { desc = "Insert mypy type ignore at end of line" })
 vim.keymap.set("n", "<Esc>", function()
