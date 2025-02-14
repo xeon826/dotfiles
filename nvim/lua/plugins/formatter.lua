@@ -12,6 +12,9 @@
 return {
 	{
 		"mhartington/formatter.nvim",
+		keys = {
+			{ mode="n", "<leader>cf", "<cmd>Format<cr>", { noremap = true, silent = true, desc = "Format everything" } },
+		},
 		config = function()
 			local vim = vim
 			local formatter = require("formatter")

@@ -1,7 +1,7 @@
 return {
 	{
 		"rmagatti/auto-session",
-		lazy = true,
+		lazy = false,
 		init = function()
 			local autocmd = vim.api.nvim_create_autocmd
 

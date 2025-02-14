@@ -14,6 +14,13 @@ return {{
     -- File explore
     -- nvim-tree.lua - A file explorer tree for neovim written in lua
     "nvim-tree/nvim-tree.lua",
+    
+		keys = {
+			{ mode="n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle tree" } },
+			{ mode="n", "<leader>nr", ":NvimTreeRefresh<CR>", { desc = "Refresh tree" } },
+			{ mode="n", "<leader>E", ":NvimTreeFindFile<CR>", { desc = "Search for a file in tree" } },
+			{ mode="n", "<leader>nf", ":NvimTreeFocus<CR>", { desc = "Focus tree" } },
+		},
     dependencies = {
         "nvim-tree/nvim-web-devicons",
         lazy = false,

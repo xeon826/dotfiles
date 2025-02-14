@@ -13,6 +13,11 @@ return {{
     -- Smart and powerful comment plugin for neovim.
     -- Supports treesitter, dot repeat, left-right/up-down motions, hooks, and more
     "numToStr/Comment.nvim",
+    lazy = true,
+    keys = {
+        { "gcc", mode = { "n", "v" } },
+        { "gc", mode = { "v" } },
+    },
     opts = {
         active = true,
         on_config_done = nil,
@@ -46,18 +51,18 @@ return {{
         -- @type table
         toggler = {
             -- line-comment toggle
-            line = "mm",
+            line = 'gcc',
             -- block-comment toggle
-            block = "mbm"
+            block = 'gbc'
         },
 
         -- LHS of line and block comment operator-mode mapping in NORMAL/VISUAL mode
         -- @type table
         opleader = {
             -- line-comment opfunc mapping
-            line = "m",
+            line = 'gc',
             -- block-comment opfunc mapping
-            block = "mb"
+            block = 'gb'
         },
 
         -- LHS of extra mappings

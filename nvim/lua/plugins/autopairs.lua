@@ -27,7 +27,7 @@ return {
 			-- Don"t add pairs if the next char is alphanumeric
 			ignored_next_char = "[%w%.]", -- will ignore alphanumeric and `.` symbol
 			fast_wrap = {},
-			disable_filetype = { "TelescopePrompt", "vim" },
+			disable_filetype = { "TelescopePrompt", "vim", "avante" },
 		},
 		config = function(_, opts)
 			local npairs = require("nvim-autopairs")

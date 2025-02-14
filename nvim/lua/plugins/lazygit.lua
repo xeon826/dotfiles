@@ -1,22 +1,20 @@
+local utils = require("config/utils")
 -- nvim v0.8.0
 return {
-  "kdheepak/lazygit.nvim",
-  cmd = {
-    "LazyGit",
-    "LazyGitConfig",
-    "LazyGitCurrentFile",
-    "LazyGitFilter",
-    "LazyGitFilterCurrentFile",
-  },
-  lazy = false,
-  event = 'VimEnter', -- Ensures it starts after Neovim finishes loading
-  -- optional for floating window border decoration
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-  },
-  -- setting the keybinding for LazyGit with 'keys' is recommended in
-  -- order to load the plugin when the command is run for the first time
-  keys = {
-    { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-  }
+	"kdheepak/lazygit.nvim",
+	cmd = {
+		"LazyGit",
+		"LazyGitConfig",
+		"LazyGitCurrentFile",
+		"LazyGitFilter",
+		"LazyGitFilterCurrentFile",
+	},
+	keys = {
+		{ mode = "n", "<leader>gch", "<leader>gch", utils.my_git_bcommits, desc = "Find Files" },
+		{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+	},
+	-- optional for floating window border decoration
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+	},
 }

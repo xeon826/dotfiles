@@ -15,6 +15,29 @@ return {
 		-- Mason
 		"williamboman/mason.nvim",
 		cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
+		keys = {
+			{ "<leader>td", function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end, { mode = "n", desc = "Toggle diagnostics", silent = true } },
+			{ "<leader>lr", "<cmd>LspRestart<cr>", { mode = "n", desc = "Restart LSP servers silently", silent = true } },
+			{ "[d", vim.diagnostic.goto_prev, { mode = "n", desc = "Go to previous diagnostic" } },
+			{ "]d", vim.diagnostic.goto_next, { mode = "n", desc = "Go to next diagnostic" } },
+			{
+				"[D",
+				function()
+					vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+				end,
+				{ mode = "n", desc = "Go to previous error" }
+			},
+			{
+				"]D",
+				function()
+					vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+				end,
+				{ mode = "n", desc = "Go to next error" }
+			},
+			{ "K", vim.lsp.buf.hover, { mode = "n", desc = "Show documentation for what is under cursor" } },
+			{ "<leader>ca", vim.lsp.buf.code_action, { mode = { "n", "v" }, desc = "See available code actions" } },
+			{ "<leader>gr", vim.lsp.buf.rename, { mode = "n", desc = "Smart rename" } },
+		},
 		opts = {
 			PATH = "prepend",
 			ui = {
@@ -84,40 +107,6 @@ return {
 				-- ------------TYPESCRIPT
 				vtsls = {
 					enabled = false,
-					-- filetypes = {
-					-- 	"javascript",
-					-- 	"javascriptreact",
-					-- 	"javascript.jsx",
-					-- 	"typescript",
-					-- 	"typescriptreact",
-					-- 	"typescript.tsx",
-					-- },
-					-- settings = {
-					-- 	complete_function_calls = true,
-					-- 	vtsls = {
-					-- 		enableMoveToFileCodeAction = true,
-					-- 		autoUseWorkspaceTsdk = true,
-					-- 		experimental = {
-					-- 			completion = {
-					-- 				enableServerSideFuzzyMatch = true,
-					-- 			},
-					-- 		},
-					-- 	},
-					-- 	typescript = {
-					-- 		updateImportsOnFileMove = { enabled = "always" },
-					-- 		suggest = {
-					-- 			completeFunctionCalls = true,
-					-- 		},
-					-- 		inlayHints = {
-					-- 			enumMemberValues = { enabled = true },
-					-- 			functionLikeReturnTypes = { enabled = true },
-					-- 			parameterNames = { enabled = "literals" },
-					-- 			parameterTypes = { enabled = true },
-					-- 			propertyDeclarationTypes = { enabled = true },
-					-- 			variableTypes = { enabled = false },
-					-- 		},
-					-- 	},
-					-- },
 				},
 				-- ------------/TYPESCRIPT
 				dockerls = {},
@@ -170,16 +159,6 @@ return {
 					require("lspconfig").vtsls.setup({})
 					return false
 				end,
-				-- example to setup with typescript.nvim
-				-- tsserver = function(_, opts)
-				-- 	require("typescript").setup({
-				-- 		server = opts,
-				-- 		filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
-				-- 	})
-				-- 	return true
-				-- end,
-				-- Specify * to use this function as a fallback for any server
-				-- ["*"] = function(server, opts) end,
 			},
 		},
 		config = function(_, opts)
@@ -215,7 +194,7 @@ return {
 			local mlsp = require("mason-lspconfig")
 			local available = mlsp.get_available_servers()
 
-			local ensure_installed = {"pyright"} ---@type string[]
+			local ensure_installed = { "pyright" } ---@type string[]
 			for server, server_opts in pairs(servers) do
 				if server_opts then
 					server_opts = server_opts == true and {} or server_opts
