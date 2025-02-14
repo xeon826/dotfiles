@@ -98,7 +98,23 @@ to update submodules
 ```
 git submodule update --remote --recursive
 ```
+
+If you make changes to your .gitmodules
 ```
 git submodule sync
+```
+
+Initialize and update submodules
+```
 git submodule update --init --recursive
 ```
+
+### Misc notes
+- `sudo pacman -S python-pipx`
+- `pipx install hererocks `
+- `sudo pacman -S python-pynvim` # and any other system-wide pip packages needed
+- install pyenv
+- `pyenv global system`
+- `sudo pacman -S python-pynvim`
+
+
