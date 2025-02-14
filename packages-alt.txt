@@ -1,4 +1,4 @@
-# pacman -Qqm > packages.txt
+# pacman -Qqm > packages-alt.txt
 aawmtt
 adduser
 android-studio
