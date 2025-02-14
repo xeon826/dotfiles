@@ -6,3 +6,7 @@
 	path = awesome-copycats
 	url = https://github.com/xeon826/awesome-copycats/
     branch = master
+
+[submodule "nvim"]
+	path = nvim
+	url = https://github.com/xeon826/neovim-config
