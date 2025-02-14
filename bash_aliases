@@ -41,7 +41,7 @@ alias loopback-audio-for-steamlink="pw-loopback --capture-props='media.class=Aud
 alias rvm='rbenv'
 alias epsxe-scrcpy='scrcpy -f --crop 1080:1920:0:380'
 alias connect-to-dualsense='bluetoothctl remove 58:10:31:97:44:BE; bluetoothctl power on; bluetoothctl discoverable on; bluetoothctl scan on; bluetoothctl pair 58:10:31:97:44:BE; bluetoothctl trust 58:10:31:97:44:BE;'
-alias connect-to-phone='adb connect 192.168.1.144; scrcpy -f;'
+alias connect-to-phone='adb connect 192.168.1.144:37355';
 alias connect-to-tjt='TERM=xterm-256color ssh thejkwun@server119.web-hosting.com -p21098;'
 alias s='sgpt'
 alias s1='sgpt --chat conversation_1'
