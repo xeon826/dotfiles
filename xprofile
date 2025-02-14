@@ -1,0 +1,5 @@
+export DESKTOP=true
+
+if [ -f ~/.bash_api_keys ]; then
+    . ~/.bash_api_keys
+fi
