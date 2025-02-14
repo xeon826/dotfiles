@@ -23,7 +23,6 @@
     ~/.config/mpd: mpd
     ~/.ncmpcpp: ncmpcpp
     ~/.config/kitty: kitty
-    ~/.vim: vim
     ~/.config/nvim: nvim
     ~/.tmux.conf: tmux.conf
     ~/.local/bin/mkrep: mkrep.py
