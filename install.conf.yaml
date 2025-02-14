@@ -8,6 +8,7 @@
     ~/.bashrc: bashrc
     ~/.bash_profile: bash_profile
     ~/.bash_aliases: bash_aliases
+    ~/.xprofile: xprofile
     ~/.vimrc: vimrc
     ~/.config/awesome: awesome-copycats
     ~/.config/mpd: mpd
