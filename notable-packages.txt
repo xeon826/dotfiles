@@ -1,3 +1,4 @@
+# pacman -Qqe > packages.txt``
 aichat
 android-studio
 awesome
