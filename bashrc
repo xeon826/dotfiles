@@ -30,6 +30,7 @@ export LANGUAGE=en_US.UTF-8
 export FONTCONFIG_PATH=/etc/fonts
 export PASSWORD_STORE_DIR=~/.password-store
 export BROWSER=/usr/bin/floorp
+export PATH="$PATH:$HOME/.luarocks/bin"
 export EDITOR=vim
 
 # The next line updates PATH for the Google Cloud SDK.
