@@ -5,6 +5,9 @@
 
 - clean: ['~']
 
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]
+
 - create:
     - ~/.config
     - ~/.local/bin
@@ -26,5 +29,3 @@
     ~/.local/bin/mkrep: mkrep.py
     ~/.Xmodmap: Xmodmap
 
-- shell:
-    - [git submodule update --init --recursive, Installing submodules]
