@@ -6,6 +6,7 @@
 
 - link:
     ~/.bashrc: bashrc
+    ~/.bash_profile: bash_profile
     ~/.bash_aliases: bash_aliases
     ~/.vimrc: vimrc
     ~/.config/awesome: awesome-copycats

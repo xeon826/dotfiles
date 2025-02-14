@@ -63,6 +63,7 @@ alias .....='cd ../../../../'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
 alias vi=vim
+alias slack='/snap/bin/slack'
 
 # meta input demo website
 alias update-cv-kit-demo-website="gcloud compute scp --recurse ./build/* \"meta-input\":~/build --zone \"us-central1-f\" --project \"pict-app\""
