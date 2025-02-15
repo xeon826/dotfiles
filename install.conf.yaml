@@ -6,7 +6,7 @@
 - clean: ['~']
 
 - shell:
-    - [git submodule update --init --remote --recursive, Initializing and updating submodules]
+    - [git submodule update --init --recursive, Initializing and updating submodules]
 
 - create:
     - ~/.config
