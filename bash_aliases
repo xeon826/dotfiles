@@ -70,3 +70,4 @@ alias update-cv-kit-demo-website="gcloud compute scp --recurse ./build/* \"meta-
 
 alias icat="kitty +kitten icat"
 # map f1 launch --type=overlay bash -i -c 'rg "^\s*(map|mouse_map)\s+.*" ~/.config/kitty/kitty.conf | fzf'
+alias run-android-emu='emulator -avd Medium_Phone_API_35'
