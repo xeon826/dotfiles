@@ -1,13 +1,3 @@
-# vagrant
-alias store_code_login="ssh -p 2222 -X pictpod@127.0.0.1"
-alias redo_vagrant='vagrant halt; vagrant destroy -f; vagrant up'
-alias s="ssh -p 2222 -X pictpod@127.0.0.1"
-
-# sw 
-alias reinstall_pip_packages_use_dep='deactivate; rm -rf venv; python -m venv venv; source venv/bin/activate; pip install -r webapp/requirements.txt --use-deprecated=legacy-resolver'
-alias reinstall_pip_packages='source deactivate; rm -rf webapp/venv; python -m venv webapp/venv; source webapp/venv/bin/activate; pip install -r webapp/requirements.txt'
-alias set_test4_gcloud='export GOOGLE_APPLICATION_CREDENTIALS="/home/dan/test4-google-credentials.json"'
-
 # docker
 alias clean_docker='docker system prune -a -f'
 alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
