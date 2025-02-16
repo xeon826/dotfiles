@@ -10,4 +10,4 @@
 [submodule "nvim"]
 	path = nvim
 	url = https://github.com/xeon826/neovim-config
-    branch = master
+    	branch = master
