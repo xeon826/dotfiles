@@ -27,4 +27,5 @@
     ~/.tmux.conf: tmux.conf
     ~/.local/bin/mkrep: mkrep.py
     ~/.Xmodmap: Xmodmap
+    ~/.config/lazygit/config.yml: lazygit.yml
 
