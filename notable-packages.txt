@@ -80,3 +80,4 @@ virtualbox-host-dkms
 wget
 xsel
 yt-dlp
+gtk-engine-murrine

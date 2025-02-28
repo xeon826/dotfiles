@@ -29,3 +29,5 @@
     ~/.Xmodmap: Xmodmap
     ~/.config/lazygit/config.yml: lazygit.yml
 
+- shell:
+    - [./Tokyonight-GTK-Theme/install.sh -d ~/.config/gtk-4.0 -c dark -l, Installing gtk 4.0 theme]

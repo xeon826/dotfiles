@@ -11,3 +11,6 @@
 	path = nvim
 	url = https://github.com/xeon826/neovim-config
   	branch = master
+[submodule "Tokyonight-GTK-Theme"]
+	path = Tokyonight-GTK-Theme
+	url = https://github.com/Fausto-Korpsvart/Tokyonight-GTK-Theme
