@@ -63,3 +63,5 @@ alias icat="kitty +kitten icat"
 alias run-android-emu='emulator -avd Medium_Phone_API_35'
 alias scaffold-flutter='flutter pub get; dart run build_runner build --delete-conflicting-outputs; flutter run -d emulator-5554'
 
+
+alias run-app='flutter run --flavor dev --target lib/main_dev.dart -d emulator-5554'
