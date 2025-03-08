@@ -28,6 +28,7 @@
     ~/.local/bin/mkrep: mkrep.py
     ~/.Xmodmap: Xmodmap
     ~/.config/lazygit/config.yml: lazygit.yml
+    ~/.inputrc: inputrc
 
 - shell:
     - [./Tokyonight-GTK-Theme/install.sh -d ~/.config/gtk-4.0 -c dark -l, Installing gtk 4.0 theme]
