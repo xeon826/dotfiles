@@ -17,7 +17,6 @@ alias get_folder_sizes='sudo du -cha --max-depth=1 . | grep -E "M|G"'
 
 #lxc
 alias store-log-external='lxc exec store -- watch -n 1 tail -n 50 /var/log/cloud-init-output.log'
-alias to-store='lxc exec my-ubuntu-vm -- su - pictpod'
 
 # misc
 alias lutris='pyenv shell system; lutris -d'
@@ -65,3 +64,7 @@ alias scaffold-flutter='flutter pub get; dart run build_runner build --delete-co
 
 
 alias run-app='flutter run --flavor dev --target lib/main_dev.dart -d emulator-5554'
+alias talk-to-robot='pyenv shell 3.12; open-webui serve --port 8084'
+alias update-mirrors='sudo reflector --protocol https --verbose --latest 25 --sort rate --save /etc/pacman.d/mirrorlist'
+alias listen-to-me='activate ~/git_clones/resumai; python ~/git_clones/resumai/manage.py listen_stream --device-name "HD Webcam C525 Mono"'
+alias listen-to-them='activate ~/git_clones/resumai; python ~/git_clones/resumai/manage.py listen_stream --device-name "SteelSeries Arctis 5 Game"'

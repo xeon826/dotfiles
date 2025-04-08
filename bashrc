@@ -110,3 +110,33 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=separator:#ff9e64 \
   --color=spinner:#ff007c \
 "
+export SILLYTAVERN_LISTEN=true 
+export SILLYTAVERN_PORT=8002
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+export PATH="/home/dan/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/home/dan/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/dan/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/dan/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/dan/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/dan/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+export DOCKER_BUILDKIT=1
+
+# Add composer bin directory to PATH
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+
+# Allow php-cs-fixer to work with PHP 8.4
+export PHP_CS_FIXER_IGNORE_ENV=1
+export ENV=dev
