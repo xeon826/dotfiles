@@ -15,6 +15,7 @@
 
 - link:
     ~/.bashrc: bashrc
+    ~/yt-dlp.conf: yt-dlp.conf
     ~/.bash_profile: bash_profile
     ~/.bash_aliases: bash_aliases
     ~/.xprofile: xprofile

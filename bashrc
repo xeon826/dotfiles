@@ -131,6 +131,8 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+export PATH="$PATH:$HOME/bin"
+
 
 export DOCKER_BUILDKIT=1
 
@@ -140,3 +142,23 @@ export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 # Allow php-cs-fixer to work with PHP 8.4
 export PHP_CS_FIXER_IGNORE_ENV=1
 export ENV=dev
+
+# Spark 
+export SPARK_HOME=~/.local/spark
+export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+
+# Kafka
+export KAFKA_HOME=~/.local/kafka
+export PATH=$PATH:$KAFKA_HOME/bin:$KAFKA_HOME/bin
+
+# Drill
+export DRILL_HOME=~/.local/drill
+export PATH=$PATH:$DRILL_HOME/bin:$DRILL_HOME/bin
+
+# Airflow
+export AIRFLOW_HOME=~/airflow
+export AIRFLOW__WEBSERVER__WEB_SERVER_PORT=8081
+
+# Zeppelin
+export ZEPPELIN_HOME=~/.local/zeppelin
+export PATH=$PATH:$ZEPPELIN_HOME/bin:$ZEPPELIN_HOME/bin
