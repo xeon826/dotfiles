@@ -74,3 +74,4 @@ alias airflow-standalone='AIRFLOW__WEBSERVER__WEB_SERVER_PORT=8082 airflow stand
 alias test-dag='AIRFLOW_CONFIG=config/airflow/airflow.cfg airflow dags test arxiv_processing 2025-04-27'
 alias check-my-ip='curl --socks5-hostname 127.0.0.1:9050 http://checkip.amazonaws.com/'
 alias ft='cd /home/dan/git_clones/FreeTube; yarn run dev'
+alias newid='tor-prompt --run "SIGNAL NEWNYM"'
