@@ -4,7 +4,7 @@ import requests
 import subprocess
 
 # Replace 'your_access_token' with your personal access token
-GITHUB_ACCESS_TOKEN = os.getenv('GIT_PAC')
+GITHUB_ACCESS_TOKEN = os.getenv('GITHUB_PERSONAL_ACCESS_TOKEN')
 GITHUB_API_URL = 'https://api.github.com'
 
 # Get the current directory name
