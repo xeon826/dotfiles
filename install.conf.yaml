@@ -19,6 +19,7 @@
     ~/.bashrc: bashrc
     ~/yt-dlp.conf: yt-dlp.conf
     ~/.bash_profile: bash_profile
+    ~/.serena/serena_config.yml: serena_config.yml
     ~/.bash_aliases: bash_aliases
     ~/.xprofile: xprofile
     ~/.vimrc: vimrc

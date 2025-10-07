@@ -1,5 +1,14 @@
 {
   "mcpServers": {
+    "serena": {
+      "command": "/usr/bin/uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server"
+      ]
+    },
     "fetch": {
       "args": ["mcp-server-fetch"],
       "command": "uvx"
