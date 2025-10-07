@@ -11,7 +11,7 @@
     },
     "fetch": {
       "args": ["mcp-server-fetch"],
-      "command": "uvx"
+      "command": "/usr/bin/uvx"
     },
     "filesystem": {
       "args": ["-y", "mcp-server-filesystem", "${workspaceFolder}"],
