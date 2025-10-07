@@ -1,12 +1,19 @@
 {
   "mcpServers": {
     "fetch": {
-      "args": [
-        "mcp-server-fetch"
-      ],
+      "args": ["mcp-server-fetch"],
       "command": "uvx"
     },
+    "filesystem": {
+      "args": ["-y", "mcp-server-filesystem", "${workspaceFolder}"],
+      "command": "/usr/bin/npx",
+      "env": {
+        "USER_HOME": "${userHome}",
+        "WORKSPACE_PATH": "${workspaceFolder}"
+      }
+    },
     "github": {
+      "autoApprove": [],
       "disabled": false,
       "disabled_prompts": [],
       "headers": {

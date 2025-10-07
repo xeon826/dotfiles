@@ -15,7 +15,7 @@
     - ~/.mcphub
 
 - link:
-    ~/.mcphub/servers.json: servers.json
+    ~/.config/mcphub/servers.json: servers.json
     ~/.bashrc: bashrc
     ~/yt-dlp.conf: yt-dlp.conf
     ~/.bash_profile: bash_profile
