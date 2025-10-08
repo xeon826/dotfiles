@@ -1,9 +1,11 @@
 # pacman -Qqe > packages.txt``
 aichat
+zoxide
 android-studio
 awesome
 brave-bin
 cmake
+fzf
 docker
 docker-compose
 downgrade

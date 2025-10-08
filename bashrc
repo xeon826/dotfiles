@@ -163,3 +163,6 @@ export AIRFLOW__WEBSERVER__WEB_SERVER_PORT=8081
 export ZEPPELIN_HOME=~/.local/zeppelin
 export PATH=$PATH:$ZEPPELIN_HOME/bin:$ZEPPELIN_HOME/bin
 
+# Zoxide
+eval "$(zoxide init bash)"
+
