@@ -71,6 +71,8 @@ bind -x '"\C-l": _sgpt_bash'
 
 bind '"\C-g":"lazygit\n"'
 
+bind '"\C-n":"nvim\n"'
+
 function brightness {
    xrandr --output DP-1 --brightness $1 && xrandr --output DP-2 --brightness $1
 }
