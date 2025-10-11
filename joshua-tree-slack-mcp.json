@@ -1,0 +1,20 @@
+{
+  "serverName": "JoshuaTreeSlack",
+  "functionsPrefix": "joshua-tree-slack",
+  "servers": [
+    {
+      "command": "envmcp",
+      "args": [
+        "npx",
+        "-y",
+        "slack-mcp-server@latest",
+        "--transport",
+        "stdio"
+      ],
+      "env": {
+        "SLACK_MCP_ADD_MESSAGE_TOOL": "true",
+        "SLACK_MCP_LOG_LEVEL": "info"
+      }
+    }
+  ]
+}
