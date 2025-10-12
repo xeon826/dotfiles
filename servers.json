@@ -30,19 +30,32 @@
       },
       "url": "https://api.githubcopilot.com/mcp/"
     },
-    "slack": {
+    "joshua-tree-slack": {
       "command": "/usr/bin/npx",
       "args": [
         "-y",
-        "slack-mcp-server@latest",
-        "--transport",
-        "stdio"
+        "@lamemind/mcp-server-multiverse@latest",
+        "/home/dan/.config/mcphub/joshua-tree-slack-mcp.json"
       ],
       "env": {
-        "SLACK_MCP_XOXC_TOKEN": "${SLACK_MCP_XOXC_TOKEN}",
-        "SLACK_MCP_XOXD_TOKEN": "${SLACK_MCP_XOXD_TOKEN}",
-        "SLACK_MCP_LOG_LEVEL": "info"
+        "SLACK_MCP_XOXP_TOKEN": "${JOSHUA_TREE_SLACK_MCP_XOXP_TOKEN}"
       }
+    },
+    "suno-slack": {
+      "command": "/usr/bin/npx",
+      "args": [
+        "-y",
+        "@lamemind/mcp-server-multiverse@latest",
+        "/home/dan/.config/mcphub/suno-slack-mcp.json"
+      ]
+    },
+    "fraction-slack": {
+      "command": "/usr/bin/npx",
+      "args": [
+        "-y",
+        "@lamemind/mcp-server-multiverse@latest",
+        "/home/dan/.config/mcphub/fraction-slack-mcp.json"
+      ]
     }
   }
 }

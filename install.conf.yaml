@@ -16,6 +16,9 @@
 
 - link:
     ~/.config/mcphub/servers.json: servers.json
+    ~/.config/mcphub/suno-slack-mcp.json: suno-slack-mcp.json
+    ~/.config/mcphub/joshua-tree-slack-mcp.json: joshua-tree-slack-mcp.json
+    ~/.config/mcphub/fraction-slack-mcp.json: fraction-slack-mcp.json
     ~/.bashrc: bashrc
     ~/yt-dlp.conf: yt-dlp.conf
     ~/.bash_profile: bash_profile

@@ -1,6 +1,6 @@
 {
-  "serverName": "JoshuaTreeSlack",
-  "functionsPrefix": "joshua-tree-slack",
+  "serverName": "SunoSlack",
+  "functionsPrefix": "suno-slack",
   "servers": [
     {
       "command": "/usr/bin/envmcp",

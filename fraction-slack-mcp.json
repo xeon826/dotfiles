@@ -1,0 +1,15 @@
+{
+  "serverName": "FractionSlack",
+  "functionsPrefix": "fraction-slack",
+  "servers": [
+    {
+      "command": "/usr/bin/npx",
+      "args": ["-y", "slack-mcp-server@latest", "--transport", "stdio"],
+      "env": {
+        "SLACK_MCP_ADD_MESSAGE_TOOL": "true",
+        "SLACK_MCP_XOXP_TOKEN": "${FRACTION_SLACK_MCP_XOXP_TOKEN}",
+        "SLACK_MCP_LOG_LEVEL": "info"
+      }
+    }
+  ]
+}
