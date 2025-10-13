@@ -36,10 +36,7 @@
         "-y",
         "@lamemind/mcp-server-multiverse@latest",
         "/home/dan/.config/mcphub/joshua-tree-slack-mcp.json"
-      ],
-      "env": {
-        "SLACK_MCP_XOXP_TOKEN": "${JOSHUA_TREE_SLACK_MCP_XOXP_TOKEN}"
-      }
+      ]
     },
     "suno-slack": {
       "command": "/usr/bin/npx",

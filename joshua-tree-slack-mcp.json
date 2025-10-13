@@ -1,10 +1,12 @@
 {
   "serverName": "JoshuaTreeSlack",
-  "functionsPrefix": "joshua-tree-slack",
+  "functionsPrefix": "tjt",
   "servers": [
     {
       "command": "/usr/bin/envmcp",
       "args": [
+        "--env-file",
+        "/home/dan/.config/mcphub/.env.joshua-tree",
         "npx",
         "-y",
         "slack-mcp-server@latest",

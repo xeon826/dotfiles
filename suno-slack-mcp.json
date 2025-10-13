@@ -5,6 +5,8 @@
     {
       "command": "/usr/bin/envmcp",
       "args": [
+        "--env-file",
+        "/home/dan/.config/mcphub/.env.suno",
         "npx",
         "-y",
         "slack-mcp-server@latest",
