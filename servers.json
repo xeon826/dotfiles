@@ -21,7 +21,7 @@
         "WORKSPACE_PATH": "${workspaceFolder}"
       }
     },
-    "github": {
+    "gh": {
       "autoApprove": [],
       "disabled": false,
       "disabled_prompts": [],
@@ -29,6 +29,13 @@
         "Authorization": "Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}"
       },
       "url": "https://api.githubcopilot.com/mcp/"
+    },
+    "firecrawl-mcp": {
+      "command": "/usr/bin/npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
+      }
     }
   },
   "workspace": {

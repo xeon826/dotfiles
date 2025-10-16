@@ -85,3 +85,5 @@ token_count_estimator: TIKTOKEN_GPT4O
 projects:
 - /home/dan/git_clones/my-app
 - /home/dan/git_clones/resumai
+- /home/dan/git_clones/suno-backend
+- /home/dan/git_clones/suno-frontend
