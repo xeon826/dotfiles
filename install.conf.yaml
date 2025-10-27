@@ -31,6 +31,7 @@
     ~/.ncmpcpp: ncmpcpp
     ~/.config/kitty: kitty
     ~/.config/nvim: nvim
+    ~/.config/ksb-nvim: ksb-nvim
     ~/.tmux.conf: tmux.conf
     ~/.local/bin/mkrep: mkrep.py
     ~/.Xmodmap: Xmodmap

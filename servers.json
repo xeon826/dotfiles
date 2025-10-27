@@ -1,28 +1,82 @@
 {
   "mcpServers": {
-    "serena": {
-      "command": "/usr/bin/uvx",
-      "args": [
-        "--from",
-        "git+https://github.com/oraios/serena",
-        "serena",
-        "start-mcp-server"
-      ]
-    },
     "fetch": {
-      "args": ["mcp-server-fetch"],
+      "args": [
+        "mcp-server-fetch"
+      ],
       "command": "/usr/bin/uvx"
     },
     "filesystem": {
-      "args": ["-y", "mcp-server-filesystem", "${workspaceFolder}"],
+      "args": [
+        "-y",
+        "mcp-server-filesystem",
+        "${workspaceFolder}"
+      ],
       "command": "/usr/bin/npx",
       "env": {
         "USER_HOME": "${userHome}",
         "WORKSPACE_PATH": "${workspaceFolder}"
       }
     },
+    "firecrawl-mcp": {
+      "args": [
+        "-y",
+        "firecrawl-mcp"
+      ],
+      "command": "/usr/bin/npx",
+      "env": {
+        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
+      }
+    },
     "gh": {
-      "autoApprove": [],
+      "autoApprove": [
+        "add_comment_to_pending_review",
+        "add_issue_comment",
+        "add_sub_issue",
+        "assign_copilot_to_issue",
+        "create_branch",
+        "create_issue",
+        "create_or_update_file",
+        "create_pull_request",
+        "create_repository",
+        "delete_file",
+        "fork_repository",
+        "get_commit",
+        "get_file_contents",
+        "get_issue",
+        "get_issue_comments",
+        "get_label",
+        "get_latest_release",
+        "get_me",
+        "get_release_by_tag",
+        "get_tag",
+        "get_team_members",
+        "get_teams",
+        "list_branches",
+        "list_commits",
+        "list_issue_types",
+        "list_issues",
+        "list_label",
+        "list_pull_requests",
+        "list_releases",
+        "list_sub_issues",
+        "list_tags",
+        "merge_pull_request",
+        "pull_request_read",
+        "pull_request_review_write",
+        "push_files",
+        "remove_sub_issue",
+        "reprioritize_sub_issue",
+        "request_copilot_review",
+        "search_code",
+        "search_issues",
+        "search_pull_requests",
+        "search_repositories",
+        "search_users",
+        "update_issue",
+        "update_pull_request",
+        "update_pull_request_branch"
+      ],
       "disabled": false,
       "disabled_prompts": [],
       "headers": {
@@ -30,19 +84,54 @@
       },
       "url": "https://api.githubcopilot.com/mcp/"
     },
-    "firecrawl-mcp": {
-      "command": "/usr/bin/npx",
-      "args": ["-y", "firecrawl-mcp"],
-      "env": {
-        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
-      }
+    "serena": {
+      "args": [
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server"
+      ],
+      "autoApprove": [
+        "read_file",
+        "create_text_file",
+        "list_dir",
+        "find_file",
+        "replace_regex",
+        "search_for_pattern",
+        "get_symbols_overview",
+        "find_symbol",
+        "find_referencing_symbols",
+        "replace_symbol_body",
+        "insert_after_symbol",
+        "insert_before_symbol",
+        "rename_symbol",
+        "write_memory",
+        "read_memory",
+        "list_memories",
+        "delete_memory",
+        "execute_shell_command",
+        "activate_project",
+        "switch_modes",
+        "get_current_config",
+        "check_onboarding_performed",
+        "onboarding",
+        "think_about_collected_information",
+        "think_about_task_adherence",
+        "think_about_whether_you_are_done",
+        "prepare_for_new_conversation"
+      ],
+      "command": "/usr/bin/uvx"
     }
   },
   "workspace": {
     "enabled": true,
-    "look_for": [".mcphub/servers.json"],
-    "reload_on_dir_changed": true,
-    "port_range": { "min": 40000, "max": 41000 },
-    "get_port": null
+    "look_for": [
+      ".mcphub/servers.json"
+    ],
+    "port_range": {
+      "max": 41000,
+      "min": 40000
+    },
+    "reload_on_dir_changed": true
   }
 }

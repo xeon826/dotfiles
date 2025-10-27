@@ -76,3 +76,6 @@ alias ft='cd /home/dan/git_clones/FreeTube; yarn run dev'
 alias newip='tor-prompt --run "SIGNAL NEWNYM"'
 alias play-most-recent='ls -rt1 . | tail -n 30 | tr "\n" "\0" | xargs -0 mpv'
 alias serena-generate-config="uvx --from git+https://github.com/oraios/serena serena project generate-yml"
+alias clear='clear && printf "\033c"'
+
+alias flushdb="poetry run python -m suno_backend.manage migrate"
