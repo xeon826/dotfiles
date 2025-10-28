@@ -60,6 +60,23 @@ activate() {
     source $(find "$search_dir" -iname "activate")
 }
 
+start() {
+    local search_dir="${1:-.}"  # Use $1 if provided, otherwise use current directory
+    local original_dir="$(pwd)"
+    
+    # Find the closest devbox.json file
+    local devbox_dir="$(dirname "$(find "$search_dir" -name "devbox.json" | head -1)")"
+    
+    if [ -n "$devbox_dir" ]; then
+        cd "$devbox_dir"
+        source $(find . -iname "start" | head -1);
+        cd "$original_dir"
+    else
+        source $(find "$search_dir" -iname "start" | head -1)
+    fi
+}
+
+
 # Shell-GPT integration BASH v0.2
 _sgpt_bash() {
 if [[ -n "$READLINE_LINE" ]]; then
@@ -173,3 +190,4 @@ export API_TIMEOUT_MS=600000
 export ANTHROPIC_MODEL=deepseek-chat
 export ANTHROPIC_SMALL_FAST_MODEL=deepseek-chat
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
+
