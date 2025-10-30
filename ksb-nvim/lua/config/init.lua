@@ -30,6 +30,17 @@ vim.opt.termguicolors = true -- enable 24-bit RGB colors
 
 vim.api.nvim_set_hl(0, "CurSearch", { fg = "#ffffff", bg = "#2D4F67", bold = true })
 
+-- Load config modules BEFORE plugins
+local modules = {"config.autocmds", "config.options", "config.keymaps", "config.custom"}
+
+for _, mod in ipairs(modules) do
+    local ok, err = pcall(require, mod)
+    -- config.custom may be empty. It's a optional module
+    if not ok and not mod == "config/custom" then
+        error(("Error loading %s...\n\n%s"):format(mod, err))
+    end
+end
+
 -- build spec
 local spec = {{
     import = "plugins"
@@ -88,15 +99,7 @@ require("lazy").setup({
     state = vim.fn.stdpath("state") .. "/lazy/state.json" -- state info for checker and other things
 })
 
-local modules = {"config.autocmds", "config.options", "config.keymaps", "config.custom"}
-
-for _, mod in ipairs(modules) do
-    local ok, err = pcall(require, mod)
-    -- config.custom may be empty. It's a optional module
-    if not ok and not mod == "config/custom" then
-        error(("Error loading %s...\n\n%s"):format(mod, err))
-    end
-end
-
 -- Disable annoying deprecated message
 vim.deprecate = function() end
+
+
