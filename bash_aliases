@@ -79,3 +79,4 @@ alias serena-generate-config="uvx --from git+https://github.com/oraios/serena se
 alias clear='clear && printf "\033c"'
 
 alias flushdb="poetry run python -m suno_backend.manage migrate"
+alias dl="yt-dlp --cookies-from-browser firefox $1"

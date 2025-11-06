@@ -84,11 +84,13 @@ if [[ -n "$READLINE_LINE" ]]; then
     READLINE_POINT=${#READLINE_LINE}
 fi
 }
-bind -x '"\C-l": _sgpt_bash'
+# bind -x '"\C-l": _sgpt_bash'
 
 bind '"\C-g":"lazygit\n"'
 
 bind '"\C-n":"nvim\n"'
+
+bind '"\C-l":"claude\n"'
 
 function brightness {
    xrandr --output DP-1 --brightness $1 && xrandr --output DP-2 --brightness $1

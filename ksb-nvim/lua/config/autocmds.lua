@@ -42,25 +42,52 @@ autocmd("BufEnter", {
 	end,
 })
 
--- Force text wrapping specifically for kitty-scrollback buffers
+-- Force text wrapping specifically for kitty-scrollback buffers with adaptive settings
 autocmd("FileType", {
 	pattern = "ksb*",
 	callback = function()
+		-- Get terminal width to detect narrow terminals (vertical monitors)
+		local columns = vim.o.columns
+
+		-- Enable text wrapping with adaptive settings
 		vim.opt_local.wrap = true
 		vim.opt_local.linebreak = true
 		vim.opt_local.breakindent = true
 		vim.opt_local.wrapmargin = 0
+
+		-- For narrow terminals (vertical monitors), adjust text display
+		if columns < 100 then
+			-- On vertical monitors, ensure proper text wrapping
+			vim.opt_local.textwidth = columns - 2  -- Leave small margins
+			vim.opt_local.showbreak = "↪ "         -- Visual indicator for wrapped lines
+			print("Vertical monitor detected: columns=" .. columns .. ", textwidth=" .. vim.opt_local.textwidth:get())
+		else
+			-- On horizontal monitors, use default settings
+			vim.opt_local.textwidth = 0  -- Disable fixed textwidth
+			print("Horizontal monitor detected: columns=" .. columns)
+		end
 	end,
 })
 
--- Force text wrapping for buffers containing "kitty" in their name
+-- Force text wrapping for buffers containing "kitty" in their name with adaptive settings
 autocmd("BufEnter", {
 	pattern = "*kitty*",
 	callback = function()
+		-- Get terminal width to detect narrow terminals (vertical monitors)
+		local columns = vim.o.columns
+
+		-- Enable text wrapping with adaptive settings
 		vim.opt_local.wrap = true
 		vim.opt_local.linebreak = true
 		vim.opt_local.breakindent = true
 		vim.opt_local.wrapmargin = 0
+
+		-- For narrow terminals (vertical monitors), adjust text display
+		if columns < 100 then
+			-- On vertical monitors, ensure proper text wrapping
+			vim.opt_local.textwidth = columns - 2  -- Leave small margins
+			vim.opt_local.showbreak = "↪ "         -- Visual indicator for wrapped lines
+		end
 	end,
 })
 

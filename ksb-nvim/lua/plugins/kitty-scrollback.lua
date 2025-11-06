@@ -15,6 +15,11 @@ return {
 			require("kitty-scrollback").setup({
 				-- Global configuration to prevent exit after yanking
 				{
+					callbacks = {
+						after_launch = function()
+							vim.o.wrap = true
+						end,
+					},
 					-- Disable yank register behavior that might trigger exit
 					paste_window = {
 						yank_register_enabled = false,
@@ -28,5 +33,3 @@ return {
 		end,
 	},
 }
-
-
