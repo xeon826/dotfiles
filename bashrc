@@ -2,6 +2,9 @@
 # ~/.bashrc
 #
 
+# set vi mode. Note: :cq to quit editor mode without executing command
+set -o vi
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
