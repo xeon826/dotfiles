@@ -87,6 +87,8 @@ bind '"\C-l":"claude\n"'
 
 bind '"\C-b":"cd ..\n"'
 
+bind '"\C-f":"ranger\n"'
+
 function brightness {
    xrandr --output DP-1 --brightness $1 && xrandr --output DP-2 --brightness $1
 }
@@ -102,6 +104,9 @@ export LIBVIRT_DEFAULT_URI="qemu:///system"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 export TERM=xterm-kitty
+
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --highlight-line \
