@@ -15,6 +15,7 @@
     - ~/.mcphub
 
 - link:
+    ~/.config/ranger/rifle.conf: rifle.conf
     ~/.config/mcphub/servers.json: servers.json
     ~/.config/mcphub/suno-slack-mcp.json: suno-slack-mcp.json
     ~/.config/mcphub/joshua-tree-slack-mcp.json: joshua-tree-slack-mcp.json
