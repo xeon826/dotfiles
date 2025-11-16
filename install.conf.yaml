@@ -15,6 +15,7 @@
     - ~/.mcphub
 
 - link:
+    ~/.config/alacritty: alacritty.toml
     ~/.config/ranger: ranger
     ~/.config/mcphub/servers.json: servers.json
     ~/.config/mcphub/suno-slack-mcp.json: suno-slack-mcp.json
