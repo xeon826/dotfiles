@@ -1,6 +1,11 @@
 git:
   log:
     order: default
+os:
+  # Copy to clipboard command for Linux/X11 systems
+  copyToClipboardCmd: printf "\033]52;c;$(printf {{text}} | base64 -w 0)\a" > /dev/tty
+  # Read from clipboard command for Linux/X11 systems
+  readFromClipboardCmd: 'xclip -selection clipboard -o'
 customCommands:
   - key: <c-b>
     description: Pick AI commit

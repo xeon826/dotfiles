@@ -74,7 +74,7 @@ alias test-dag='AIRFLOW_CONFIG=config/airflow/airflow.cfg airflow dags test arxi
 alias check-my-ip='curl --socks5-hostname 127.0.0.1:9050 http://checkip.amazonaws.com/'
 alias ft='cd /home/dan/git_clones/FreeTube; yarn run dev'
 alias newip='tor-prompt --run "SIGNAL NEWNYM"'
-alias play-most-recent='ls -rt1 . | tail -n 30 | tr "\n" "\0" | xargs -0 mpv'
+alias play-most-recent='ls -rt1 . | tail -n 30 | tr "\n" "\0" | xargs -0 mpv --no-video'
 alias serena-generate-config="uvx --from git+https://github.com/oraios/serena serena project generate-yml"
 alias clear='clear && printf "\033c"'
 
@@ -83,3 +83,5 @@ alias ytdl="yt-dlp --cookies-from-browser firefox $1"
 alias clone="git clone"
 alias jellyfin="flatpak run org.jellyfin.JellyfinServer"
 alias ncdu='sudo TERM=xterm-256color ncdu'
+alias screensoff='xset dpms force off'
+alias jelly-mpv-shim='flatpak run com.github.iwalton3.jellyfin-mpv-shim'
