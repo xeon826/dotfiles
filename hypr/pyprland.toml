@@ -4,12 +4,12 @@ plugins = [
 ]
 
 [scratchpads.terminals]
-animation = "fromTop"
+animation = "fromRight"
 margin = 50
-size = "75% 60%"
+size = "95% 60%"
 max_size = "1920px 100%"
 
 [scratchpads.term]
-command = "kitty --class kitty-dropterm claude"
+command = "kitty --class kitty-dropterm --directory ~/git_clones claude"
 class = "kitty-dropterm"
 use = "terminals"
