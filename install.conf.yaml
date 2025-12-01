@@ -1,6 +1,7 @@
 - defaults:
     link:
       relink: true
+      force: true
       create: true
 
 - clean: ['~']
@@ -15,6 +16,8 @@
     - ~/.mcphub
 
 - link:
+    ~/.config/fish: fish
+    ~/.config/hypr: hypr
     ~/.config/alacritty: alacritty.toml
     ~/.config/ranger: ranger
     ~/.config/mcphub/servers.json: servers.json
