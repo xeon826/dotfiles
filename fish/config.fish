@@ -149,12 +149,9 @@ if status is-interactive # Commands to run in interactive sessions can go here
         set -gx NVM_DIR "$HOME/.nvm"
     end
 
-    if test -d "$HOME/.pyenv"
-        set -gx PYENV_ROOT "$HOME/.pyenv"
-        fish_add_path $PYENV_ROOT/bin
-        pyenv init - | source
-        pyenv virtualenv-init - | source
-    end
+    set -Ux PYENV_ROOT $HOME/.pyenv
+    test -d $PYENV_ROOT/bin; and fish_add_path $PYENV_ROOT/bin
+    pyenv init - fish | source
 
     if test -f "$HOME/Downloads/google-cloud-sdk/path.fish.inc"
         source "$HOME/Downloads/google-cloud-sdk/path.fish.inc"
