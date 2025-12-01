@@ -1,0 +1,15 @@
+[pyprland]
+plugins = [
+    "scratchpads",
+]
+
+[scratchpads.terminals]
+animation = "fromTop"
+margin = 50
+size = "75% 60%"
+max_size = "1920px 100%"
+
+[scratchpads.term]
+command = "kitty --class kitty-dropterm claude"
+class = "kitty-dropterm"
+use = "terminals"
