@@ -177,6 +177,14 @@ Item { // Bar content region
                     Layout.alignment: Qt.AlignVCenter
                 }
 
+                HeadphoneBatteryIndicator {
+                    Layout.alignment: Qt.AlignVCenter
+                }
+
+                DualSenseBatteryIndicator {
+                    Layout.alignment: Qt.AlignVCenter
+                }
+
                 BatteryIndicator {
                     visible: (root.useShortenedForm < 2 && Battery.available)
                     Layout.alignment: Qt.AlignVCenter
@@ -312,14 +320,7 @@ Item { // Bar content region
                         iconSize: Appearance.font.pixelSize.larger
                         color: rightSidebarButton.colText
                     }
-                    HeadphoneBatteryIndicator {
-                        Layout.alignment: Qt.AlignVCenter
-                        Layout.leftMargin: indicatorsRowLayout.realSpacing
-                    }
-                    DualSenseBatteryIndicator {
-                        Layout.alignment: Qt.AlignVCenter
-                        Layout.leftMargin: indicatorsRowLayout.realSpacing
-                    }
+
                 }
             }
 
