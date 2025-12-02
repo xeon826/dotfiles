@@ -312,6 +312,14 @@ Item { // Bar content region
                         iconSize: Appearance.font.pixelSize.larger
                         color: rightSidebarButton.colText
                     }
+                    HeadphoneBatteryIndicator {
+                        Layout.alignment: Qt.AlignVCenter
+                        Layout.leftMargin: indicatorsRowLayout.realSpacing
+                    }
+                    DualSenseBatteryIndicator {
+                        Layout.alignment: Qt.AlignVCenter
+                        Layout.leftMargin: indicatorsRowLayout.realSpacing
+                    }
                 }
             }
 
