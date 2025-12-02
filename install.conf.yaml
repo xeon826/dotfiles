@@ -17,6 +17,7 @@
 
 - link:
     ~/.config/mpDris2: mpDris2
+    ~/.config/quickshell: quickshell
     ~/.config/fish: fish
     ~/.config/hypr: hypr
     ~/.config/alacritty: alacritty.toml
