@@ -111,7 +111,7 @@ if status is-interactive # Commands to run in interactive sessions can go here
         if test (count $argv) -gt 0
             set search_dir $argv[1]
         end
-        source (find "$search_dir" -iname "activate" | head -1)
+        source (find "$search_dir" -iname "activate.fish" | head -1)
     end
 
     function start
