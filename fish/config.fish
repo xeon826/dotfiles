@@ -166,11 +166,6 @@ if status is-interactive # Commands to run in interactive sessions can go here
         source ~/.config/fish/aliases.fish
     end
 
-    # Source api-keys file
-    if test -f ~/api-keys.fish
-        source ~/api-keys.fish
-    end
-
     # SDKMAN
     set -gx SDKMAN_DIR "$HOME/.sdkman"
     if test -f "$HOME/.sdkman/bin/sdkman-init.fish"
