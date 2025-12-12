@@ -85,10 +85,10 @@ alias jelly-mpv-shim 'flatpak run com.github.iwalton3.jellyfin-mpv-shim'
 # ============================================================================
 
 # Function for lutris with pyenv
-function lutris
-    pyenv shell system
-    lutris -d
-end
+# function lutris
+#     pyenv shell system
+#     lutris -d
+# end
 
 # Function for dev server with output redirection
 function dev_server_tsx
