@@ -17,6 +17,7 @@
 
 - link:
     ~/.config/mpDris2: mpDris2
+    ~/steam-wayland-wrapper.sh: steam-wayland-wrapper
     ~/.config/quickshell: quickshell
     ~/.config/fish: fish
     ~/.config/hypr: hypr
