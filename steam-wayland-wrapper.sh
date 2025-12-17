@@ -30,7 +30,7 @@ if [ "$XDG_SESSION_TYPE" = "wayland" ] || [ -n "$WAYLAND_DISPLAY" ]; then
         H=2160
     fi
     # SDL_VIDEODRIVER=x11 gamescope -r 180 --mangoapp --backend sdl --adaptive-sync -f -W "$W" -H "$H" -- "$@"
-    SDL_VIDEODRIVER=x11 gamescope -f -W "$W" -H "$H" -- "$@" -dx12
+    gamescope -f -W "$W" -H "$H" -- "$@"
 else
     exec "$@"
 fi
