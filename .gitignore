@@ -1,3 +1,4 @@
 .jukit
 *.pyc
 fish_variables
+hypr/monitors.conf

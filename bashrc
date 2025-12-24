@@ -194,3 +194,12 @@ export ANTHROPIC_SMALL_FAST_MODEL=deepseek-chat
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 export PATH="$PATH:$HOME/go/bin"
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --color=fg:#ffffff,bg:#161616,hl:#08bdba --color=fg+:#f2f4f8,bg+:#262626,hl+:#3ddbd9 --color=info:#78a9ff,prompt:#33b1ff,pointer:#42be65 --color=marker:#ee5396,spinner:#ff7eb6,header:#be95ff'
+
+stopwatch() {
+    start=$(date +%s)
+    while true; do
+        time="$(($(date +%s) - $start))"
+        printf "\r%s" "$(date -u -d "@$time" +%H:%M:%S)"
+        sleep 0.1
+    done
+}

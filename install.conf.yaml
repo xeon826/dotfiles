@@ -16,6 +16,7 @@
     - ~/.mcphub
 
 - link:
+    ~/.config/illogical-impulse/config.json: config.json
     ~/.config/mpDris2: mpDris2
     ~/steam-wayland-wrapper.sh: steam-wayland-wrapper.sh
     ~/.config/quickshell: quickshell
