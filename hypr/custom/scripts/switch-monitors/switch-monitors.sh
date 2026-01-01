@@ -8,9 +8,9 @@ set -euo pipefail
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}" || echo "${BASH_SOURCE[0]}")"
 CONFIG_DIR="$(cd "$(dirname "$SCRIPT_PATH")/../.." && pwd)"
 MONITORS_CONF="${CONFIG_DIR}/monitors.conf"
-TRIPLE_CONF="${CONFIG_DIR}/custom/scripts/switch-monitors/triple.monitors.conf"
-BIGSCREEN_CONF="${CONFIG_DIR}/custom/scripts/switch-monitors/bigscreen.monitors.conf"
-ALL_CONF="${CONFIG_DIR}/custom/scripts/switch-monitors/all.monitors.conf"
+TRIPLE_CONF="${CONFIG_DIR}/scripts/switch-monitors/triple.monitors.conf"
+BIGSCREEN_CONF="${CONFIG_DIR}/scripts/switch-monitors/bigscreen.monitors.conf"
+ALL_CONF="${CONFIG_DIR}/scripts/switch-monitors/all.monitors.conf"
 
 # Monitor names (ordered as they appear in configurations)
 MONITORS=("HDMI-A-1" "DP-1" "DP-2" "DP-3")

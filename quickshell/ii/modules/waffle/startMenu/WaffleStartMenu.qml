@@ -15,8 +15,10 @@ Scope {
         target: GlobalStates
 
         function onSearchOpenChanged() {
-            if (GlobalStates.searchOpen)
+            if (GlobalStates.searchOpen) {
+                LauncherSearch.query = "";
                 panelLoader.active = true;
+            }
         }
     }
 
@@ -62,9 +64,23 @@ Scope {
                 onClosed: {
                     GlobalStates.searchOpen = false;
                     panelLoader.active = false;
+                    LauncherSearch.query = "";
                 }
             }
         }
+    }
+
+    function toggleClipboard() {
+        if (LauncherSearch.query.startsWith(Config.options.search.prefix.clipboard) || !GlobalStates.searchOpen) {
+            GlobalStates.searchOpen = !GlobalStates.searchOpen;
+        }
+        LauncherSearch.ensurePrefix(Config.options.search.prefix.clipboard);
+    }
+    function toggleEmojis() {
+        if (LauncherSearch.query.startsWith(Config.options.search.prefix.emojis) || !GlobalStates.searchOpen) {
+            GlobalStates.searchOpen = !GlobalStates.searchOpen;
+        }
+        LauncherSearch.ensurePrefix(Config.options.search.prefix.emojis);
     }
 
     IpcHandler {
@@ -92,34 +108,46 @@ Scope {
             GlobalStates.searchOpen = !GlobalStates.searchOpen;
         }
     }
-    // Disabled: search toggle on super key release
-    // GlobalShortcut {
-    //     name: "searchToggleRelease"
-    //     description: "Toggles search on release"
-    //
-    //     onPressed: {
-    //         GlobalStates.superReleaseMightTrigger = true;
-    //     }
-    //
-    //     onReleased: {
-    //         if (!GlobalStates.superReleaseMightTrigger) {
-    //             GlobalStates.superReleaseMightTrigger = true;
-    //             return;
-    //         }
-    //         // Add a small delay to check if this was a quick tap (for workspace numbers)
-    //         // vs a hold-and-release (for search)
-    //         delayedSearchToggle.restart();
-    //     }
-    // }
-    // Disabled: interrupt for search toggle on super key release
-    // GlobalShortcut {
-    //     name: "searchToggleReleaseInterrupt"
-    //     description: "Interrupts possibility of search being toggled on release. " + "This is necessary because GlobalShortcut.onReleased in quickshell triggers whether or not you press something else while holding the key. " + "To make sure this works consistently, use binditn = MODKEYS, catchall in an automatically triggered submap that includes everything."
-    //
-    //     onPressed: {
-    //         GlobalStates.superReleaseMightTrigger = false;
-    //         delayedSearchToggle.stop();
-    //     }
-    // }
+    GlobalShortcut {
+        name: "searchToggleRelease"
+        description: "Toggles search on release"
 
+        onPressed: {
+            GlobalStates.superReleaseMightTrigger = true;
+        }
+
+        onReleased: {
+            if (!GlobalStates.superReleaseMightTrigger) {
+                GlobalStates.superReleaseMightTrigger = true;
+                return;
+            }
+            GlobalStates.searchOpen = !GlobalStates.searchOpen;
+        }
+    }
+    GlobalShortcut {
+        name: "searchToggleReleaseInterrupt"
+        description: "Interrupts possibility of search being toggled on release. " + "This is necessary because GlobalShortcut.onReleased in quickshell triggers whether or not you press something else while holding the key. " + "To make sure this works consistently, use binditn = MODKEYS, catchall in an automatically triggered submap that includes everything."
+
+        onPressed: {
+            GlobalStates.superReleaseMightTrigger = false;
+        }
+    }
+
+    GlobalShortcut {
+        name: "overviewClipboardToggle"
+        description: "Toggle clipboard query on overview widget"
+
+        onPressed: {
+            root.toggleClipboard();
+        }
+    }
+
+    GlobalShortcut {
+        name: "overviewEmojiToggle"
+        description: "Toggle emoji query on overview widget"
+
+        onPressed: {
+            root.toggleEmojis();
+        }
+    }
 }
