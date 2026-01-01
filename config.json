@@ -106,8 +106,8 @@
                 "showOnlyWhenLocked": false,
                 "style": "cookie",
                 "styleLocked": "cookie",
-                "x": 1190.4,
-                "y": 559.8000000000001
+                "x": 869.4000000000001,
+                "y": 377.90000000000003
             },
             "weather": {
                 "enable": false,
@@ -268,10 +268,10 @@
     },
     "light": {
         "antiFlashbang": {
-            "enable": true
+            "enable": false
         },
         "night": {
-            "automatic": true,
+            "automatic": false,
             "colorTemperature": 4170,
             "from": "19:00",
             "to": "06:30"

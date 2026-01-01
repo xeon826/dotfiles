@@ -13,6 +13,9 @@ alias sshc "docker exec -it c15f9c0f259a bash"
 alias down 'docker-compose down'
 alias upb 'docker-compose up -d --build'
 alias up 'docker-compose up -d'
+alias steamlink 'flatpak run com.valvesoftware.SteamLink'
+alias faugus 'sh ~/steam-wayland-wrapper.sh faugus-launcher'
+alias monitor-journalctl 'journalctl -b -n 100 -f'
 
 # ============================================================================
 # Clipboard utilities
