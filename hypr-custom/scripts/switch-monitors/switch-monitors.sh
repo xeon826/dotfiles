@@ -7,10 +7,11 @@ set -euo pipefail
 # Get the real path of this script, resolving symlinks
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}" || echo "${BASH_SOURCE[0]}")"
 CONFIG_DIR="$(cd "$(dirname "$SCRIPT_PATH")/../.." && pwd)"
-MONITORS_CONF="${CONFIG_DIR}/monitors.conf"
-TRIPLE_CONF="${CONFIG_DIR}/custom/scripts/switch-monitors/triple.monitors.conf"
-BIGSCREEN_CONF="${CONFIG_DIR}/custom/scripts/switch-monitors/bigscreen.monitors.conf"
-ALL_CONF="${CONFIG_DIR}/custom/scripts/switch-monitors/all.monitors.conf"
+# monitors.conf needs to be in the main hypr config directory, not in custom/
+MONITORS_CONF="${HOME}/.config/hypr/monitors.conf"
+TRIPLE_CONF="${CONFIG_DIR}/scripts/switch-monitors/triple.monitors.conf"
+BIGSCREEN_CONF="${CONFIG_DIR}/scripts/switch-monitors/bigscreen.monitors.conf"
+ALL_CONF="${CONFIG_DIR}/scripts/switch-monitors/all.monitors.conf"
 
 # Monitor names (ordered as they appear in configurations)
 MONITORS=("HDMI-A-1" "DP-1" "DP-2" "DP-3")

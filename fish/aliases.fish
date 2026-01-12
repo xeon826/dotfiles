@@ -176,7 +176,7 @@ end
 
 # Function for playing most recent files
 function play-most-recent
-    ls -rt1 . | tail -n 30 | tr "\n" "\0" | xargs -0 mpv
+    ls -rt1 . | tail -n 30 | tr "\n" "\0" | xargs -0 mpv --no-video
 end
 
 # Function for serena config generation
