@@ -33,6 +33,8 @@
     ~/.config/awesome: awesome-copycats
     ~/.config/mpd: mpd
     ~/.ncmpcpp: ncmpcpp
+    ~/.zshrc: .zshrc
+    ~/.zprofile: .zprofile
     ~/.config/kitty: kitty
     ~/.config/nvim: nvim
     ~/.config/ksb-nvim: ksb-nvim

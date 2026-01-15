@@ -60,7 +60,8 @@ if status is-interactive # Commands to run in interactive sessions can go here
     set -gx AIRFLOW_HOME ~/airflow
     set -gx AIRFLOW__WEBSERVER__WEB_SERVER_PORT 8081
     set -gx ZEPPELIN_HOME ~/.local/zeppelin
-    # set -gx ANTHROPIC_BASE_URL https://api.deepseek.com/anthropic
+    set -gx ANTHROPIC_BASE_URL https://api.deepseek.com/anthropic
+    # set -gx ANTHROPIC_BASE_URL https://openrouter.ai/api
     set -gx API_TIMEOUT_MS 600000
     # set -gx ANTHROPIC_MODEL deepseek-chat
     # set -gx ANTHROPIC_SMALL_FAST_MODEL deepseek-chat

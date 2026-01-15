@@ -1,6 +1,8 @@
+
 #
 # ~/.bashrc
 #
+[[ $- == *i* ]] && source /usr/share/blesh/ble.sh --noattach
 
 # set vi mode. Note: :cq to quit editor mode without executing command
 # set -o vi
@@ -187,10 +189,10 @@ export PATH=$PATH:$ZEPPELIN_HOME/bin:$ZEPPELIN_HOME/bin
 # Zoxide
 eval "$(zoxide init bash)"
 
-export ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
+# export ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
 export API_TIMEOUT_MS=600000
-export ANTHROPIC_MODEL=deepseek-chat
-export ANTHROPIC_SMALL_FAST_MODEL=deepseek-chat
+# export ANTHROPIC_MODEL=deepseek-chat
+# export ANTHROPIC_SMALL_FAST_MODEL=deepseek-chat
 export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 export PATH="$PATH:$HOME/go/bin"
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --color=fg:#ffffff,bg:#161616,hl:#08bdba --color=fg+:#f2f4f8,bg+:#262626,hl+:#3ddbd9 --color=info:#78a9ff,prompt:#33b1ff,pointer:#42be65 --color=marker:#ee5396,spinner:#ff7eb6,header:#be95ff'
@@ -203,3 +205,9 @@ stopwatch() {
         sleep 0.1
     done
 }
+
+eval "$(starship init bash)"
+# bashrc
+
+# Add this lines at the top of .bashrc:
+[[ ${BLE_VERSION-} ]] && ble-attach
