@@ -6,6 +6,34 @@
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+export EDITOR=vim
+
+
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+  --highlight-line \
+  --info=inline-right \
+  --ansi \
+  --layout=reverse \
+  --border=none \
+  --color=bg+:#283457 \
+  --color=bg:#16161e \
+  --color=border:#27a1b9 \
+  --color=fg:#c0caf5 \
+  --color=gutter:#16161e \
+  --color=header:#ff9e64 \
+  --color=hl+:#2ac3de \
+  --color=hl:#2ac3de \
+  --color=info:#545c7e \
+  --color=marker:#ff007c \
+  --color=pointer:#ff007c \
+  --color=prompt:#2ac3de \
+  --color=query:#c0caf5:regular \
+  --color=scrollbar:#27a1b9 \
+  --color=separator:#ff9e64 \
+  --color=spinner:#ff007c \
+"
+
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -72,7 +100,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git nvm pyenv-lazy fzf zsh-autosuggestions starship zsh-syntax-highlighting) 
+plugins=(git nvm pyenv-lazy fzf zsh-autosuggestions starship zoxide zsh-syntax-highlighting) 
 zstyle ':omz:plugins:nvm' lazy yes
 
 
@@ -109,5 +137,11 @@ source $ZSH/oh-my-zsh.sh
 
 # Use Ctrl + Space to accept zsh-autosuggestions suggestion
 bindkey '^ ' autosuggest-accept
+
+bindkey -s '^g' 'lazygit\n'
+bindkey -s '^n' 'nvim\n'
+bindkey -s '^l' 'claude\n'
+bindkey -s '^f' 'ranger\n'
+
 
 # zprof
