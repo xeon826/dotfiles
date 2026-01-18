@@ -8,3 +8,5 @@ export PATH="$HOME/flutter-development/flutter/bin:$PATH" >> ~/.bash_profile
 [ -f /home/dan/.dart-cli-completion/bash-config.bash ] && . /home/dan/.dart-cli-completion/bash-config.bash || true
 ## [/Completion]
 
+
+. "$HOME/.local/bin/env"

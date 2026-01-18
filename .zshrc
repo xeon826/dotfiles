@@ -105,7 +105,7 @@ zstyle ':omz:plugins:nvm' lazy yes
 
 
 source $ZSH/oh-my-zsh.sh
-
+source ~/.zsh_api_keys
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -135,13 +135,33 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias nv='nvim'
+alias v='vim'
+alias play-most-recent='ls -rt1 . | tail -n 30 | tr "\n" "\0" | xargs -0 mpv --no-video'
+
+alias clean_docker='docker system prune -a -f'
+alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
+
+
+
 # Use Ctrl + Space to accept zsh-autosuggestions suggestion
 bindkey '^ ' autosuggest-accept
 
 bindkey -s '^g' 'lazygit\n'
 bindkey -s '^n' 'nvim\n'
-bindkey -s '^l' 'claude\n'
+bindkey -s '^l' 'opencode\n'
 bindkey -s '^f' 'ranger\n'
 
 
+
 # zprof
+
+. "$HOME/.local/bin/env"
+
+# pnpm
+export PNPM_HOME="/home/dan/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

@@ -211,3 +211,5 @@ eval "$(starship init bash)"
 
 # Add this lines at the top of .bashrc:
 [[ ${BLE_VERSION-} ]] && ble-attach
+
+. "$HOME/.local/bin/env"
