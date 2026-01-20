@@ -8,14 +8,9 @@ is_fullscreen=$(echo "$active_window_info" | jq -r '.fullscreen')
 # Check if the active window is in pseudo state (maximized in Hyprland)
 is_pseudo=$(echo "$active_window_info" | jq -r '.pseudo')
 
-# If the window is fullscreen, exit fullscreen
+# If the window is fullscreen or maximized, restore it
 if [[ "$is_fullscreen" != "0" ]]; then
-	hyprctl dispatch fullscreen 0
-fi
-
-# If the window is in pseudo state (maximized), exit pseudo state
-if [[ "$is_pseudo" == "true" ]]; then
-	hyprctl dispatch pseudo
+	hyprctl dispatch fullscreenstate 0 0
 fi
 
 for cmd in "$@"; do
