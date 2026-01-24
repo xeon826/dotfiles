@@ -138,6 +138,7 @@ source ~/.zsh_api_keys
 alias nv='nvim'
 alias v='vim'
 alias play-most-recent='ls -rt1 . | tail -n 30 | tr "\n" "\0" | xargs -0 mpv --no-video'
+alias postman='flatpak run com.getpostman.Postman --enable-features=UseOzonePlatform --ozone-platform=x11'
 
 alias clean_docker='docker system prune -a -f'
 alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
