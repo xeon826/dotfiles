@@ -142,6 +142,7 @@ alias postman='flatpak run com.getpostman.Postman --enable-features=UseOzonePlat
 
 alias clean_docker='docker system prune -a -f'
 alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
+alias weather='curl wttr.in'
 
 
 
@@ -166,3 +167,4 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+export AWS_PROFILE=DataSci-ML-951813250220
