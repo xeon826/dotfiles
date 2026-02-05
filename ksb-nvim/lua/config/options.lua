@@ -77,7 +77,6 @@ opt.scrolloff = 18 -- minimal number of screen lines to keep above and below the
 opt.sidescrolloff = 3 -- minimal number of screen columns to keep to the left and right (horizontal) of the cursor if wrap is `false`
 opt.splitbelow = true -- open new split below
 opt.splitright = true -- open new split to the right
-opt.wrap = true -- wrap text to next line
 opt.linebreak = true -- break lines at word boundaries
 opt.breakindent = true -- maintain indent level for wrapped lines
 
