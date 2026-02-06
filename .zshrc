@@ -143,6 +143,7 @@ alias postman='flatpak run com.getpostman.Postman --enable-features=UseOzonePlat
 alias clean_docker='docker system prune -a -f'
 alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
 alias weather='curl wttr.in'
+alias listen-to-them='python manage.py listen_stream --device-name "SteelSeries Arctis Nova 5 Digital Stereo (IEC958)"'
 
 
 
