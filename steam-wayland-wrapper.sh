@@ -31,7 +31,8 @@ if [ "$XDG_SESSION_TYPE" = "wayland" ] || [ -n "$WAYLAND_DISPLAY" ]; then
     fi
     # SDL_VIDEODRIVER=x11 gamescope -r 180 --mangoapp --backend sdl --adaptive-sync -f -W "$W" -H "$H" -- "$@"
     # gamescope -f -W "$W" -H "$H" -- "$@"
-    ENABLE_GAMESCOPE_WSI=1 DXVK_HDR=1 gamescope -f --hdr-enabled --hdr-debug-force-output -W "$W" -H "$H" -- "$@"
+#gamescope -f -W "$W" -H "$H" -w "$W" -h "$H" -- "$@"
+gamescope -f --framerate-limit 60 --force-grab-cursor -W 2560 -H 1440 -w 2560 -h 1440 -- "$@"
 else
     exec "$@"
 fi

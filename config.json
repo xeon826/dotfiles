@@ -331,8 +331,8 @@
     },
     "panelFamily": "ii",
     "policies": {
-        "ai": 1,
-        "weeb": 1
+        "ai": 0,
+        "weeb": 0
     },
     "regionSelector": {
         "circle": {
