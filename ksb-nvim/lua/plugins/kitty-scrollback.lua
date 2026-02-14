@@ -17,7 +17,7 @@ return {
 				{
 					callbacks = {
 						after_launch = function()
-							vim.o.wrap = true
+							vim.o.wrap = false
 						end,
 					},
 					-- Disable yank register behavior that might trigger exit
