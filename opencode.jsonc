@@ -29,11 +29,24 @@
         "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_PERSONAL_ACCESS_TOKEN}"
       }
     },
+    // "browser-control": {
+    //    "type": "local",
+    //    "command": ["node", "/home/dan/git_clones/browser-control-mcp/mcp-server/dist/server.js"],
+    //    "enabled": true,
+    //    "environment": {
+    //      "EXTENSION_SECRET": "df26b850-4d2c-4e95-a5f6-7c1d0158158c",
+    //      "EXTENSION_PORT": "8090"
+    //    }
+    //  },
+      "browser-kit": {
+        "type": "local",
+        "command": ["npx", "@mcp-browser-kit/server@latest"],
+        "enabled": true
+      },
+    "octocode": {
+      "type": "local",
+      "command": ["npx", "octocode-mcp@latest"],
+      "enabled": true
+    }
   }
-  // "server": {
-  //   "port": 4097,
-  //   "hostname": "0.0.0.0",
-  //   "mdns": true,
-  //   "cors": ["https://example.com"]
-  // }
 }
