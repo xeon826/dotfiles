@@ -47,6 +47,11 @@
       "type": "local",
       "command": ["npx", "octocode-mcp@latest"],
       "enabled": true
+    },
+    "aws-mcp": {
+      "type": "local",
+      "command": ["uvx", "mcp-proxy-for-aws@latest", "https://aws-mcp.us-east-1.api.aws/mcp", "--metadata", "AWS_REGION=us-west-2"],
+      "enabled": true
     }
   }
 }
