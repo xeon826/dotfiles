@@ -168,4 +168,5 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-export AWS_PROFILE=DataSci-ML-951813250220
+#export AWS_PROFILE=DataSci-ML-951813250220
+export AWS_PROFILE=PowerUserAccess-548959629706
