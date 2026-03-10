@@ -144,6 +144,9 @@ alias clean_docker='docker system prune -a -f'
 alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
 alias weather='curl wttr.in'
 alias listen-to-them='cd ~/git_clones/resumai; source venv/bin/activate; python manage.py listen_stream --device-name "SteelSeries Arctis Nova 5 Digital Stereo (IEC958)"'
+alias update-mirrors='sudo reflector --protocol https --verbose --latest 25 --sort rate --save /etc/pacman.d/mirrorlist'
+alias bruno='env ELECTRON_OZONE_PLATFORM_HINT=x11 bruno'
+
 
 
 
