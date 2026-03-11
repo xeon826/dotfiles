@@ -59,24 +59,6 @@
     },
     "smart": {
       "model": "zai-coding-plan/glm-4.7"
-    },
-    "component-engineer": {
-      "disable": true
-    },
-    "opencode-configurator": {
-      "disable": true
-    },
-    "openspec-orchestrator": {
-      "disable": true
-    },
-    "plugin-creator": {
-      "disable": true
-    },
-    "security-reviewer": {
-      "disable": true
-    },
-    "parallel-prd-orchestrator": {
-      "disable": true
     }
   }
 }
