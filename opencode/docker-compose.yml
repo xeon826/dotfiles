@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  crawl4ai:
+    image: unclecode/crawl4ai:latest
+    container_name: crawl4ai
+    ports:
+      - "11236:11235"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11235/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  crawl4ai-mcp:
+    image: stgmt/crawl4ai-mcp:latest
+    container_name: crawl4ai-mcp
+    ports:
+      - "3001:3001"
+    environment:
+      - CRAWL4AI_ENDPOINT=http://crawl4ai:11235
+      # Optional: CRAWL4AI_BEARER_TOKEN=your-token
+    command: ["crawl4ai-mcp", "--http", "--port", "3001"]
+    depends_on:
+      crawl4ai:
+        condition: service_healthy
+    restart: unless-stopped
+
+networks:
+  default:
+    name: crawl4ai-network
+    driver: bridge

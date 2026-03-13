@@ -173,3 +173,4 @@ esac
 # pnpm end
 #export AWS_PROFILE=DataSci-ML-951813250220
 export AWS_PROFILE=PowerUserAccess-548959629706
+export CRAWL4AI_ENDPOINT="http://localhost:11235"
