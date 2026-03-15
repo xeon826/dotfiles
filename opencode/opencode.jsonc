@@ -1,16 +1,23 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
-    // "crawl4ai": {
-    //     "type": "remote",
-    //     "url": "http://localhost:11235/mcp/sse",
-    //     "enabled": true
-    //   },
-    "fl-figma": {
-      "type": "local",
-      "command": ["pnpm", "figma-developer-mcp", "--figma-api-key={env:FIGMA_API_KEY}", "--stdio"],
-      "enabled": false
+    "web-reader": {
+        "type": "remote",
+        "url": "https://api.z.ai/api/mcp/web_reader/mcp",
+        "headers": {
+            "Authorization": "Bearer {env:ZAI_API_KEY}"
+        }
     },
+    // "fl-figma": {
+    //   "type": "local",
+    //   "command": [
+    //     "pnpm",
+    //     "figma-developer-mcp",
+    //     "--figma-api-key={env:FIGMA_API_KEY}",
+    //     "--stdio"
+    //   ],
+    //   "enabled": false
+    // },
     "context7": {
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
@@ -20,30 +27,54 @@
     },
     "github": {
       "type": "local",
-      "command": ["docker", "run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github-mcp-server"],
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
+      ],
       "enabled": true,
       "environment": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_PERSONAL_ACCESS_TOKEN}"
       }
     },
     "browser-kit": {
-        "type": "local",
-        "command": ["npx", "@mcp-browser-kit/server@latest"],
-        "enabled": true
-      },
+      "type": "local",
+      "command": [
+        "npx",
+        "@mcp-browser-kit/server@latest"
+      ],
+      "enabled": true
+    },
     "octocode": {
       "type": "local",
-      "command": ["npx", "octocode-mcp@latest"],
+      "command": [
+        "npx",
+        "octocode-mcp@latest"
+      ],
       "enabled": true
     },
     "aws-mcp": {
       "type": "local",
-      "command": ["uvx", "mcp-proxy-for-aws@latest", "https://aws-mcp.us-east-1.api.aws/mcp", "--metadata", "AWS_REGION=us-west-2"],
+      "command": [
+        "uvx",
+        "mcp-proxy-for-aws@latest",
+        "https://aws-mcp.us-east-1.api.aws/mcp",
+        "--metadata",
+        "AWS_REGION=us-west-2"
+      ],
       "enabled": true
     },
     "bruno-mcp": {
       "type": "local",
-      "command": ["npx", "-y", "bruno-mcp"],
+      "command": [
+        "npx",
+        "-y",
+        "bruno-mcp"
+      ],
       "enabled": true
     }
   },
@@ -56,6 +87,16 @@
     },
     "smart": {
       "model": "zai-coding-plan/glm-5"
+    },
+    "explore": {
+      "disable": true
     }
+  },
+  "plugin": [
+    "opencode-antigravity-auth@latest",
+    "@tarquinen/opencode-dcp@latest",
+    "oh-my-opencode"
+  ],
+  "provider": {
   }
 }
