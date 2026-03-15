@@ -1,0 +1,6 @@
+{
+  "plugin": [
+    "opencode-agent-tmux"
+  ],
+  "$schema": "https://opencode.ai/config.json"
+}

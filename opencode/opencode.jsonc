@@ -95,7 +95,8 @@
   "plugin": [
     "opencode-antigravity-auth@latest",
     "@tarquinen/opencode-dcp@latest",
-    "oh-my-opencode"
+    "oh-my-opencode",
+    "opentmux"
   ],
   "provider": {
   }
