@@ -155,7 +155,7 @@ bindkey '^ ' autosuggest-accept
 
 bindkey -s '^g' 'lazygit\n'
 bindkey -s '^n' 'nvim\n'
-bindkey -s '^l' 'opencode\n'
+bindkey -s '^l' 'opentmux\n'
 bindkey -s '^f' 'ranger\n'
 
 
