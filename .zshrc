@@ -137,7 +137,7 @@ source ~/.zsh_api_keys
 
 alias nv='nvim'
 alias v='vim'
-alias play-most-recent='ls -rt1 . | tail -n 30 | tr "\n" "\0" | xargs -0 mpv --no-video'
+alias play-most-recent='ls -rt1 . | tail -n 30 | tr "\n" "\0" | xargs -0 mpv'
 alias postman='flatpak run com.getpostman.Postman --enable-features=UseOzonePlatform --ozone-platform=x11'
 
 alias clean_docker='docker system prune -a -f'
@@ -155,7 +155,7 @@ bindkey '^ ' autosuggest-accept
 
 bindkey -s '^g' 'lazygit\n'
 bindkey -s '^n' 'nvim\n'
-bindkey -s '^l' 'opentmux\n'
+bindkey -s '^l' 'opencode\n'
 bindkey -s '^f' 'ranger\n'
 
 
@@ -174,3 +174,9 @@ esac
 #export AWS_PROFILE=DataSci-ML-951813250220
 export AWS_PROFILE=PowerUserAccess-548959629706
 export CRAWL4AI_ENDPOINT="http://localhost:11235"
+export AWS_PAGER=""
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="$HOME/.cargo/bin:$PATH"
