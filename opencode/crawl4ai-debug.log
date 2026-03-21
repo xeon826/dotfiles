@@ -1,0 +1,5 @@
+Command: /home/dan/.config/opencode/venv/bin/python /home/dan/dotfiles/opencode/python/bridge.py
+PYTHON_BRIDGE_PATH: /home/dan/dotfiles/opencode/python/bridge.py
+Request: {"action":"search","params":{"query":"tmux mouse reporting escape sequences disable after pane close reset terminal","limit":5}}
+Stderr: /home/dan/.config/opencode/venv/bin/python: can't open file '/home/dan/dotfiles/opencode/python/bridge.py': [Errno 2] No such file or directory
+

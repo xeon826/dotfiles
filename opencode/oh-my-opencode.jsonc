@@ -2,16 +2,16 @@
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/dev/assets/oh-my-opencode.schema.json",
   "agents": {
     "sisyphus": {
-      "model": "zai-coding-plan/glm-5",
+      "model": "zai-coding-plan/glm-4.7",
     },
     "oracle": {
       "model": "chutes/deepseek-ai/DeepSeek-V3.2-TEE",
     },
     "librarian": {
-      "model": "zai-coding-plan/glm-4.7",
+      "model": "deepseek/deepseek-reasoner",
     },
     "explore": {
-      "model": "zai-coding-plan/glm-4.7",
+      "model": "deepseek/deepseek-reasoner",
     },
     "multimodal-looker": {
       "model": "chutes/zai-org/GLM-4.6V",
@@ -26,7 +26,7 @@
       "model": "chutes/deepseek-ai/DeepSeek-V3.2-TEE",
     },
     "atlas": {
-      "model": "chutes/moonshotai/Kimi-K2.5-TEE",
+      "model": "zai-coding-plan/glm-4.7",
     },
     "hephaestus": {
       "model": "zai-coding-plan/glm-4.7",
