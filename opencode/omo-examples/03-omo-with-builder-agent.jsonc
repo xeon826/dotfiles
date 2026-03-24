@@ -1,13 +1,14 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/dev/assets/oh-my-opencode.schema.json",
+  "sisyphus_agent": {
+    "disabled": false,
+    "default_builder_enabled": true,
+    "planner_enabled": false,
+    "replace_plan": true
+  },
   "agents": {
     "sisyphus": {
       "model": "zai-coding-plan/glm-4.7",
-    },
-    "sisyphus_agent": {
-      "default_builder_enabled": true,
-      "planner_enabled": true,
-      "replace_plan": false,
     },
     "oracle": {
       "model": "chutes/deepseek-ai/DeepSeek-V3.2-TEE",
@@ -36,6 +37,17 @@
     "hephaestus": {
       "model": "zai-coding-plan/glm-4.7",
     },
+    "OpenCode-Builder": {
+      "model": "zai-coding-plan/glm-4.7",
+      "disable": false,
+      "description": "Build and execution agent",
+      "mode": "primary",
+      "tools": {
+        "bash": true,
+        "edit": true,
+        "write": true
+      }
+    }
   },
   "categories": {
     "visual-engineering": {

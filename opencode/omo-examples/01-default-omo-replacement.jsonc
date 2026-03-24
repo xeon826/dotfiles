@@ -4,11 +4,6 @@
     "sisyphus": {
       "model": "zai-coding-plan/glm-4.7",
     },
-    "sisyphus_agent": {
-      "default_builder_enabled": true,
-      "planner_enabled": true,
-      "replace_plan": false,
-    },
     "oracle": {
       "model": "chutes/deepseek-ai/DeepSeek-V3.2-TEE",
     },

@@ -1,13 +1,14 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/dev/assets/oh-my-opencode.schema.json",
+  "sisyphus_agent": {
+    "disabled": false,
+    "default_builder_enabled": false,
+    "planner_enabled": true,
+    "replace_plan": false
+  },
   "agents": {
     "sisyphus": {
       "model": "zai-coding-plan/glm-4.7",
-    },
-    "sisyphus_agent": {
-      "default_builder_enabled": true,
-      "planner_enabled": true,
-      "replace_plan": false,
     },
     "oracle": {
       "model": "chutes/deepseek-ai/DeepSeek-V3.2-TEE",
@@ -36,6 +37,12 @@
     "hephaestus": {
       "model": "zai-coding-plan/glm-4.7",
     },
+    "plan": {
+      "model": "zai-coding-plan/glm-4.7",
+      "disable": false,
+      "description": "Planning agent for task decomposition and strategy",
+      "mode": "primary"
+    }
   },
   "categories": {
     "visual-engineering": {

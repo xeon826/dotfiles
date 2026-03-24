@@ -1,13 +1,17 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/dev/assets/oh-my-opencode.schema.json",
+  "sisyphus_agent": {
+    "disabled": false,
+    "default_builder_enabled": true,
+    "planner_enabled": true,
+    "replace_plan": false
+  },
   "agents": {
     "sisyphus": {
       "model": "zai-coding-plan/glm-4.7",
-    },
-    "sisyphus_agent": {
-      "default_builder_enabled": true,
-      "planner_enabled": true,
-      "replace_plan": false,
+      "disable": false,
+      "description": "OMO orchestrator agent",
+      "mode": "primary"
     },
     "oracle": {
       "model": "chutes/deepseek-ai/DeepSeek-V3.2-TEE",
@@ -36,6 +40,30 @@
     "hephaestus": {
       "model": "zai-coding-plan/glm-4.7",
     },
+    "plan": {
+      "model": "anthropic/claude-haiku-4-5",
+      "disable": false,
+      "description": "Planning agent for task decomposition",
+      "mode": "primary",
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": false
+      }
+    },
+    "build": {
+      "model": "anthropic/claude-sonnet-4-6",
+      "disable": false,
+      "description": "Build and execution agent",
+      "mode": "primary",
+      "temperature": 0.2
+    },
+    "OpenCode-Builder": {
+      "model": "zai-coding-plan/glm-4.7",
+      "disable": false,
+      "description": "Alternative builder agent",
+      "mode": "subagent"
+    }
   },
   "categories": {
     "visual-engineering": {
