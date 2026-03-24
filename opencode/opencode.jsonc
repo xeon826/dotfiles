@@ -13,13 +13,7 @@
         "FIRECRAWL_API_KEY": "{env:FIRECRAWL_API_KEY}",
       },
     },
-    // "web-reader": {
-    //     "type": "remote",
-    //     "url": "https://api.z.ai/api/mcp/web_reader/mcp",
-    //     "headers": {
-    //         "Authorization": "Bearer {env:ZAI_API_KEY}"
-    //     }
-    // },
+
     // "fl-figma": {
     //   "type": "local",
     //   "command": [
@@ -74,39 +68,21 @@
       ],
       "enabled": true,
     },
-    // "bruno-mcp": {
-    //   "type": "local",
-    //   "command": ["npx", "-y", "bruno-mcp"],
-    //   "enabled": true,
-    // },
-    // "crawl4ai": {
-    //   "type": "local",
-    //   "command": [
-    //     "/home/dan/.config/opencode/venv/bin/python",
-    //     "/home/dan/dotfiles/opencode/python/crawl4ai_mcp.py",
-    //   ],
-    //   "enabled": true,
-    // },
-  },
-  "agent": {
-    "general": {
-      "disable": true,
-    },
-    "fast": {
-      "model": "deepseek/deepseek-reasoner",
-    },
-    "smart": {
-      "model": "zai-coding-plan/glm-5",
-    },
-    "explore": {
-      "disable": true,
+    "linear": {
+      "type": "remote",
+      "url": "https://mcp.linear.app/mcp",
+      "headers": {
+        "Authorization": "Bearer {env:LINEAR_API_KEY}"
+      },
+      "enabled": true,
+      "timeout": 5000
     },
   },
   "plugin": [
     "opencode-antigravity-auth@latest",
     "@tarquinen/opencode-dcp@latest",
     "oh-my-opencode",
-    "opencode-snip@latest"
+    // "opencode-snip@latest",
     // "opencode-agent-tmux",
     // "opentmux"
   ],
