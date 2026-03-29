@@ -13,10 +13,10 @@
       "model": "chutes/deepseek-ai/DeepSeek-V3.2-TEE",
     },
     "librarian": {
-      "model": "deepseek/deepseek-reasoner",
+      "model": "zai-coding-plan/glm-4.7",
     },
     "explore": {
-      "model": "deepseek/deepseek-reasoner",
+      "model": "zai-coding-plan/glm-4.7",
     },
     "multimodal-looker": {
       "model": "chutes/zai-org/GLM-4.6V",
