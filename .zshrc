@@ -171,13 +171,66 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-#export AWS_PROFILE=DataSci-ML-951813250220
-export AWS_PROFILE=PowerUserAccess-548959629706
+export AWS_PROFILE=AdministratorAccess-447437755865
 export CRAWL4AI_ENDPOINT="http://localhost:11235"
 export AWS_PAGER=""
+alias "hm-production-aws-cli"="aws-sso-profile 890651867127:PowerUserAccess"
+alias "hm-staging-aws-cli"="aws-sso-profile 548959629706:PowerUserAccess"
+alias "hm-development-aws-cli"="aws-sso-profile 013200616260:PowerUserAccess"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$PATH:$HOME/go/bin"
+# BEGIN_AWS_SSO_CLI
+
+# AWS SSO requires `bashcompinit` which needs to be enabled once and
+# only once in your shell.  Hence we do not include the two lines:
+#
+# autoload -Uz +X compinit && compinit
+# autoload -Uz +X bashcompinit && bashcompinit
+#
+# If you do not already have these lines, you must COPY the lines 
+# above, place it OUTSIDE of the BEGIN/END_AWS_SSO_CLI markers
+# and of course uncomment it
+
+__aws_sso_profile_complete() {
+     local _args=${AWS_SSO_HELPER_ARGS:- -L error}
+    _multi_parts : "($(/home/dan/go/bin/aws-sso ${=_args} list --csv Profile))"
+}
+
+aws-sso-profile() {
+    local _args=${AWS_SSO_HELPER_ARGS:- -L error}
+    if [ -n "$AWS_PROFILE" ]; then
+        echo "Unable to assume a role while AWS_PROFILE is set"
+        return 1
+    fi
+
+    if [ -z "$1" ]; then
+        echo "Usage: aws-sso-profile <profile>"
+        return 1
+    fi
+
+    eval $(/home/dan/go/bin/aws-sso ${=_args} eval -p "$1")
+    if [ "$AWS_SSO_PROFILE" != "$1" ]; then
+        return 1
+    fi
+}
+
+aws-sso-clear() {
+    local _args=${AWS_SSO_HELPER_ARGS:- -L error}
+    if [ -z "$AWS_SSO_PROFILE" ]; then
+        echo "AWS_SSO_PROFILE is not set"
+        return 1
+    fi
+    eval $(/home/dan/go/bin/aws-sso ${=_args} eval -c)
+}
+
+compdef __aws_sso_profile_complete aws-sso-profile
+complete -C /home/dan/go/bin/aws-sso aws-sso
+
+# END_AWS_SSO_CLI
+
+# opencode
+export PATH=/home/dan/.opencode/bin:$PATH
