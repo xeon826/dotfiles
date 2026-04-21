@@ -15,6 +15,7 @@ import qs.modules.ii.overview
 import qs.modules.ii.polkit
 import qs.modules.ii.regionSelector
 import qs.modules.ii.screenCorners
+import qs.modules.ii.screenTranslator
 import qs.modules.ii.sessionScreen
 import qs.modules.ii.sidebarLeft
 import qs.modules.ii.sidebarRight
@@ -37,8 +38,9 @@ Scope {
     PanelLoader { component: Polkit {} }
     PanelLoader { component: RegionSelector {} }
     PanelLoader { component: ScreenCorners {} }
+    PanelLoader { component: ScreenTranslator {} }
     PanelLoader { component: SessionScreen {} }
-    PanelLoader { extraCondition: Config.options.policies.ai !== 0 || Config.options.policies.weeb !== 0 || Config.options.sidebar.translator.enable; component: SidebarLeft {} }
+    PanelLoader { component: SidebarLeft {} }
     PanelLoader { component: SidebarRight {} }
     PanelLoader { extraCondition: Config.options.bar.vertical; component: VerticalBar {} }
     PanelLoader { component: WallpaperSelector {} }

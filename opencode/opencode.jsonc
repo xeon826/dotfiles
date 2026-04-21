@@ -13,6 +13,11 @@
         "FIRECRAWL_API_KEY": "{env:FIRECRAWL_API_KEY}",
       },
     },
+    // "playwright": {
+    //   "type": "local",
+    //   "command": ["npx", "@playwright/mcp@latest"],
+    //   "enabled": true,
+    // },
 
     // "fl-figma": {
     //   "type": "local",
@@ -72,10 +77,10 @@
       "type": "remote",
       "url": "https://mcp.linear.app/mcp",
       "headers": {
-        "Authorization": "Bearer {env:LINEAR_API_KEY}"
+        "Authorization": "Bearer {env:LINEAR_API_KEY}",
       },
       "enabled": true,
-      "timeout": 5000
+      "timeout": 5000,
     },
   },
   "plugin": [
