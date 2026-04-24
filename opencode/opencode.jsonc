@@ -82,6 +82,20 @@
       "enabled": true,
       "timeout": 5000,
     },
+    "mcp-fhir": {
+      "type": "local",
+      "command": ["node", "/home/dan/git_clones/mcp-fhir/build/index.js"],
+      "enabled": true,
+      "environment": {
+        "FHIR_BASE_URL": "{env:FHIR_BASE_URL}",
+        "FHIR_ACCESS_TOKEN": "{env:FHIR_ACCESS_TOKEN}",
+        "FHIR_USERNAME": "{env:FHIR_USERNAME}",
+        "FHIR_PASSWORD": "{env:FHIR_PASSWORD}",
+        "FHIR_FIRM_URL_PREFIX": "schweigerderm",
+        "FHIR_API_KEY": "{env:FHIR_API_KEY}",
+        "FHIR_USE_OAUTH2": "true",
+      },
+    },
   },
   "plugin": [
     "opencode-antigravity-auth@latest",
