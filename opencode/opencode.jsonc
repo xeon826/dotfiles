@@ -96,6 +96,15 @@
         "FHIR_USE_OAUTH2": "true",
       },
     },
+    "langcare-mcp-fhir": {
+      "type": "local",
+      "command": [
+        "/usr/lib/node_modules/@langcare/langcare-mcp-fhir/bin/langcare-mcp-fhir",
+        "-config",
+        "/home/dan/.config/opencode/langcare-modmed.yaml"
+      ],
+      "enabled": true,
+    },
   },
   "plugin": [
     "opencode-antigravity-auth@latest",
