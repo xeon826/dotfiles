@@ -3,38 +3,22 @@
   "mcp": {
     "mcp-web-reader": {
       "type": "local",
-      "command": ["npx", "-y", "zacfire-mcp-web-reader"],
+      "command": ["npx", "-y", "zacfire-mcp-web-reader"]
     },
     "firecrawl-mcp": {
       "type": "local",
       "command": ["npx", "-y", "firecrawl-mcp"],
       "enabled": true,
       "environment": {
-        "FIRECRAWL_API_KEY": "{env:FIRECRAWL_API_KEY}",
-      },
+        "FIRECRAWL_API_KEY": "{env:FIRECRAWL_API_KEY}"
+      }
     },
-    // "playwright": {
-    //   "type": "local",
-    //   "command": ["npx", "@playwright/mcp@latest"],
-    //   "enabled": true,
-    // },
-
-    // "fl-figma": {
-    //   "type": "local",
-    //   "command": [
-    //     "pnpm",
-    //     "figma-developer-mcp",
-    //     "--figma-api-key={env:FIGMA_API_KEY}",
-    //     "--stdio"
-    //   ],
-    //   "enabled": false
-    // },
     "context7": {
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
       "headers": {
-        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}",
-      },
+        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
+      }
     },
     "github": {
       "type": "local",
@@ -45,22 +29,27 @@
         "--rm",
         "-e",
         "GITHUB_PERSONAL_ACCESS_TOKEN",
-        "ghcr.io/github/github-mcp-server",
+        "ghcr.io/github/github-mcp-server"
       ],
       "enabled": true,
       "environment": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_PERSONAL_ACCESS_TOKEN}",
-      },
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
     },
     "browser-kit": {
       "type": "local",
       "command": ["npx", "@mcp-browser-kit/server@latest"],
-      "enabled": true,
+      "enabled": true
+    },
+    "superset": {
+      "type": "remote",
+      "url": "http://localhost:5008/mcp",
+      "enabled": true
     },
     "octocode": {
       "type": "local",
       "command": ["npx", "octocode-mcp@latest"],
-      "enabled": true,
+      "enabled": true
     },
     "aws-mcp": {
       "type": "local",
@@ -69,18 +58,18 @@
         "mcp-proxy-for-aws@latest",
         "https://aws-mcp.us-east-1.api.aws/mcp",
         "--metadata",
-        "AWS_REGION=us-east-1",
+        "AWS_REGION=us-east-1"
       ],
-      "enabled": true,
+      "enabled": true
     },
     "linear": {
       "type": "remote",
       "url": "https://mcp.linear.app/mcp",
       "headers": {
-        "Authorization": "Bearer {env:LINEAR_API_KEY}",
+        "Authorization": "Bearer {env:LINEAR_API_KEY}"
       },
       "enabled": true,
-      "timeout": 5000,
+      "timeout": 5000
     },
     "mcp-fhir": {
       "type": "local",
@@ -93,8 +82,8 @@
         "FHIR_PASSWORD": "{env:FHIR_PASSWORD}",
         "FHIR_FIRM_URL_PREFIX": "schweigerderm",
         "FHIR_API_KEY": "{env:FHIR_API_KEY}",
-        "FHIR_USE_OAUTH2": "true",
-      },
+        "FHIR_USE_OAUTH2": "true"
+      }
     },
     "langcare-mcp-fhir": {
       "type": "local",
@@ -103,13 +92,14 @@
         "-config",
         "/home/dan/.config/opencode/langcare-modmed.yaml"
       ],
-      "enabled": true,
-    },
+      "enabled": true
+    }
   },
   "plugin": [
     "opencode-antigravity-auth@latest",
     "@tarquinen/opencode-dcp@latest",
-    "oh-my-openagent",
+    // "oh-my-openagent",
+    "oh-my-opencode-slim"
   ],
   "provider": {
     "google": {
@@ -119,108 +109,117 @@
           "limit": { "context": 1048576, "output": 65535 },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
+            "output": ["text"]
           },
           "variants": {
             "low": { "thinkingLevel": "low" },
-            "high": { "thinkingLevel": "high" },
-          },
+            "high": { "thinkingLevel": "high" }
+          }
         },
         "antigravity-gemini-3.1-pro": {
           "name": "Gemini 3.1 Pro (Antigravity)",
           "limit": { "context": 1048576, "output": 65535 },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
+            "output": ["text"]
           },
           "variants": {
             "low": { "thinkingLevel": "low" },
-            "high": { "thinkingLevel": "high" },
-          },
+            "high": { "thinkingLevel": "high" }
+          }
         },
         "antigravity-gemini-3-flash": {
           "name": "Gemini 3 Flash (Antigravity)",
           "limit": { "context": 1048576, "output": 65536 },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
+            "output": ["text"]
           },
           "variants": {
             "minimal": { "thinkingLevel": "minimal" },
             "low": { "thinkingLevel": "low" },
             "medium": { "thinkingLevel": "medium" },
-            "high": { "thinkingLevel": "high" },
-          },
+            "high": { "thinkingLevel": "high" }
+          }
         },
         "antigravity-claude-sonnet-4-6": {
           "name": "Claude Sonnet 4.6 (Antigravity)",
           "limit": { "context": 200000, "output": 64000 },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
-          },
+            "output": ["text"]
+          }
         },
         "antigravity-claude-opus-4-6-thinking": {
           "name": "Claude Opus 4.6 Thinking (Antigravity)",
           "limit": { "context": 200000, "output": 64000 },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
+            "output": ["text"]
           },
           "variants": {
             "low": { "thinkingConfig": { "thinkingBudget": 8192 } },
-            "max": { "thinkingConfig": { "thinkingBudget": 32768 } },
-          },
+            "max": { "thinkingConfig": { "thinkingBudget": 32768 } }
+          }
         },
         "gemini-2.5-flash": {
           "name": "Gemini 2.5 Flash (Gemini CLI)",
           "limit": { "context": 1048576, "output": 65536 },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
-          },
+            "output": ["text"]
+          }
         },
         "gemini-2.5-pro": {
           "name": "Gemini 2.5 Pro (Gemini CLI)",
           "limit": { "context": 1048576, "output": 65536 },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
-          },
+            "output": ["text"]
+          }
         },
         "gemini-3-flash-preview": {
           "name": "Gemini 3 Flash Preview (Gemini CLI)",
           "limit": { "context": 1048576, "output": 65536 },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
-          },
+            "output": ["text"]
+          }
         },
         "gemini-3-pro-preview": {
           "name": "Gemini 3 Pro Preview (Gemini CLI)",
           "limit": { "context": 1048576, "output": 65535 },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
-          },
+            "output": ["text"]
+          }
         },
         "gemini-3.1-pro-preview": {
           "name": "Gemini 3.1 Pro Preview (Gemini CLI)",
           "limit": { "context": 1048576, "output": 65535 },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
-          },
+            "output": ["text"]
+          }
         },
         "gemini-3.1-pro-preview-customtools": {
           "name": "Gemini 3.1 Pro Preview Custom Tools (Gemini CLI)",
           "limit": { "context": 1048576, "output": 65535 },
           "modalities": {
             "input": ["text", "image", "pdf"],
-            "output": ["text"],
-          },
-        },
-      },
-    },
+            "output": ["text"]
+          }
+        }
+      }
+    }
   },
+  "agent": {
+    "explore": {
+      "disable": true
+    },
+    "general": {
+      "disable": true
+    }
+  },
+  "lsp": true
 }
