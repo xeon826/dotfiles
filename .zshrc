@@ -236,3 +236,5 @@ complete -C /home/dan/go/bin/aws-sso aws-sso
 export PATH=/home/dan/.opencode/bin:$PATH
 
 export FHIR_BASE_URL="https://stage.ema-api.com/ema-training/firm/schweigerderm/ema/fhir/v2"
+#export FHIR_BASE_URL="https://mmapi.ema-api.com/ema-prod/firm/schweigerderm/ema/fhir/v2"
+
