@@ -62,52 +62,38 @@
       ],
       "enabled": true
     },
-    "shopify": {
+    "linear": {
+      "type": "remote",
+      "url": "https://mcp.linear.app/mcp",
+      "headers": {
+        "Authorization": "Bearer {env:LINEAR_API_KEY}"
+      },
+      "enabled": true,
+      "timeout": 5000
+    },
+    "mcp-fhir": {
+      "type": "local",
+      // "command": ["node", "/home/dan/git_clones/mcp-fhir/build/index.js"],
+      "command": ["npx", "-y", "tsx", "--watch", "/home/dan/git_clones/mcp-fhir/src/index.ts"],
+      "enabled": true,
+      "environment": {
+        "FHIR_BASE_URL": "{env:FHIR_BASE_URL}",
+        "FHIR_USERNAME": "{env:FHIR_USERNAME}",
+        "FHIR_PASSWORD": "{env:FHIR_PASSWORD}",
+        "FHIR_FIRM_URL_PREFIX": "schweigerderm",
+        "FHIR_API_KEY": "{env:FHIR_API_KEY}",
+        "FHIR_USE_OAUTH2": "true"
+      }
+    },
+    "langcare-mcp-fhir": {
       "type": "local",
       "command": [
-        "npx",
-        "-y",
-        "shopify-mcp",
-        "--clientId",
-        "{env:SHOPIFY_CLIENT_ID}",
-        "--clientSecret",
-        "{env:SHOPIFY_CLIENT_SECRET}",
-        "--domain",
-        "sobe-girl.myshopify.com"
+        "/usr/lib/node_modules/@langcare/langcare-mcp-fhir/bin/langcare-mcp-fhir",
+        "-config",
+        "/home/dan/.config/opencode/langcare-modmed.yaml"
       ],
       "enabled": true
     }
-    // "linear": {
-    //   "type": "remote",
-    //   "url": "https://mcp.linear.app/mcp",
-    //   "headers": {
-    //     "Authorization": "Bearer {env:LINEAR_API_KEY}"
-    //   },
-    //   "enabled": true,
-    //   "timeout": 5000
-    // },
-    // "mcp-fhir": {
-    //   "type": "local",
-    //   "command": ["node", "/home/dan/git_clones/mcp-fhir/build/index.js"],
-    //   "enabled": true,
-    //   "environment": {
-    //     "FHIR_BASE_URL": "{env:FHIR_BASE_URL}",
-    //     "FHIR_USERNAME": "{env:FHIR_USERNAME}",
-    //     "FHIR_PASSWORD": "{env:FHIR_PASSWORD}",
-    //     "FHIR_FIRM_URL_PREFIX": "schweigerderm",
-    //     "FHIR_API_KEY": "{env:FHIR_API_KEY}",
-    //     "FHIR_USE_OAUTH2": "true"
-    //   }
-    // },
-    // "langcare-mcp-fhir": {
-    //   "type": "local",
-    //   "command": [
-    //     "/usr/lib/node_modules/@langcare/langcare-mcp-fhir/bin/langcare-mcp-fhir",
-    //     "-config",
-    //     "/home/dan/.config/opencode/langcare-modmed.yaml"
-    //   ],
-    //   "enabled": true
-    // }
   },
   "plugin": [
     "opencode-antigravity-auth@latest",
