@@ -213,3 +213,6 @@ eval "$(starship init bash)"
 [[ ${BLE_VERSION-} ]] && ble-attach
 
 . "$HOME/.local/bin/env"
+
+# opencode
+export PATH=/home/dan/.opencode/bin:$PATH

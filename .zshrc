@@ -38,7 +38,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME=""
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -100,11 +100,12 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git nvm pyenv-lazy fzf zsh-autosuggestions starship zoxide zsh-syntax-highlighting) 
+plugins=(git nvm pyenv-lazy zsh-autosuggestions zsh-syntax-highlighting) 
 zstyle ':omz:plugins:nvm' lazy yes
 
 
-source $ZSH/oh-my-zsh.sh
+source <(fzf --zsh)
+eval "$(zoxide init zsh)"
 source ~/.zsh_api_keys
 # User configuration
 
@@ -162,7 +163,7 @@ bindkey -s '^f' 'ranger\n'
 
 # zprof
 
-. "$HOME/.local/bin/env"
+#. "$HOME/.local/bin/env"
 
 # pnpm
 export PNPM_HOME="/home/dan/.local/share/pnpm"
@@ -227,12 +228,26 @@ aws-sso-clear() {
     eval $(/home/dan/go/bin/aws-sso ${=_args} eval -c)
 }
 
-compdef __aws_sso_profile_complete aws-sso-profile
-complete -C /home/dan/go/bin/aws-sso aws-sso
+#compdef __aws_sso_profile_complete aws-sso-profile
+#complete -C /home/dan/go/bin/aws-sso aws-sso
 
 # END_AWS_SSO_CLI
 
 # opencode
 export PATH=/home/dan/.opencode/bin:$PATH
 
+# local user binaries (whisper-cli, piper, etc.)
+export PATH="$HOME/.local/bin:$PATH"
+
 export FHIR_BASE_URL="https://stage.ema-api.com/ema-training/firm/schweigerderm/ema/fhir/v2"
+
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY          # share history between sessions/terminals
+setopt HIST_IGNORE_DUPS       # don't record consecutive duplicates
+setopt HIST_IGNORE_ALL_DUPS   # remove older duplicate entries
+setopt HIST_REDUCE_BLANKS     # trim extra whitespace
+
+# Starship prompt (must be last)
+eval "$(starship init zsh)"

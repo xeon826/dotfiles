@@ -1,5 +1,19 @@
 {
+  "keybinds": {
+    "session_rename": "none"
+  },
   "plugin": [
-    "oh-my-opencode-slim"
+    "oh-my-opencode-slim",
+    [
+      "@renjfk/opencode-voice",
+      {
+        "endpoint": "https://api.deepseek.com/v1",
+        "model": "deepseek-v4-flash",
+        "apiKeyEnv": "DEEPSEEK_API_KEY",
+        "sttEndpoint": "https://api.openai.com/v1",
+        "sttModel": "gpt-4o-mini-transcribe",
+        "sttApiKeyEnv": "OPENAI_API_KEY"
+      }
+    ]
   ]
 }
