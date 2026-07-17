@@ -103,7 +103,7 @@ ZSH_THEME=""
 plugins=(git nvm pyenv-lazy zsh-autosuggestions zsh-syntax-highlighting) 
 zstyle ':omz:plugins:nvm' lazy yes
 
-# source $ZSH/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 
 
 source <(fzf --zsh)
@@ -186,9 +186,9 @@ alias "hm-production-aws-cli"="aws-sso-profile 890651867127:PowerUserAccess"
 alias "hm-staging-aws-cli"="aws-sso-profile 548959629706:PowerUserAccess"
 alias "hm-development-aws-cli"="aws-sso-profile 013200616260:PowerUserAccess"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$PATH:$HOME/go/bin"
 # BEGIN_AWS_SSO_CLI
