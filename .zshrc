@@ -103,6 +103,8 @@ ZSH_THEME=""
 plugins=(git nvm pyenv-lazy zsh-autosuggestions zsh-syntax-highlighting) 
 zstyle ':omz:plugins:nvm' lazy yes
 
+# source $ZSH/oh-my-zsh.sh
+
 
 source <(fzf --zsh)
 eval "$(zoxide init zsh)"
@@ -146,10 +148,15 @@ alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=sta
 alias weather='curl wttr.in'
 alias listen-to-them='cd ~/git_clones/resumai; source venv/bin/activate; python manage.py listen_stream --device-name "SteelSeries Arctis Nova 5 Digital Stereo (IEC958)"'
 alias update-mirrors='sudo reflector --protocol https --verbose --latest 25 --sort rate --save /etc/pacman.d/mirrorlist'
+alias rate-arch-mirrors='rate-mirrors --allow-root arch | sudo tee /etc/pacman.d/mirrorlist'
+alias rate-endeavouros-mirrors='rate-mirrors --allow-root endeavouros | sudo tee /etc/pacman.d/endeavouros-mirrorlist'
 alias bruno='env ELECTRON_OZONE_PLATFORM_HINT=x11 bruno'
 
 
 
+
+# Emacs keybindings — disables vi command mode (stops ESC from flipping the starship prompt)
+bindkey -e
 
 # Use Ctrl + Space to accept zsh-autosuggestions suggestion
 bindkey '^ ' autosuggest-accept
@@ -251,3 +258,17 @@ setopt HIST_REDUCE_BLANKS     # trim extra whitespace
 
 # Starship prompt (must be last)
 eval "$(starship init zsh)"
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+bindkey '\e^?' backward-kill-word
+
+# >>> oh-my-opencode-slim background subagents >>>
+export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
+# <<< oh-my-opencode-slim background subagents <<<
+alias cd..='cd ..'
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../..'
