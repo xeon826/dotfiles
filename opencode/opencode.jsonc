@@ -113,6 +113,11 @@
         "git+https://github.com/imprvhub/mcp-domain-availability",
         "mcp-domain-availability"
       ]
+    },
+    "stripe": {
+      "type": "remote",
+      "url": "https://mcp.stripe.com",
+      "enabled": true
     }
   },
   "plugin": [
