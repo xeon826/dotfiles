@@ -179,7 +179,7 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-export AWS_PROFILE=AdministratorAccess-447437755865
+#export AWS_PROFILE=AdministratorAccess-447437755865
 export CRAWL4AI_ENDPOINT="http://localhost:11235"
 export AWS_PAGER=""
 alias "hm-production-aws-cli"="aws-sso-profile 890651867127:PowerUserAccess"
@@ -245,8 +245,6 @@ export PATH=/home/dan/.opencode/bin:$PATH
 
 # local user binaries (whisper-cli, piper, etc.)
 export PATH="$HOME/.local/bin:$PATH"
-
-export FHIR_BASE_URL="https://stage.ema-api.com/ema-training/firm/schweigerderm/ema/fhir/v2"
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000

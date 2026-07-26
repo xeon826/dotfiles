@@ -1,14 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
-    "mcp-web-reader": {
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "zacfire-mcp-web-reader"
-      ]
-    },
     "firecrawl-mcp": {
       "type": "local",
       "command": [
@@ -44,19 +36,14 @@
         "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_PERSONAL_ACCESS_TOKEN}"
       }
     },
-    "browser-kit": {
-      "type": "local",
-      "command": [
-        "npx",
-        "@mcp-browser-kit/server@latest"
-      ],
-      "enabled": true
-    },
-    "superset": {
-      "type": "remote",
-      "url": "http://localhost:5008/mcp",
-      "enabled": true
-    },
+    // "browser-kit": {
+    //   "type": "local",
+    //   "command": [
+    //     "npx",
+    //     "@mcp-browser-kit/server@latest"
+    //   ],
+    //   "enabled": true
+    // },
     "octocode": {
       "type": "local",
       "command": [
@@ -76,47 +63,43 @@
       ],
       "enabled": true
     },
-    "linear": {
-      "type": "remote",
-      "url": "https://mcp.linear.app/mcp",
-      "headers": {
-        "Authorization": "Bearer {env:LINEAR_API_KEY}"
-      },
-      "enabled": false,
-      "timeout": 5000
-    },
-    "mcp-fhir": {
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "tsx",
-        "--watch",
-        "/home/dan/git_clones/mcp-fhir/src/index.ts"
-      ],
-      "enabled": true,
-      "environment": {
-        "FHIR_BASE_URL": "{env:FHIR_BASE_URL}",
-        "FHIR_USERNAME": "{env:FHIR_USERNAME}",
-        "FHIR_PASSWORD": "{env:FHIR_PASSWORD}",
-        "FHIR_FIRM_URL_PREFIX": "schweigerderm",
-        "FHIR_API_KEY": "{env:FHIR_API_KEY}",
-        "FHIR_USE_OAUTH2": "true"
-      }
-    },
-    "mcp-domain-availability": {
-      "type": "local",
-      "command": [
-        "uvx",
-        "--python=3.10",
-        "--from",
-        "git+https://github.com/imprvhub/mcp-domain-availability",
-        "mcp-domain-availability"
-      ]
-    },
     "stripe": {
       "type": "remote",
       "url": "https://mcp.stripe.com",
+      "enabled": true
+    },
+    "momentum": {
+      "type": "local",
+      "command": [
+        "/home/dan/git_clones/momentum-mcp/.venv/bin/python",
+        "-m",
+        "mcp_server.server"
+      ],
+      "cwd": "/home/dan/git_clones/momentum-mcp",
+      "environment": {
+        "MCP_TRANSPORT": "stdio"
+      },
+      "enabled": true
+    },
+    "alpaca": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "alpaca-mcp-server"
+      ],
+      "environment": {
+        "ALPACA_API_KEY": "{env:ALPACA_API_KEY}",
+        "ALPACA_SECRET_KEY": "{env:ALPACA_SECRET_KEY}"
+      },
+      "enabled": true
+    },
+    "danelfin": {
+      "type": "remote",
+      "url": "https://mcp.danelfin.com/mcp",
+      "headers": {
+        "Authorization": "Bearer {env:DANELFIN_API_KEY}"
+      },
+      "oauth": false,
       "enabled": true
     }
   },

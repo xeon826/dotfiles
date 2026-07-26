@@ -21,18 +21,20 @@ if [ "$XDG_SESSION_TYPE" = "wayland" ] || [ -n "$WAYLAND_DISPLAY" ]; then
         }')
         if [ -z "$W" ] || [ -z "$H" ]; then
             echo "Warning: Failed to detect monitor dimensions, using default 3840x2160"
-            W=3840
-            H=2160
+            W=2560
+            H=1440
+            #W=3840
+            #H=2160
         fi
     else
         echo "Warning: xrandr not found, using default 3840x2160"
-        W=3840
-        H=2160
+	W=2560
+	H=1440
     fi
     # SDL_VIDEODRIVER=x11 gamescope -r 180 --mangoapp --backend sdl --adaptive-sync -f -W "$W" -H "$H" -- "$@"
     # gamescope -f -W "$W" -H "$H" -- "$@"
 #gamescope -f -W "$W" -H "$H" -w "$W" -h "$H" -- "$@"
-gamescope -f --framerate-limit 60 --force-grab-cursor -W 2560 -H 1440 -w 2560 -h 1440 -- "$@"
+gamescope -f -W 2560 -H 1440 -w 2560 -h 1440 -- "$@"
 else
     exec "$@"
 fi
