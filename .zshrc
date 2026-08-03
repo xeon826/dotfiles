@@ -270,3 +270,10 @@ alias ....='cd ../../../../'
 alias .....='cd ../../../../'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
+
+# bun completions
+[ -s "/home/dan/.bun/_bun" ] && source "/home/dan/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

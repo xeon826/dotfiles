@@ -3,6 +3,7 @@
     "session_rename": "none"
   },
   "plugin": [
+    "oh-my-opencode-slim",
     [
       "@renjfk/opencode-voice",
       {
@@ -13,7 +14,6 @@
         "sttModel": "gpt-4o-mini-transcribe",
         "sttApiKeyEnv": "OPENAI_API_KEY"
       }
-    ],
-    "oh-my-opencode-slim"
+    ]
   ]
 }

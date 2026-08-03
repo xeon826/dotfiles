@@ -4,12 +4,12 @@
   "presets": {
     "zai": {
       "orchestrator": {
-        "model": "zai-coding-plan/glm-5.1",
+        "model": "zai-coding-plan/glm-5.2",
         "skills": ["*"],
         "mcps": ["*", "!context7"]
       },
       "oracle": {
-        "model": "zai-coding-plan/glm-5.1",
+        "model": "zai-coding-plan/glm-5.2",
         "variant": "high",
         "skills": ["simplify"],
         "mcps": []
@@ -27,7 +27,7 @@
         "mcps": []
       },
       "designer": {
-        "model": "zai-coding-plan/glm-5.1",
+        "model": "zai-coding-plan/glm-5.2",
         "variant": "medium",
         "skills": ["agent-browser"],
         "mcps": []
