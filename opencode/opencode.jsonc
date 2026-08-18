@@ -121,6 +121,18 @@
         "SEARXNG_URL": "http://localhost:8095"
       },
       "enabled": true
+    },
+    "form4api": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "form4api-mcp"
+      ],
+      "environment": {
+        "FORM4API_KEY": "{env:FORM4_API_KEY}"
+      },
+      "enabled": true
     }
   },
   "plugin": [
