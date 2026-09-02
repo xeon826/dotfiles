@@ -14,21 +14,50 @@ LockScreen {
     // Monitor name -> workspace id to restore on unlock (set when locking)
     property var savedWorkspaces: ({})
 
+    // Retries until every monitor stranded on a lock temp workspace is healed.
+    // A single fire-and-forget batch races DPMS wake / unlock and silently
+    // strands monitors on the huge-ID temp workspaces (2147483647 - ws).
     Timer {
         id: restoreTimer
-        interval: 150
-        repeat: false
+        interval: 250
+        repeat: true
+
+        property int attempts: 0
+
+        function startRestore() {
+            attempts = 0;
+            restart();
+        }
+
         onTriggered: {
-            var batch = ""
+            attempts++;
+            var batch = "";
+            var allRestored = true;
             for (var j = 0; j < Quickshell.screens.length; ++j) {
-                var monName = Quickshell.screens[j].name
-                var wsId = root.savedWorkspaces[monName]
-                if (wsId !== undefined) {
-                    batch += "dispatch focusmonitor " + monName + "; dispatch workspace " + wsId + "; "
+                var monName = Quickshell.screens[j].name;
+                var mData = HyprlandData.monitors.find(m => m.name === monName);
+                var current = mData?.activeWorkspace?.id ?? -1;
+                if (current <= 1000000) {
+                    continue; // not stranded on a temp workspace
+                }
+                allRestored = false;
+                // Prefer the workspace saved at lock time; if that state was
+                // lost (shell restarted while locked), fall back to the lowest
+                // workspace still assigned to this monitor.
+                var wsId = root.savedWorkspaces[monName];
+                if (wsId === undefined || wsId <= 0) {
+                    wsId = HyprlandData.workspaces.find(ws => ws.monitorID === mData?.id)?.id;
+                }
+                if (wsId !== undefined && wsId > 0) {
+                    batch += "dispatch focusmonitor " + monName + "; dispatch workspace " + wsId + "; ";
                 }
             }
             if (batch.length > 0) {
                 Quickshell.execDetached(["hyprctl", "--batch", batch + "reload"])
+            }
+            // Give up after ~5s so an unreachable monitor can't loop forever
+            if (allRestored || attempts >= 20) {
+                restoreTimer.stop();
             }
         }
     }
@@ -49,16 +78,20 @@ LockScreen {
                     var mon = Quickshell.screens[i].name
                     var mData = HyprlandData.monitors.find(m => m.name === mon)
                     if (mData?.activeWorkspace == undefined) {
-                        return;
+                        continue; // skip this monitor instead of aborting the whole save
                     }
                     var ws = (mData?.activeWorkspace?.id ?? 1)
+                    if (ws > 1000000) {
+                        continue; // already stranded on a temp workspace; don't save or re-park it
+                    }
                     next[mon] = ws
                     batch += "dispatch focusmonitor " + mon + "; dispatch workspace " + (2147483647 - ws) + "; "
                 }
                 root.savedWorkspaces = next
+                restoreTimer.stop()
                 Quickshell.execDetached(["hyprctl", "--batch", batch + "reload"])
             } else {
-                restoreTimer.start()
+                restoreTimer.startRestore()
             }
         }
     }
