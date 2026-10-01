@@ -4,18 +4,18 @@
   "presets": {
     "zai": {
       "orchestrator": {
-        "model": "zai-coding-plan/glm-5.3",
+        "model": "zai-coding-plan/glm-5.3-flash",
         "skills": ["*"],
         "mcps": ["*", "!context7"]
       },
       "oracle": {
-        "model": "zai-coding-plan/glm-5.2",
+        "model": "zai-coding-plan/glm-5.3",
         "variant": "high",
         "skills": ["simplify"],
         "mcps": []
       },
       "librarian": {
-        "model": "zai-coding-plan/glm-4.7",
+        "model": "zai-coding-plan/glm-5.3-flash",
         "variant": "low",
         "skills": [],
         "mcps": ["websearch", "context7", "grep_app"]
@@ -27,13 +27,13 @@
         "mcps": []
       },
       "designer": {
-        "model": "zai-coding-plan/glm-5.2",
+        "model": "zai-coding-plan/glm-5.3-flash",
         "variant": "medium",
         "skills": ["agent-browser"],
         "mcps": []
       },
       "fixer": {
-        "model": "zai-coding-plan/glm-4.7",
+        "model": "zai-coding-plan/glm-5.3-flash",
         "variant": "low",
         "skills": [],
         "mcps": []

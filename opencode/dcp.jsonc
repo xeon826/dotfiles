@@ -3,11 +3,13 @@
   "compress": {
     "modelMaxLimits": {
       "zai-coding-plan/glm-5.2": 700000,
-      "zai-coding-plan/glm-5.3": 700000
+      "zai-coding-plan/glm-5.3": 700000,
+      "zai-coding-plan/glm-5.3-flash": 700000
     },
     "modelMinLimits": {
       "zai-coding-plan/glm-5.2": 350000,
-      "zai-coding-plan/glm-5.3": 700000
+      "zai-coding-plan/glm-5.3": 700000,
+      "zai-coding-plan/glm-5.3-flash": 700000
     }
   }
 }
