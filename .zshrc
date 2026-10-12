@@ -180,6 +180,7 @@ case ":$PATH:" in
 esac
 # pnpm end
 #export AWS_PROFILE=AdministratorAccess-447437755865
+#export AWS_DEFAULT_PROFILE=AdministratorAccess-755933695170 
 export CRAWL4AI_ENDPOINT="http://localhost:11235"
 export AWS_PAGER=""
 alias "hm-production-aws-cli"="aws-sso-profile 890651867127:PowerUserAccess"

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://opencode.ai/v2/cli.json",
+  "theme": {
+    "name": "opencode"
+  },
+  "keybinds": {
+    "session.rename": "none",
+    "agent.cycle": "tab"
+  },
+  "plugins": [
+    {
+      "package": "file:///home/dan/git_clones/opencode-voice",
+      "options": {
+        "endpoint": "https://api.deepseek.com/v1",
+        "model": "deepseek-v4-flash",
+        "apiKeyEnv": "DEEPSEEK_API_KEY",
+        "sttEndpoint": "https://api.openai.com/v1",
+        "sttModel": "gpt-4o-mini-transcribe",
+        "sttApiKeyEnv": "OPENAI_API_KEY"
+      }
+    },
+    "oh-my-opencode-slim"
+  ],
+  "diffs": {
+    "wrap": "word"
+  },
+  "session": {
+    "sidebar": "hide",
+    "scrollbar": false,
+    "thinking": "show"
+  },
+  "animations": true
+}

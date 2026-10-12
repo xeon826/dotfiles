@@ -152,13 +152,23 @@
         "EXTENSION_SECRET": "{env:BROWSER_MCP_SECRET}",
         "EXTENSION_PORT": "8089"
       },
+      "enabled": false
+    },
+    "browsermcp": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@browsermcp/mcp@0.1.3"
+      ],
       "enabled": true
     }
   },
   "plugin": [
     "opencode-antigravity-auth@latest",
     "@tarquinen/opencode-dcp@latest",
-    "oh-my-opencode-slim"
+    "oh-my-opencode-slim",
+    "opencode-browser"
   ],
   "provider": {
     "google": {

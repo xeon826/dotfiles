@@ -2,14 +2,14 @@
   "$schema": "https://raw.githubusercontent.com/Opencode-DCP/opencode-dynamic-context-pruning/master/dcp.schema.json",
   "compress": {
     "modelMaxLimits": {
-      "zai-coding-plan/glm-5.2": 700000,
-      "zai-coding-plan/glm-5.3": 700000,
-      "zai-coding-plan/glm-5.3-flash": 700000
+      "zai-coding-plan/glm-5.2": 500000,
+      "zai-coding-plan/glm-5.3": 500000,
+      "zai-coding-plan/glm-5.3-flash": 500000
     },
     "modelMinLimits": {
       "zai-coding-plan/glm-5.2": 350000,
-      "zai-coding-plan/glm-5.3": 700000,
-      "zai-coding-plan/glm-5.3-flash": 700000
+      "zai-coding-plan/glm-5.3": 500000,
+      "zai-coding-plan/glm-5.3-flash": 500000
     }
   }
 }
