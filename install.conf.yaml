@@ -41,6 +41,8 @@
     ~/.config/ksb-nvim: ksb-nvim
     ~/.tmux.conf: tmux.conf
     ~/.local/bin/mkrep: mkrep.py
+    ~/.local/bin/helium: helium-wrapper.sh
+    ~/.local/share/applications/helium.desktop: helium.desktop
     ~/.Xmodmap: Xmodmap
     ~/.config/lazygit/config.yml: lazygit.yml
     ~/.inputrc: inputrc
