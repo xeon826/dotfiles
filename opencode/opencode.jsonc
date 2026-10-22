@@ -162,6 +162,17 @@
         "@browsermcp/mcp@0.1.3"
       ],
       "enabled": true
+    },
+    "google-ads": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "google-ads-mcp"
+      ],
+      "environment": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "/home/dan/.config/google-ads/user-adc.json"
+      },
+      "enabled": true
     }
   },
   "plugin": [
