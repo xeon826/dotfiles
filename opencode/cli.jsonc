@@ -5,7 +5,8 @@
   },
   "keybinds": {
     "session.rename": "none",
-    "agent.cycle": "tab"
+    "agent.cycle": "tab",
+    "agent.cycle.reverse": "shift+tab"
   },
   "plugins": [
     {
