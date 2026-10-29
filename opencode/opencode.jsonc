@@ -196,6 +196,20 @@
       ],
       "enabled": true
     },
+    // hao-cyber/phone-mcp — Android via ADB (wireless). Needs `adb connect` first;
+    // port changes per wireless-debugging toggle, rediscover via avahi (_adb-tls-connect._tcp).
+    // No ANDROID_SERIAL: single device, plain adb targeting survives port changes.
+    // mcp<2 pinned: package still uses FastMCP v1 API.
+    "phone": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "--with",
+        "mcp<2",
+        "phone-mcp"
+      ],
+      "enabled": true
+    },
     "google-ads-official": {
       "type": "local",
       "command": [

@@ -8,6 +8,10 @@ Apply DRY broadly — not just code (dedupe via functions/abstractions) but data
 
 Try to refrain from using insider lingo when talking about finances.
 
+## Bank balances — gwal (Plaid)
+
+To check the user's bank accounts, use the Plaid setup in `~/git_clones/gwal` (personal expense tracker): run a small Node script from that directory importing `./lib/plaid.mjs` (it loads `.env` creds), read the access token from `plaid-token.json`, and call `plaid('/accounts/balance/get', { access_token })` — see AGENTS.md there for Plaid specifics (Trial plan, never relink casually). Accounts: Checking ••4777, Savings ••9540, Brokerage ••5595, Credit Card ••9372 (US Bank). There is no Plaid MCP server configured for this; `plaid-token.json` and `.env` are secrets — never echo or commit them.
+
 ## Browser automation — agent-browser
 
 Config lives in `~/.agent-browser/config.json` (symlink to `~/dotfiles/agent-browser/config.json`): hardware-GPU launch args (`--use-angle=vulkan,--enable-features=Vulkan` — WebGL renders on the RTX 4070 Ti instead of SwiftShader-on-CPU, which pegs every core at ~1300%) and a 5-minute idle timeout that auto-closes the headless browser. Still run `agent-browser close --all` when done with a browser task. If a `chrome --type=gpu-process` under `~/.agent-browser/browsers/` ever spins up CPU again, it means the config was bypassed/overridden — check the config first, don't just pkill. Kill scoped with `pkill -f '.agent-browser/browsers/chrome'`; never blanket `pkill chrome` (Steam and other apps embed Chrome). Do not attach to the user's running Helium browser (`--connect`/`--auto-connect`) — that hijacks their tabs and personal session.
