@@ -1,6 +1,15 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
+    "codepen": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "codepen-mcp"
+      ],
+      "enabled": true
+    },
     "firecrawl-mcp": {
       "type": "local",
       "command": [
@@ -175,6 +184,16 @@
         "GOOGLE_ADS_CUSTOMER_ID": "{env:GOOGLE_ADS_CUSTOMER_ID}",
         "GOOGLE_ADS_TOKEN_PATH": "/home/dan/.mcp-google-ads/token.json"
       },
+      "enabled": true
+    },
+    // TKasperczyk/thunderbird-mcp — stdio bridge to the Thunderbird extension's HTTP server.
+    // Requires the thunderbird-mcp.xpi installed in Thunderbird and TB running.
+    "thunderbird": {
+      "type": "local",
+      "command": [
+        "node",
+        "/home/dan/git_clones/thunderbird-mcp/mcp-bridge.cjs"
+      ],
       "enabled": true
     },
     "google-ads-official": {
