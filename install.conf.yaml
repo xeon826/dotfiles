@@ -21,6 +21,7 @@
     ~/steam-wayland-wrapper.sh: steam-wayland-wrapper.sh
     ~/.config/fish: fish
     ~/.config/opencode/: opencode
+    ~/.config/hypr/hyprland.lua: hyprland.lua
     ~/.config/hypr/custom: hypr-custom
     ~/.config/alacritty: alacritty.toml
     ~/.config/ranger: ranger

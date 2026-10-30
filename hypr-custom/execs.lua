@@ -1,0 +1,13 @@
+-- Custom autostart (converted from custom/execs.conf)
+hl.on("hyprland.start", function()
+    hl.exec_cmd("thunderbird", { workspace = "3 silent" })
+    hl.exec_cmd("docker-compose -f /home/dan/git_clones/aio/docker-compose.yml up -d")
+    hl.exec_cmd("mpDris2")
+    hl.exec_cmd("~/.local/bin/helium", { workspace = "2 silent" })
+    hl.exec_cmd("pw-loopback --capture-props='media.class=Audio/Sink' --playback-props='node.name=steamlink_sink'")
+    hl.exec_cmd("/bin/sh -c 'until systemctl is-active --quiet network-online.target; do sleep 1; done; kitty --title \"weechat\" -e /usr/bin/weechat'",
+        { workspace = "3 silent" })
+    hl.exec_cmd("flatpak run com.github.iwalton3.jellyfin-mpv-shim")
+    hl.exec_cmd("rclone mount gdrive: ~/gdrive-mount --vfs-cache-mode full")
+    hl.exec_cmd("wayvnc 0.0.0.0 5900")
+end)
