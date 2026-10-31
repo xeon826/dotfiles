@@ -87,7 +87,7 @@ hl.unbind("SUPER + SHIFT + Z")
 hl.bind("SUPER + SHIFT + Z", dsp.window.move({ workspace = "special:browser", follow = false })) -- Send to scratchpad
 
 hl.bind("SUPER + ALT + S", dsp.global("quickshell:regionScreenshot")) -- Screen snip
-hl.bind("SUPER + ALT + S", dsp.exec_cmd("qs -c " .. QS_CONFIG .. " ipc call TEST_ALIVE || pidof slurp || hyprshot --freeze --clipboard-only --mode region --silent")) -- [hidden] Screen snip (fallback)
+hl.bind("SUPER + ALT + S", dsp.exec_cmd("qs -p " .. QS_PATH .. " ipc call TEST_ALIVE || pidof slurp || hyprshot --freeze --clipboard-only --mode region --silent")) -- [hidden] Screen snip (fallback)
 
 -- Switch between clients (next/previous)
 hl.bind("SUPER + SHIFT + H", dsp.window.swap({ direction = "left" }))

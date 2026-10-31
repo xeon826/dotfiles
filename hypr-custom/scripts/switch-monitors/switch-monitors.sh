@@ -115,7 +115,7 @@ move_clients_between_monitors() {
     while IFS= read -r addr; do
         if [[ -n "$addr" ]]; then
             echo "Moving client $addr to monitor $dest_mon"
-            if hyprctl dispatch movetomonitor "$dest_mon,address:$addr" 2>/dev/null; then
+            if hyprctl dispatch "hl.dsp.window.move({window=\"address:$addr\",monitor=\"$dest_mon\"})" 2>/dev/null; then
                 moved=$((moved + 1))
             else
                 echo "Warning: Failed to move client $addr" >&2

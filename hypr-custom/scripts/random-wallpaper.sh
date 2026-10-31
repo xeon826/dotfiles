@@ -21,7 +21,7 @@ echo "[$(date '+%Y-%m-%d %H:%M:%S')] Triggering random wallpaper selection..."
 # Method 1: Use hyprctl dispatch (primary method)
 if command -v hyprctl >/dev/null 2>&1; then
     # Syntax from keybinds.conf: global, quickshell:wallpaperSelectorRandom
-    if hyprctl dispatch global "quickshell:wallpaperSelectorRandom" >/dev/null 2>&1; then
+    if hyprctl dispatch 'hl.dsp.global("quickshell:wallpaperSelectorRandom")' >/dev/null 2>&1; then
         echo "Success: Random wallpaper selected via hyprctl dispatch"
         exit 0
     else

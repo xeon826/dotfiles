@@ -142,7 +142,7 @@ Item {
                                 onPressed: {
                                     if (root.draggingTargetWorkspace === -1) {
                                         GlobalStates.overviewOpen = false
-                                        Hyprland.dispatch(`workspace ${workspace.workspaceValue}`)
+                                        Hyprland.dispatch(`hl.dsp.focus({workspace=${workspace.workspaceValue}})`)
                                     }
                                 }
                             }
@@ -266,7 +266,7 @@ Item {
                             window.Drag.active = false
                             root.draggingFromWorkspace = -1
                             if (targetWorkspace !== -1 && targetWorkspace !== windowData?.workspace.id) {
-                                Hyprland.dispatch(`movetoworkspacesilent ${targetWorkspace}, address:${window.windowData?.address}`)
+                                Hyprland.dispatch(`hl.dsp.window.move({window="address:${window.windowData?.address}",workspace=${targetWorkspace},follow=false})`)
                                 updateWindowPosition.restart()
                             }
                             else {
@@ -276,7 +276,11 @@ Item {
                                 }
                                 const percentageX = Math.round((window.x - xOffset) / root.workspaceImplicitWidth * 100)
                                 const percentageY = Math.round((window.y - yOffset) / root.workspaceImplicitHeight * 100)
-                                Hyprland.dispatch(`movewindowpixel exact ${percentageX}% ${percentageY}%, address:${window.windowData?.address}`)
+                                const reserved = root.monitorData?.reserved ?? [0, 0, 0, 0]
+                                const scaleFix = (root.monitorData?.scale ?? 1) / root.scale
+                                const exactX = Math.round((root.monitorData?.x ?? 0) + reserved[0] + percentageX / 100 * root.workspaceImplicitWidth * scaleFix)
+                                const exactY = Math.round((root.monitorData?.y ?? 0) + reserved[1] + percentageY / 100 * root.workspaceImplicitHeight * scaleFix)
+                                Hyprland.dispatch(`hl.dsp.window.move({window="address:${window.windowData?.address}",x=${exactX},y=${exactY}})`)
                             }
                         }
                         onClicked: (event) => {
@@ -284,10 +288,10 @@ Item {
 
                             if (event.button === Qt.LeftButton) {
                                 GlobalStates.overviewOpen = false
-                                Hyprland.dispatch(`focuswindow address:${windowData.address}`)
+                                Hyprland.dispatch(`hl.dsp.focus({window="address:${windowData.address}"})`)
                                 event.accepted = true
                             } else if (event.button === Qt.MiddleButton) {
-                                Hyprland.dispatch(`closewindow address:${windowData.address}`)
+                                Hyprland.dispatch(`hl.dsp.window.close({window="address:${windowData.address}"})`)
                                 event.accepted = true
                             }
                         }

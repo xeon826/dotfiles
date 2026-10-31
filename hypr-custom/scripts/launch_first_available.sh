@@ -10,7 +10,7 @@ is_pseudo=$(echo "$active_window_info" | jq -r '.pseudo')
 
 # If the window is fullscreen or maximized, restore it
 if [[ "$is_fullscreen" != "0" ]]; then
-	hyprctl dispatch fullscreenstate 0 0
+	hyprctl dispatch 'hl.dsp.window.fullscreen_state({internal=0,client=0})'
 fi
 
 for cmd in "$@"; do

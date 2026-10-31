@@ -5,6 +5,10 @@
 
 local QS_CONFIG = "ii"
 _G.QS_CONFIG = QS_CONFIG -- shared with dofile()'d files
+-- quickshell >=0.3.2 matches running instances by the RESOLVED config path, so
+-- `qs -c ii` can't find the instance started through the ~/.config/quickshell
+-- symlink. Always invoke with the real path:
+_G.QS_PATH = "/home/dan/dotfiles/quickshell/" .. QS_CONFIG
 
 -- Ensure binds are live even after a reload from a nested submap
 -- (legacy: `exec = hyprctl dispatch submap global` + `submap = global`)
