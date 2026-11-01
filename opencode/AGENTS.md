@@ -10,6 +10,8 @@ Try to refrain from using insider lingo when talking about finances.
 
 ## Bank balances — gwal (Plaid)
 
+When the user says just "bank status", they mean: show balance and recent transaction activity for their accounts using the Plaid setup below (at minimum Checking ••4777 — balance plus the last ~30 days of transactions). Present the activity grouped by date (most recent first) with: the day's net amount summed across its transactions, and a comma-delimited list of the merchant/description names for that day. Income positive / spend negative.
+
 To check the user's bank accounts, use the Plaid setup in `~/git_clones/gwal` (personal expense tracker): run a small Node script from that directory importing `./lib/plaid.mjs` (it loads `.env` creds), read the access token from `plaid-token.json`, and call `plaid('/accounts/balance/get', { access_token })` — see AGENTS.md there for Plaid specifics (Trial plan, never relink casually). Accounts: Checking ••4777, Savings ••9540, Brokerage ••5595, Credit Card ••9372 (US Bank). There is no Plaid MCP server configured for this; `plaid-token.json` and `.env` are secrets — never echo or commit them.
 
 ## Browser automation — agent-browser

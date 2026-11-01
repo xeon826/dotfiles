@@ -6,7 +6,7 @@ hl.config({
     general = {
         border_size = 4,
         col = {
-            active_border   = { colors = { "rgba(8B0000FF)", "rgba(FF4444FF)", "rgba(FFD700FF)" }, angle = 45 },
+            active_border   = { colors = { "rgba(7FFFD4FF)", "rgba(00BFFFFF)", "rgba(1E90FFFF)" }, angle = 45 },
             inactive_border = "rgba(333333FF)",
         },
     },
@@ -35,10 +35,13 @@ hl.config({
     decoration = {
         rounding = 10,
         active_opacity = 1.00,
-        inactive_opacity = 1.00,
+        inactive_opacity = 0.92,
 
         blur = {
-            enabled = false, -- Disable blur to fix high CPU usage
+            enabled = true,
+            size = 3,
+            passes = 1,
+            vibrancy = 0.17, -- keeps dark themes from looking washed out
         },
 
         shadow = {
