@@ -471,5 +471,8 @@
       "disable": true
     }
   },
-  "lsp": true
+  "lsp": true,
+  "plugins": [
+    "@aerovato/operator-opencode-v2@latest"
+  ]
 }

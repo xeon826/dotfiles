@@ -279,3 +279,4 @@ alias .5='cd ../../../../..'
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$HOME/.npm-global/bin:$PATH"
