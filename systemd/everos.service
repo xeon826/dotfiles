@@ -1,0 +1,12 @@
+[Unit]
+Description=EverOS memory server (local-first agent memory)
+After=network-online.target
+
+[Service]
+ExecStart=%h/.local/share/uv/tools/everos/bin/everos server start
+EnvironmentFile=%h/.config/everos/server.env
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
