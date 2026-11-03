@@ -21,7 +21,7 @@
         "mcps": ["websearch", "context7", "grep_app"]
       },
       "explorer": {
-        "model": "zai-coding-plan/glm-4.7",
+        "model": "zai-coding-plan/glm-5.3-flash",
         "variant": "low",
         "skills": [],
         "mcps": []

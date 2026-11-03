@@ -1,15 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
-    "codepen": {
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "codepen-mcp"
-      ],
-      "enabled": true
-    },
     "firecrawl-mcp": {
       "type": "local",
       "command": [
@@ -168,7 +159,19 @@
       "command": [
         "npx",
         "-y",
-        "@browsermcp/mcp@0.1.3"
+        "@browsermcp/mcp@latest"
+      ],
+      "enabled": true
+    },
+    // vercel-labs/agent-browser — typed MCP surface over the same daemon as the CLI.
+    // Profiles: core (nav/snapshot/interaction) + network (routes/HAR/credentials).
+    "agent-browser": {
+      "type": "local",
+      "command": [
+        "agent-browser",
+        "mcp",
+        "--tools",
+        "core,network"
       ],
       "enabled": true
     },
@@ -223,7 +226,7 @@
     }
   },
   "plugin": [
-    "opencode-antigravity-auth@latest",
+    // "opencode-antigravity-auth@latest",
     "@tarquinen/opencode-dcp@latest",
     "oh-my-opencode-slim",
     "opencode-browser"
@@ -471,8 +474,15 @@
       "disable": true
     }
   },
+  // Read-only allowlists (no prompt approval). Never blanket-allow write patterns here.
+  "permissions": [
+    { "action": "shell", "resource": "AWS_PROFILE=AdministratorAccess-* aws logs tail *", "effect": "allow" },
+    { "action": "shell", "resource": "curl -s http://localhost:*", "effect": "allow" },
+    { "action": "shell", "resource": "docker exec gmaj-db psql -U postgres -tc *", "effect": "allow" }
+  ],
   "lsp": true,
   "plugins": [
-    "@aerovato/operator-opencode-v2@latest"
+    "@aerovato/operator-opencode-v2@latest",
+    "/home/dan/git_clones/ever-opencode"
   ]
 }

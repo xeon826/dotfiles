@@ -26,6 +26,9 @@
   "diffs": {
     "wrap": "word"
   },
+  "tabs": {
+    "mode": "off"
+  },
   "session": {
     "sidebar": "hide",
     "scrollbar": false,
