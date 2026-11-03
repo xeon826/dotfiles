@@ -41,3 +41,4 @@ end)
 
 -- was: source = /home/dan/.config/hypr/openwhispr-binds.conf
 -- (that file currently contains no binds; if it ever gains binds, port them here)
+pcall(require, "/home/dan/.config/hypr/openwhispr-binds.lua")

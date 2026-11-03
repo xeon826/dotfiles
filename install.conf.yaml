@@ -46,6 +46,9 @@
     ~/.local/share/applications/helium.desktop: helium.desktop
     ~/.Xmodmap: Xmodmap
     ~/.config/lazygit/config.yml: lazygit.yml
+    ~/.config/systemd/user/everos.service: systemd/everos.service
+    ~/.everos/everos.toml: everos/everos.toml
+    ~/.everos/ome.toml: everos/ome.toml
     ~/.inputrc: inputrc
 
 - shell:

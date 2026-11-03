@@ -1,4 +1,4 @@
 {
   "args": "--use-angle=vulkan,--enable-features=Vulkan",
-  "idleTimeout": "5m"
+  "idleTimeout": "15m"
 }
