@@ -229,7 +229,7 @@
     // "opencode-antigravity-auth@latest",
     "@tarquinen/opencode-dcp@latest",
     "oh-my-opencode-slim",
-    "opencode-browser"
+    // "opencode-browser"
   ],
   "provider": {
     "google": {
