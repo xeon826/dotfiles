@@ -129,9 +129,10 @@ max_concurrency = 4
 # OpenAI-compatible embedding endpoint. Override via env:
 #   EVEROS_EMBEDDING__MODEL, EVEROS_EMBEDDING__API_KEY, EVEROS_EMBEDDING__BASE_URL
 # model and base_url ship with recommended defaults; api_key must be set.
-model     = "Qwen/Qwen3-Embedding-4B"
-api_key   = ""
-base_url  = "https://api.deepinfra.com/v1/openai"
+model      = "text-embedding-v4"
+api_key    = ""
+base_url   = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1"
+dimensions = 1024
 # Width of the vector column in every index table. The model must return at
 # least this many dimensions; a longer vector is truncated (only lossless for
 # Matryoshka models), a shorter one is refused at startup. Changing it means
