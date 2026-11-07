@@ -1,6 +1,7 @@
 ---
 description: "Use this agent when building production ML systems requiring model training pipelines, model serving infrastructure, performance optimization, and automated retraining."
 mode: subagent
+model: zai-coding-plan/glm-5.3-flash
 hidden: true
 ---
 

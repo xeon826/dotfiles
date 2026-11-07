@@ -1,6 +1,7 @@
 ---
 description: "Use this agent when designing, building, or optimizing CI/CD pipelines and deployment automation strategies."
 mode: subagent
+model: zai-coding-plan/glm-5.3-flash
 hidden: true
 ---
 

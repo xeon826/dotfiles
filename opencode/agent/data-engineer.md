@@ -1,6 +1,7 @@
 ---
 description: "Use this agent when you need to design, build, or optimize data pipelines, ETL/ELT processes, and data infrastructure. Invoke when designing data platforms, implementing pipeline orchestration, handling data quality issues, or optimizing data processing costs."
 mode: subagent
+model: zai-coding-plan/glm-5.3-flash
 hidden: true
 ---
 

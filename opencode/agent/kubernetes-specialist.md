@@ -1,6 +1,7 @@
 ---
 description: "Use this agent when you need to design, deploy, configure, or troubleshoot Kubernetes clusters and workloads in production environments."
 mode: subagent
+model: zai-coding-plan/glm-5.3-flash
 hidden: true
 ---
 

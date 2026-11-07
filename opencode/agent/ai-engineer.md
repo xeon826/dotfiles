@@ -1,6 +1,7 @@
 ---
 description: "Use this agent when architecting, implementing, or optimizing end-to-end AI systems—from model selection and training pipelines to production deployment and monitoring."
 mode: subagent
+model: zai-coding-plan/glm-5.3-flash
 hidden: true
 ---
 

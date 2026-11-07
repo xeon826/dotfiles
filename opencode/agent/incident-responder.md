@@ -1,6 +1,7 @@
 ---
 description: "Use this agent when an active security breach, service outage, or operational incident requires immediate response, evidence preservation, and coordinated recovery."
 mode: subagent
+model: zai-coding-plan/glm-5.3-flash
 hidden: true
 ---
 

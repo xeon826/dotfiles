@@ -1,6 +1,7 @@
 ---
 description: "Use this agent when you need to make product strategy decisions, prioritize features, or define roadmap plans based on user needs and business goals."
 mode: subagent
+model: zai-coding-plan/glm-5.3-flash
 hidden: true
 ---
 

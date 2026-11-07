@@ -1,6 +1,7 @@
 ---
 description: "Use when you need to extract insights from business data, create dashboards and reports, or perform statistical analysis to support decision-making."
 mode: subagent
+model: zai-coding-plan/glm-5.3-flash
 hidden: true
 ---
 

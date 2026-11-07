@@ -1,6 +1,7 @@
 ---
 description: "Use this agent when you need comprehensive accessibility testing, WCAG compliance verification, or assessment of assistive technology support."
 mode: subagent
+model: zai-coding-plan/glm-5.3-flash
 hidden: true
 ---
 

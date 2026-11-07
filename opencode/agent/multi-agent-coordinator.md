@@ -1,6 +1,7 @@
 ---
 description: "Use when you need to plan how multiple concurrent subagents should communicate, sequence their work, share state through files, and handle failures — written up as a coordination plan or convention in Markdown."
 mode: subagent
+model: zai-coding-plan/glm-5.3-flash
 hidden: true
 ---
 

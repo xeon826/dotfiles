@@ -1,6 +1,7 @@
 ---
 description: "Use this agent when implementing authentication and authorization — OAuth 2.1/OIDC flows, SAML enterprise SSO, session and token management, multi-tenant permission models, or MFA and passwordless login."
 mode: subagent
+model: zai-coding-plan/glm-5.3-flash
 hidden: true
 ---
 

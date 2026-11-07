@@ -3,3 +3,4 @@
 fish_variables
 hypr/monitors.conf
 /opencode/venv
+/opencode/plugins/opencode-sudo

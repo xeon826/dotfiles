@@ -1,0 +1,166 @@
+--- a/everalgo/user_memory/episode.py
++++ b/everalgo/user_memory/episode.py
+@@ -3,6 +3,7 @@
+ from __future__ import annotations
+ 
+ import json
++import re
+ from datetime import UTC, datetime
+ from typing import TYPE_CHECKING, Any
+ 
+@@ -100,7 +101,7 @@
+     response = await llm.chat(messages=[LLMChatMessage(role="user", content=rendered)])
+     text = response.content
+     json_str = _extract_json_object(text)
+-    data: dict[str, Any] = json.loads(json_str)
++    data: dict[str, Any] = _loads_lenient(json_str)
+     if "title" not in data or "content" not in data:
+         raise ValueError(f"Episode LLM response missing required keys: {data!r}")
+     if not str(data["content"]).strip():
+@@ -108,6 +109,19 @@
+     return data
+ 
+ 
++def _loads_lenient(text: str):
++    """``json.loads`` with one repair pass for common LLM JSON slop.
++
++    Some models (observed: DeepSeek) occasionally emit trailing commas
++    (``{..., }`` / ``[..., ]``), which strict parsing rejects. Strip any
++    comma directly preceding a closing brace/bracket and retry once.
++    """
++    try:
++        return json.loads(text)
++    except json.JSONDecodeError:
++        return json.loads(re.sub(r",\s*([}\]])", r"\1", text))
++
++
+ def _extract_json_object(text: str) -> str:
+     """First balanced {{...}} block in text (brace-balanced parser for nested/complex JSON)."""
+     start = text.find("{")
+--- a/everalgo/user_memory/profile.py
++++ b/everalgo/user_memory/profile.py
+@@ -3,6 +3,7 @@
+ from __future__ import annotations
+ 
+ import json
++import re
+ import logging
+ from typing import TYPE_CHECKING, Any, cast
+ 
+@@ -196,7 +197,7 @@
+     response = await llm.chat(messages=[LLMChatMessage(role="user", content=rendered)])
+     text = response.content
+     json_str = _extract_json_object(text)
+-    data: dict[str, Any] = json.loads(json_str)
++    data: dict[str, Any] = _loads_lenient(json_str)
+     if "explicit_info" not in data or "implicit_traits" not in data:
+         raise ValueError(f"Profile init response missing required keys: {list(data.keys())!r}")
+     if not isinstance(data["explicit_info"], list) or not isinstance(data["implicit_traits"], list):
+@@ -209,7 +210,7 @@
+     response = await llm.chat(messages=[LLMChatMessage(role="user", content=rendered)])
+     text = response.content
+     json_str = _extract_json_object(text)
+-    data: dict[str, Any] = json.loads(json_str)
++    data: dict[str, Any] = _loads_lenient(json_str)
+     if "operations" not in data:
+         raise ValueError(f"Profile update response missing 'operations' key: {list(data.keys())!r}")
+     if not isinstance(data["operations"], list):
+@@ -222,7 +223,7 @@
+     response = await llm.chat(messages=[LLMChatMessage(role="user", content=rendered)])
+     text = response.content
+     json_str = _extract_json_object(text)
+-    data: dict[str, Any] = json.loads(json_str)
++    data: dict[str, Any] = _loads_lenient(json_str)
+     if "explicit_info" not in data or "implicit_traits" not in data:
+         raise ValueError(f"Profile compact response missing required keys: {list(data.keys())!r}")
+     if not isinstance(data["explicit_info"], list) or not isinstance(data["implicit_traits"], list):
+@@ -230,6 +231,19 @@
+     return data
+ 
+ 
++def _loads_lenient(text: str):
++    """``json.loads`` with one repair pass for common LLM JSON slop.
++
++    Some models (observed: DeepSeek) occasionally emit trailing commas
++    (``{..., }`` / ``[..., ]``), which strict parsing rejects. Strip any
++    comma directly preceding a closing brace/bracket and retry once.
++    """
++    try:
++        return json.loads(text)
++    except json.JSONDecodeError:
++        return json.loads(re.sub(r",\s*([}\]])", r"\1", text))
++
++
+ def _extract_json_object(text: str) -> str:
+     """First balanced {{...}} block in text (brace-balanced parser for nested JSON)."""
+     start = text.find("{")
+--- a/everalgo/user_memory/atomic_fact.py
++++ b/everalgo/user_memory/atomic_fact.py
+@@ -3,6 +3,7 @@
+ from __future__ import annotations
+ 
+ import json
++import re
+ import logging
+ from typing import TYPE_CHECKING, Any, cast
+ 
+@@ -128,7 +129,7 @@
+     response = await llm.chat(messages=[LLMChatMessage(role="user", content=rendered)])
+     text = response.content
+     json_str = _extract_json_object(text)
+-    data: dict[str, Any] = json.loads(json_str)
++    data: dict[str, Any] = _loads_lenient(json_str)
+     if "event_log" in data:
+         raw_block = data["event_log"]
+     elif "atomic_facts" in data:
+@@ -151,6 +152,19 @@
+     return block
+ 
+ 
++def _loads_lenient(text: str):
++    """``json.loads`` with one repair pass for common LLM JSON slop.
++
++    Some models (observed: DeepSeek) occasionally emit trailing commas
++    (``{..., }`` / ``[..., ]``), which strict parsing rejects. Strip any
++    comma directly preceding a closing brace/bracket and retry once.
++    """
++    try:
++        return json.loads(text)
++    except json.JSONDecodeError:
++        return json.loads(re.sub(r",\s*([}\]])", r"\1", text))
++
++
+ def _extract_json_object(text: str) -> str:
+     """First balanced {{...}} block in text (brace-balanced parser for nested JSON)."""
+     start = text.find("{")
+--- a/everalgo/user_memory/foresight.py
++++ b/everalgo/user_memory/foresight.py
+@@ -100,7 +100,7 @@
+     response = await llm.chat(messages=[LLMChatMessage(role="user", content=rendered)], temperature=temperature)
+     text = response.content
+     json_str = _extract_json_object(text)
+-    data = json.loads(json_str)
++    data = _loads_lenient(json_str)
+     if "foresights" not in data:
+         raise ValueError(f"foresights key missing from LLM response: {data!r}")
+     items = data["foresights"]
+@@ -109,6 +109,19 @@
+     return cast("list[dict[str, Any]]", items)
+ 
+ 
++def _loads_lenient(text: str):
++    """``json.loads`` with one repair pass for common LLM JSON slop.
++
++    Some models (observed: DeepSeek) occasionally emit trailing commas
++    (``{..., }`` / ``[..., ]``), which strict parsing rejects. Strip any
++    comma directly preceding a closing brace/bracket and retry once.
++    """
++    try:
++        return json.loads(text)
++    except json.JSONDecodeError:
++        return json.loads(re.sub(r",\s*([}\]])", r"\1", text))
++
++
+ def _extract_json_object(text: str) -> str:
+     """First balanced {{...}} block in text (brace-balanced parser for nested JSON)."""
+     start = text.find("{")
