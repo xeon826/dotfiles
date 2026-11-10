@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# Fresh-machine bootstrap: run BEFORE ./install on a new machine.
+# Installs packages, links configs, runs post-install fixes.
+# Arch (EndeavourOS) only. Safe to re-run.
+set -euo pipefail
+cd "$(dirname "$0")"
+
+step() { printf '\n==> %s\n' "$*"; }
+
+step "System packages"
+echo "Run scripts/install-packages.sh separately to install native/AUR packages."
+
+step "Linking dotfiles (dotbot)"
+./install
+
+step "User systemd units"
+systemctl --user daemon-reload
+for unit in everos.service eos-update-notifier.timer; do
+    systemctl --user enable "$unit" 2>/dev/null || echo "  (skip: $unit unavailable)"
+done
+
+step "agent-browser config"
+mkdir -p ~/.agent-browser
+ln -sfn "$PWD/agent-browser/config.json" ~/.agent-browser/config.json
+
+step "pyenv / pipx (from readme misc notes)"
+command -v pipx >/dev/null || echo "  TODO: sudo pacman -S python-pipx"
+command -v pipx >/dev/null && pipx list | grep -q hererocks || pipx install hererocks || true
+command -v pyenv >/dev/null || echo "  TODO: install pyenv (see readme.md)"
+pyenv global system 2>/dev/null || true
+
+step "Secrets backup (gdrive)"
+if [ -x scripts/backup-secrets.sh ]; then scripts/backup-secrets.sh || true; fi
+
+step "Manual follow-ups"
+cat <<'EOF'
+  - everos server.env:   cp from backup or re-create (see ~/.dotfiles/everos/server.env.example), chmod 600
+  - everos json repair:  patch -p1 -d ~/.local/share/uv/tools/everos/lib/python3.12/site-packages < everos/everalgo-json-repair.patch
+  - SSH keys:            restore from backup, then ssh-add
+  - ~/.zsh_api_keys:     restore from gdrive backup (scripts/backup-secrets.sh)
+  - gwal:                git clone ~/git_clones/gwal, restore .env + plaid-token.json (chmod 600)
+  - google-ads creds:    ~/.mcp-google-ads/{credentials,token}.json, ~/.config/google-ads/user-adc.json
+  - git credentials:     ~/.git-credentials (credential.helper=store)
+  - AUR helper packages: paru -S --needed - < packages-alt.txt
+  - crontab:             re-add any cron entries (e.g. resumai watchdog)
+EOF
+
+echo "Bootstrap complete."

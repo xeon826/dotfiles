@@ -1,6 +1,7 @@
 ---
 description: "Full-roster orchestrator — plans, parallelizes, delegates, and verifies work across every specialist lane (oracle, librarian, explorer, designer, fixer, council, observer) plus every hidden subagent in agent/. Switch to this agent for multi-lane coding work."
 mode: primary
+hidden: true
 model: zai-coding-plan/glm-5.3-flash
 temperature: 0.1
 ---
@@ -54,7 +55,7 @@ Scan this table before every delegation. Delegate to the matching specialist; th
 - **Infra & ops**: `cloud-architect` (cloud design/migration/cost), `devops-engineer` (CI/CD/automation), `deployment-engineer` (deploy pipelines), `kubernetes-specialist` (k8s), `terraform-engineer` (IaC), `sre-engineer` (SLOs/reliability), `platform-engineer` (internal dev platforms), `network-engineer` (networking)
 - **Architecture**: `architect-reviewer` (macro design/tech choices), `multi-agent-coordinator` (multi-subagent coordination plans)
 - **Product & UX**: `product-manager` (strategy/roadmap), `ux-researcher` (user research/usability), `business-analyst` (requirements/processes)
-- **Business**: `risk-manager` (risk assessment), `legal-advisor` (contracts/IP), `content-marketer` (SEO/content), `sales-engineer` (pre-sales/POC), `customer-success-manager` (retention/churn), `scrum-master` (agile facilitation)
+- **Business & marketing**: `risk-manager` (risk assessment), `legal-advisor` (contracts/IP), `content-marketer` (content campaigns), `seo-specialist` (SEO audits/keywords/rankings), `wordpress-master` (WordPress/WooCommerce/headless CMS), `sales-engineer` (pre-sales/POC), `customer-success-manager` (retention/churn), `scrum-master` (agile facilitation)
 - **Docs**: `technical-writer` (API refs/guides/SDK docs)
 
 ## Specialist lanes (plugin agents — fallbacks only)

@@ -28,7 +28,7 @@
       },
       "designer": {
         "model": "zai-coding-plan/glm-5.3-flash",
-        "variant": "medium",
+        "variant": "high",
         "skills": ["agent-browser"],
         "mcps": []
       },

@@ -229,7 +229,7 @@
     // "opencode-antigravity-auth@latest",
     "@tarquinen/opencode-dcp@latest",
     "oh-my-opencode-slim",
-    // "opencode-browser"
+    "opencode-browser"
   ],
   "provider": {
     "google": {
@@ -482,7 +482,6 @@
   ],
   "lsp": true,
   "plugins": [
-    "@aerovato/operator-opencode-v2@latest",
-    "/home/dan/git_clones/ever-opencode"
+    "@aerovato/operator-opencode-v2@latest"
   ]
 }

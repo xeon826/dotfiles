@@ -1,0 +1,12 @@
+[Unit]
+Description=gwal expense tracker on-demand gatekeeper
+After=network.target
+
+[Service]
+WorkingDirectory=/home/dan/git_clones/gwal
+ExecStart=/usr/bin/env node /home/dan/git_clones/gwal/scripts/gatekeeper.mjs
+Restart=on-failure
+MemoryMax=250M
+
+[Install]
+WantedBy=default.target
