@@ -12,6 +12,18 @@ hl.bind("CTRL + SUPER + ALT + SLASH", dsp.exec_cmd("xdg-open ~/.config/hypr/cust
 -- Add stuff here
 -- Use a `description` flag to add an entry on the cheatsheet
 
+--#! VNC keyboard capture toggle (Super+F10)
+-- Enter Hyprland's passthrough submap so all keys reach the focused
+-- window (e.g. a VNC client); Super+F10 again returns to global binds.
+hl.bind("SUPER + F10", function()
+    hl.dispatch(dsp.submap("passthrough"))
+end, { description = "VNC keyboard capture (press again to exit)" })
+hl.define_submap("passthrough", function()
+    hl.bind("SUPER + F10", function()
+        hl.dispatch(dsp.submap("reset"))
+    end)
+end)
+
 hl.unbind("SUPER + SHIFT + L") -- unbind suspend system
 
 hl.unbind("SUPER + O")

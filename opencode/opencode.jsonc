@@ -223,6 +223,18 @@
         "GOOGLE_APPLICATION_CREDENTIALS": "/home/dan/.config/google-ads/user-adc.json"
       },
       "enabled": false
+    },
+    // speedyapply/JobSpy official MCP — job board scraper (LinkedIn, Indeed,
+    // Glassdoor, ZipRecruiter, Bayt, Naukri, BDJobs, HelloWork; Google broken upstream).
+    // search_jobs (preview + search id, saves csv/json/jsonl) + get_job_details.
+    // Boards rate-limit (LinkedIn 429s ~1min); set HTTPS_PROXY here if ever needed.
+    "jobspy": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "mcp-jobspy@latest"
+      ],
+      "enabled": true
     }
   },
   "plugin": [
