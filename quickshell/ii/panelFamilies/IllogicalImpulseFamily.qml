@@ -37,6 +37,8 @@ Scope {
     PanelLoader { component: Overview {} }
     PanelLoader { component: Polkit {} }
     PanelLoader { component: RegionSelector {} }
+
+    PanelLoader { component: RecordingIndicator {} }
     PanelLoader { component: ScreenCorners {} }
     PanelLoader { component: ScreenTranslator {} }
     PanelLoader { component: SessionScreen {} }

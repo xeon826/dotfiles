@@ -25,7 +25,7 @@ Singleton {
     property string imageSearchEngineBaseUrl: Config.options.search.imageSearch.imageSearchEngineBaseUrl
     property string fileUploadApiEndpoint: "https://uguu.se/upload"
 
-    function getCommand(x, y, width, height, screenshotPath, action, saveDir = "") {
+    function getCommand(x, y, width, height, screenshotPath, action, saveDir = "", screenName = "") {
         // Set command for action
         const rx = Math.round(x);
         const ry = Math.round(y);
@@ -37,6 +37,9 @@ Singleton {
         const cropInPlace = `${cropBase} '${StringUtils.shellSingleQuoteEscape(screenshotPath)}'`
         const cleanup = `rm '${StringUtils.shellSingleQuoteEscape(screenshotPath)}'`
         const slurpRegion = `${rx},${ry} ${rw}x${rh}`
+        // --screen names the monitor the region was drawn on; record.sh needs it
+        // for -o because local/global coordinates alone can't identify it.
+        const screenArg = screenName !== "" ? ` --screen '${StringUtils.shellSingleQuoteEscape(screenName)}'` : ""
         const uploadAndGetUrl = (filePath) => {
             return `curl -sF files[]=@'${StringUtils.shellSingleQuoteEscape(filePath)}' ${root.fileUploadApiEndpoint} | jq -r '.files[0].url'`
         }
@@ -68,10 +71,10 @@ Singleton {
                 return ["bash", "-c", `${cropInPlace} && tesseract '${StringUtils.shellSingleQuoteEscape(screenshotPath)}' stdout -l $(tesseract --list-langs | awk 'NR>1{print $1}' | tr '\\n' '+' | sed 's/\\+$/\\n/') | wl-copy && ${cleanup}`]
                 break;
             case ScreenshotAction.Action.Record:
-                return ["bash", "-c", `${Directories.recordScriptPath} --region '${slurpRegion}'`]
+                return ["bash", "-c", `${Directories.recordScriptPath} --region '${slurpRegion}'${screenArg}`]
                 break;
             case ScreenshotAction.Action.RecordWithSound:
-                return ["bash", "-c", `${Directories.recordScriptPath} --region '${slurpRegion}' --sound`]
+                return ["bash", "-c", `${Directories.recordScriptPath} --region '${slurpRegion}'${screenArg} --sound`]
                 break;
             default:
                 console.warn("[Region Selector] Unknown snip action, skipping snip.");

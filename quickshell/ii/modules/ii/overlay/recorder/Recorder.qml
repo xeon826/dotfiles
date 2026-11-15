@@ -65,6 +65,37 @@ StyledOverlayWidget {
 
             RippleButton {
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                visible: ScreenRecorder.recording
+                implicitHeight: 36
+                implicitWidth: stopContent.implicitWidth + 32
+                buttonRadius: height / 2
+                colBackground: Appearance.colors.colErrorContainer
+                colBackgroundHover: Appearance.colors.colErrorContainerHover
+                colRipple: Appearance.colors.colErrorContainerActive
+                onClicked: {
+                    GlobalStates.overlayOpen = false;
+                    ScreenRecorder.stop();
+                }
+                contentItem: Row {
+                    id: stopContent
+                    anchors.centerIn: parent
+                    spacing: 6
+                    MaterialSymbol {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "stop"
+                        iconSize: 20
+                        color: Appearance.m3colors.m3onErrorContainer
+                    }
+                    StyledText {
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: Appearance.m3colors.m3onErrorContainer
+                        text: Translation.tr("Stop recording")
+                    }
+                }
+            }
+
+            RippleButton {
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 Layout.fillWidth: false
                 buttonRadius: height / 2
                 colBackground: Appearance.colors.colLayer3

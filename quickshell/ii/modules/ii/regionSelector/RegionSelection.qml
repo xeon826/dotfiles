@@ -279,22 +279,34 @@ PanelWindow {
         const screenshotDir = Config.options.screenSnip.savePath !== "" ? //
             Config.options.screenSnip.savePath : "";
         var screenshotAction = root.getScreenshotAction();
+        // wf-recorder -g validates regions against the output's global logical
+        // rect, so record actions need global logical coords (origin offset),
+        // while magick screenshot crops need monitor-local device px (scaled).
+        const x = root.isRecording ? root.regionX + root.monitorOffsetX : root.regionX * root.monitorScale;
+        const y = root.isRecording ? root.regionY + root.monitorOffsetY : root.regionY * root.monitorScale;
+        const w = root.isRecording ? root.regionWidth : root.regionWidth * root.monitorScale;
+        const h = root.isRecording ? root.regionHeight : root.regionHeight * root.monitorScale;
         const command = ScreenshotAction.getCommand(
-            root.regionX * root.monitorScale, //
-            root.regionY * root.monitorScale, //
-            root.regionWidth * root.monitorScale,// 
-            root.regionHeight * root.monitorScale, //
+            x, //
+            y, //
+            w, //
+            h, //
             root.screenshotPath, //
             screenshotAction, //
-            screenshotDir
+            screenshotDir, //
+            root.isRecording ? root.screen.name : ""
         )
-        Quickshell.execDetached(command);
-        if (root.action == RegionSelection.SnipAction.Record || root.action == RegionSelection.SnipAction.RecordWithSound) {
-            root.phase = RegionSelection.Phase.Post
-            root.selectionMode = RegionSelection.SelectionMode.RectCorners
-        } else {
-            root.dismiss();
+        if (root.isRecording) {
+            // Instant indicator; reconciled with record.sh's state file by the
+            // ScreenRecorder poll.
+            ScreenRecorder.region = { monitor: root.screen.name, x: x, y: y, w: w, h: h };
         }
+        Quickshell.execDetached(command);
+        // Dismiss on all monitors for every action: Record previously kept this
+        // instance open as a "recording indicator" (Phase.Post), which left the
+        // other monitors' selectors armed forever on multi-monitor. The border
+        // indicator now lives in RecordingIndicator.qml instead.
+        root.dismiss();
     }
 
     // Only clickable in Selection phase
