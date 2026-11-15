@@ -1,0 +1,397 @@
+2026-11-12 21:14:29,692 DEBUG [main] davmail.DavGateway  - Start DavMail headless EWS null
+2026-11-12 21:14:29,702 INFO  [main] davmail  - DavMail Gateway 7.0.0-4403 listening on SMTP port 1025 POP port 1110 IMAP port 1143 CALDAV port 1080 LDAP port 1389 
+2026-11-12 21:14:29,750 DEBUG [CheckRelease] davmail.http.HttpClientAdapter  - GET https://davmail.sourceforge.net/version.txt
+2026-11-12 21:14:29,831 DEBUG [CheckRelease] davmail.http.DavGatewaySSLSocketFactory  - createSocket davmail.sourceforge.net 443
+2026-11-12 21:14:30,433 DEBUG [CheckRelease] davmail.DavGateway  - DavMail released version: 7.1.0-4498
+2026-11-12 21:14:30,433 INFO  [CheckRelease] davmail  - A new version (7.1.0-4498) of DavMail Gateway is available !
+2026-11-12 21:17:28,141 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /127.0.0.1 on port 1143
+2026-11-12 21:17:28,148 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 127.0.0.1:58398 
+2026-11-12 21:17:28,149 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /127.0.0.1 on port 1143
+2026-11-12 21:17:28,149 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 127.0.0.1:58400 
+2026-11-12 21:17:57,201 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /0:0:0:0:0:0:0:1 on port 1143
+2026-11-12 21:17:57,201 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 0:0:0:0:0:0:0:1:38096 
+2026-11-12 21:18:25,177 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /0:0:0:0:0:0:0:1 on port 1143
+2026-11-12 21:18:25,177 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 0:0:0:0:0:0:0:1:56156 
+2026-11-12 21:19:21,348 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /0:0:0:0:0:0:0:1 on port 1143
+2026-11-12 21:19:21,348 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 0:0:0:0:0:0:0:1:35738 
+2026-11-12 21:20:08,183 ERROR [ImapConnection-58398] davmail.exchange.ExchangeSession  - Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.122.50, outlook.office365.com/52.96.181.226, outlook.office365.com/52.96.97.178, outlook.office365.com/52.96.165.34, outlook.office365.com/52.96.182.18, outlook.office365.com/52.96.97.146, outlook.office365.com/52.96.104.34, outlook.office365.com/52.96.165.226, outlook.office365.com/2603:1036:303:3c05:0:0:0:2, outlook.office365.com/2603:1036:303:3c0a:0:0:0:2, outlook.office365.com/2603:1036:303:3c29:0:0:0:2, outlook.office365.com/2603:1036:303:3c28:0:0:0:2, outlook.office365.com/2603:1036:303:3c06:0:0:0:2, outlook.office365.com/2603:1036:303:3c1c:0:0:0:2, outlook.office365.com/2603:1036:303:3807:0:0:0:2, outlook.office365.com/2603:1036:303:3c16:0:0:0:2] failed: connect timed out
+2026-11-12 21:20:08,183 WARN  [ImapConnection-58400] davmail.exchange.ExchangeSession  - Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.122.50, outlook.office365.com/52.96.181.226, outlook.office365.com/52.96.97.178, outlook.office365.com/52.96.165.34, outlook.office365.com/52.96.182.18, outlook.office365.com/52.96.97.146, outlook.office365.com/52.96.104.34, outlook.office365.com/52.96.165.226, outlook.office365.com/2603:1036:303:3c05:0:0:0:2, outlook.office365.com/2603:1036:303:3c0a:0:0:0:2, outlook.office365.com/2603:1036:303:3c29:0:0:0:2, outlook.office365.com/2603:1036:303:3c28:0:0:0:2, outlook.office365.com/2603:1036:303:3c06:0:0:0:2, outlook.office365.com/2603:1036:303:3c1c:0:0:0:2, outlook.office365.com/2603:1036:303:3807:0:0:0:2, outlook.office365.com/2603:1036:303:3c16:0:0:0:2] failed: connect timed out
+2026-11-12 21:20:08,183 ERROR [ImapConnection-58398] davmail  - DavMail configuration exception:
+Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.122.50, outlook.office365.com/52.96.181.226, outlook.office365.com/52.96.97.178, outlook.office365.com/52.96.165.34, outlook.office365.com/52.96.182.18, outlook.office365.com/52.96.97.146, outlook.office365.com/52.96.104.34, outlook.office365.com/52.96.165.226, outlook.office365.com/2603:1036:303:3c05:0:0:0:2, outlook.office365.com/2603:1036:303:3c0a:0:0:0:2, outlook.office365.com/2603:1036:303:3c29:0:0:0:2, outlook.office365.com/2603:1036:303:3c28:0:0:0:2, outlook.office365.com/2603:1036:303:3c06:0:0:0:2, outlook.office365.com/2603:1036:303:3c1c:0:0:0:2, outlook.office365.com/2603:1036:303:3807:0:0:0:2, outlook.office365.com/2603:1036:303:3c16:0:0:0:2] failed: connect timed out
+davmail.exception.DavMailException: DavMail configuration exception:
+Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.122.50, outlook.office365.com/52.96.181.226, outlook.office365.com/52.96.97.178, outlook.office365.com/52.96.165.34, outlook.office365.com/52.96.182.18, outlook.office365.com/52.96.97.146, outlook.office365.com/52.96.104.34, outlook.office365.com/52.96.165.226, outlook.office365.com/2603:1036:303:3c05:0:0:0:2, outlook.office365.com/2603:1036:303:3c0a:0:0:0:2, outlook.office365.com/2603:1036:303:3c29:0:0:0:2, outlook.office365.com/2603:1036:303:3c28:0:0:0:2, outlook.office365.com/2603:1036:303:3c06:0:0:0:2, outlook.office365.com/2603:1036:303:3c1c:0:0:0:2, outlook.office365.com/2603:1036:303:3807:0:0:0:2, outlook.office365.com/2603:1036:303:3c16:0:0:0:2] failed: connect timed out
+	at davmail.exchange.ExchangeSessionFactory.handleNetworkDown(ExchangeSessionFactory.java:376)
+	at davmail.exchange.ExchangeSessionFactory.checkConfig(ExchangeSessionFactory.java:353)
+	at davmail.imap.ImapConnection.run(ImapConnection.java:112)
+2026-11-12 21:20:08,183 WARN  [ImapConnection-58400] davmail  - DavMail configuration exception:
+Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.122.50, outlook.office365.com/52.96.181.226, outlook.office365.com/52.96.97.178, outlook.office365.com/52.96.165.34, outlook.office365.com/52.96.182.18, outlook.office365.com/52.96.97.146, outlook.office365.com/52.96.104.34, outlook.office365.com/52.96.165.226, outlook.office365.com/2603:1036:303:3c05:0:0:0:2, outlook.office365.com/2603:1036:303:3c0a:0:0:0:2, outlook.office365.com/2603:1036:303:3c29:0:0:0:2, outlook.office365.com/2603:1036:303:3c28:0:0:0:2, outlook.office365.com/2603:1036:303:3c06:0:0:0:2, outlook.office365.com/2603:1036:303:3c1c:0:0:0:2, outlook.office365.com/2603:1036:303:3807:0:0:0:2, outlook.office365.com/2603:1036:303:3c16:0:0:0:2] failed: connect timed out
+2026-11-12 21:20:08,185 DEBUG [ImapConnection-58398] davmail  - > * BAD unable to handle request: DavMail configuration exception: Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.122.50, outlook.office365.com/52.96.181.226, outlook.office365.com/52.96.97.178, outlook.office365.com/52.96.165.34, outlook.office365.com/52.96.182.18, outlook.office365.com/52.96.97.146, outlook.office365.com/52.96.104.34, outlook.office365.com/52.96.165.226, outlook.office365.com/2603:1036:303:3c05:0:0:0:2, outlook.office365.com/2603:1036:303:3c0a:0:0:0:2, outlook.office365.com/2603:1036:303:3c29:0:0:0:2, outlook.office365.com/2603:1036:303:3c28:0:0:0:2, outlook.office365.com/2603:1036:303:3c06:0:0:0:2, outlook.office365.com/2603:1036:303:3c1c:0:0:0:2, outlook.office365.com/2603:1036:303:3807:0:0:0:2, outlook.office365.com/2603:1036:303:3c16:0:0:0:2] failed: connect timed out
+2026-11-12 21:20:08,185 DEBUG [ImapConnection-58400] davmail  - > * BAD unable to handle request: DavMail configuration exception: Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.122.50, outlook.office365.com/52.96.181.226, outlook.office365.com/52.96.97.178, outlook.office365.com/52.96.165.34, outlook.office365.com/52.96.182.18, outlook.office365.com/52.96.97.146, outlook.office365.com/52.96.104.34, outlook.office365.com/52.96.165.226, outlook.office365.com/2603:1036:303:3c05:0:0:0:2, outlook.office365.com/2603:1036:303:3c0a:0:0:0:2, outlook.office365.com/2603:1036:303:3c29:0:0:0:2, outlook.office365.com/2603:1036:303:3c28:0:0:0:2, outlook.office365.com/2603:1036:303:3c06:0:0:0:2, outlook.office365.com/2603:1036:303:3c1c:0:0:0:2, outlook.office365.com/2603:1036:303:3807:0:0:0:2, outlook.office365.com/2603:1036:303:3c16:0:0:0:2] failed: connect timed out
+2026-11-12 21:20:08,185 INFO  [ImapConnection-58398] davmail.connection  - DISCONNECT - 127.0.0.1:58398 
+2026-11-12 21:20:08,185 INFO  [ImapConnection-58400] davmail.connection  - DISCONNECT - 127.0.0.1:58400 
+2026-11-12 21:20:37,206 WARN  [ImapConnection-38096] davmail.exchange.ExchangeSession  - Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.122.50, outlook.office365.com/52.96.181.226, outlook.office365.com/52.96.97.178, outlook.office365.com/52.96.165.34, outlook.office365.com/52.96.182.18, outlook.office365.com/52.96.97.146, outlook.office365.com/52.96.104.34, outlook.office365.com/52.96.165.226, outlook.office365.com/2603:1036:303:3c05:0:0:0:2, outlook.office365.com/2603:1036:303:3c0a:0:0:0:2, outlook.office365.com/2603:1036:303:3c29:0:0:0:2, outlook.office365.com/2603:1036:303:3c28:0:0:0:2, outlook.office365.com/2603:1036:303:3c06:0:0:0:2, outlook.office365.com/2603:1036:303:3c1c:0:0:0:2, outlook.office365.com/2603:1036:303:3807:0:0:0:2, outlook.office365.com/2603:1036:303:3c16:0:0:0:2] failed: connect timed out
+2026-11-12 21:20:37,206 WARN  [ImapConnection-38096] davmail  - DavMail configuration exception:
+Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.122.50, outlook.office365.com/52.96.181.226, outlook.office365.com/52.96.97.178, outlook.office365.com/52.96.165.34, outlook.office365.com/52.96.182.18, outlook.office365.com/52.96.97.146, outlook.office365.com/52.96.104.34, outlook.office365.com/52.96.165.226, outlook.office365.com/2603:1036:303:3c05:0:0:0:2, outlook.office365.com/2603:1036:303:3c0a:0:0:0:2, outlook.office365.com/2603:1036:303:3c29:0:0:0:2, outlook.office365.com/2603:1036:303:3c28:0:0:0:2, outlook.office365.com/2603:1036:303:3c06:0:0:0:2, outlook.office365.com/2603:1036:303:3c1c:0:0:0:2, outlook.office365.com/2603:1036:303:3807:0:0:0:2, outlook.office365.com/2603:1036:303:3c16:0:0:0:2] failed: connect timed out
+2026-11-12 21:20:37,207 DEBUG [ImapConnection-38096] davmail  - > * BAD unable to handle request: DavMail configuration exception: Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.122.50, outlook.office365.com/52.96.181.226, outlook.office365.com/52.96.97.178, outlook.office365.com/52.96.165.34, outlook.office365.com/52.96.182.18, outlook.office365.com/52.96.97.146, outlook.office365.com/52.96.104.34, outlook.office365.com/52.96.165.226, outlook.office365.com/2603:1036:303:3c05:0:0:0:2, outlook.office365.com/2603:1036:303:3c0a:0:0:0:2, outlook.office365.com/2603:1036:303:3c29:0:0:0:2, outlook.office365.com/2603:1036:303:3c28:0:0:0:2, outlook.office365.com/2603:1036:303:3c06:0:0:0:2, outlook.office365.com/2603:1036:303:3c1c:0:0:0:2, outlook.office365.com/2603:1036:303:3807:0:0:0:2, outlook.office365.com/2603:1036:303:3c16:0:0:0:2] failed: connect timed out
+2026-11-12 21:20:37,207 INFO  [ImapConnection-38096] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:38096 
+2026-11-12 21:21:05,179 WARN  [ImapConnection-56156] davmail.exchange.ExchangeSession  - Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.122.50, outlook.office365.com/52.96.181.226, outlook.office365.com/52.96.97.178, outlook.office365.com/52.96.165.34, outlook.office365.com/52.96.182.18, outlook.office365.com/52.96.97.146, outlook.office365.com/52.96.104.34, outlook.office365.com/52.96.165.226, outlook.office365.com/2603:1036:303:3c05:0:0:0:2, outlook.office365.com/2603:1036:303:3c0a:0:0:0:2, outlook.office365.com/2603:1036:303:3c29:0:0:0:2, outlook.office365.com/2603:1036:303:3c28:0:0:0:2, outlook.office365.com/2603:1036:303:3c06:0:0:0:2, outlook.office365.com/2603:1036:303:3c1c:0:0:0:2, outlook.office365.com/2603:1036:303:3807:0:0:0:2, outlook.office365.com/2603:1036:303:3c16:0:0:0:2] failed: connect timed out
+2026-11-12 21:21:05,179 WARN  [ImapConnection-56156] davmail  - DavMail configuration exception:
+Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.122.50, outlook.office365.com/52.96.181.226, outlook.office365.com/52.96.97.178, outlook.office365.com/52.96.165.34, outlook.office365.com/52.96.182.18, outlook.office365.com/52.96.97.146, outlook.office365.com/52.96.104.34, outlook.office365.com/52.96.165.226, outlook.office365.com/2603:1036:303:3c05:0:0:0:2, outlook.office365.com/2603:1036:303:3c0a:0:0:0:2, outlook.office365.com/2603:1036:303:3c29:0:0:0:2, outlook.office365.com/2603:1036:303:3c28:0:0:0:2, outlook.office365.com/2603:1036:303:3c06:0:0:0:2, outlook.office365.com/2603:1036:303:3c1c:0:0:0:2, outlook.office365.com/2603:1036:303:3807:0:0:0:2, outlook.office365.com/2603:1036:303:3c16:0:0:0:2] failed: connect timed out
+2026-11-12 21:21:05,180 DEBUG [ImapConnection-56156] davmail  - > * BAD unable to handle request: DavMail configuration exception: Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.122.50, outlook.office365.com/52.96.181.226, outlook.office365.com/52.96.97.178, outlook.office365.com/52.96.165.34, outlook.office365.com/52.96.182.18, outlook.office365.com/52.96.97.146, outlook.office365.com/52.96.104.34, outlook.office365.com/52.96.165.226, outlook.office365.com/2603:1036:303:3c05:0:0:0:2, outlook.office365.com/2603:1036:303:3c0a:0:0:0:2, outlook.office365.com/2603:1036:303:3c29:0:0:0:2, outlook.office365.com/2603:1036:303:3c28:0:0:0:2, outlook.office365.com/2603:1036:303:3c06:0:0:0:2, outlook.office365.com/2603:1036:303:3c1c:0:0:0:2, outlook.office365.com/2603:1036:303:3807:0:0:0:2, outlook.office365.com/2603:1036:303:3c16:0:0:0:2] failed: connect timed out
+2026-11-12 21:21:05,180 INFO  [ImapConnection-56156] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:56156 
+2026-11-12 21:22:01,374 WARN  [ImapConnection-35738] davmail.exchange.ExchangeSession  - Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.119.82, outlook.office365.com/52.96.122.66, outlook.office365.com/52.96.165.194, outlook.office365.com/52.96.172.98, outlook.office365.com/52.96.173.162, outlook.office365.com/52.96.184.2, outlook.office365.com/52.96.189.18, outlook.office365.com/52.96.104.18, outlook.office365.com/2603:1036:303:3c19:0:0:0:2, outlook.office365.com/2603:1036:303:3c37:0:0:0:2, outlook.office365.com/2603:1036:303:3c0b:0:0:0:2, outlook.office365.com/2603:1036:303:3806:0:0:0:2, outlook.office365.com/2603:1036:303:3c32:0:0:0:2, outlook.office365.com/2603:1036:303:3094:0:0:0:2, outlook.office365.com/2603:1036:303:380b:0:0:0:2, outlook.office365.com/2603:1036:303:3c1a:0:0:0:2] failed: connect timed out
+2026-11-12 21:22:01,374 WARN  [ImapConnection-35738] davmail  - DavMail configuration exception:
+Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.119.82, outlook.office365.com/52.96.122.66, outlook.office365.com/52.96.165.194, outlook.office365.com/52.96.172.98, outlook.office365.com/52.96.173.162, outlook.office365.com/52.96.184.2, outlook.office365.com/52.96.189.18, outlook.office365.com/52.96.104.18, outlook.office365.com/2603:1036:303:3c19:0:0:0:2, outlook.office365.com/2603:1036:303:3c37:0:0:0:2, outlook.office365.com/2603:1036:303:3c0b:0:0:0:2, outlook.office365.com/2603:1036:303:3806:0:0:0:2, outlook.office365.com/2603:1036:303:3c32:0:0:0:2, outlook.office365.com/2603:1036:303:3094:0:0:0:2, outlook.office365.com/2603:1036:303:380b:0:0:0:2, outlook.office365.com/2603:1036:303:3c1a:0:0:0:2] failed: connect timed out
+2026-11-12 21:22:01,374 DEBUG [ImapConnection-35738] davmail  - > * BAD unable to handle request: DavMail configuration exception: Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.119.82, outlook.office365.com/52.96.122.66, outlook.office365.com/52.96.165.194, outlook.office365.com/52.96.172.98, outlook.office365.com/52.96.173.162, outlook.office365.com/52.96.184.2, outlook.office365.com/52.96.189.18, outlook.office365.com/52.96.104.18, outlook.office365.com/2603:1036:303:3c19:0:0:0:2, outlook.office365.com/2603:1036:303:3c37:0:0:0:2, outlook.office365.com/2603:1036:303:3c0b:0:0:0:2, outlook.office365.com/2603:1036:303:3806:0:0:0:2, outlook.office365.com/2603:1036:303:3c32:0:0:0:2, outlook.office365.com/2603:1036:303:3094:0:0:0:2, outlook.office365.com/2603:1036:303:380b:0:0:0:2, outlook.office365.com/2603:1036:303:3c1a:0:0:0:2] failed: connect timed out
+2026-11-12 21:22:01,374 INFO  [ImapConnection-35738] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:35738 
+2026-11-12 21:47:00,876 DEBUG [Shutdown] davmail  - Stopping DavMail gateway
+2026-11-12 21:47:00,877 INFO  [davmail.imap.ImapServer] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:35738 
+2026-11-12 21:47:00,877 INFO  [Shutdown] davmail  - DavMail gateway stopped
+2026-11-12 21:47:02,999 DEBUG [main] davmail.DavGateway  - Start DavMail headless EWS null
+2026-11-12 21:47:03,010 INFO  [main] davmail  - DavMail Gateway 7.0.0-4403 listening on SMTP port 1025 POP port 1110 IMAP port 1143 CALDAV port 1080 LDAP port 1389 
+2026-11-12 21:47:03,061 DEBUG [CheckRelease] davmail.http.HttpClientAdapter  - GET https://davmail.sourceforge.net/version.txt
+2026-11-12 21:47:03,148 DEBUG [CheckRelease] davmail.http.DavGatewaySSLSocketFactory  - createSocket davmail.sourceforge.net 443
+2026-11-12 21:47:13,500 DEBUG [CheckRelease] davmail.DavGateway  - DavMail released version: 7.1.0-4498
+2026-11-12 21:47:13,501 INFO  [CheckRelease] davmail  - A new version (7.1.0-4498) of DavMail Gateway is available !
+2026-11-12 21:57:26,094 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /0:0:0:0:0:0:0:1 on port 1143
+2026-11-12 21:57:26,099 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 0:0:0:0:0:0:0:1:44846 
+2026-11-12 21:58:48,191 DEBUG [ImapConnection-44846] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-12 21:58:58,197 ERROR [ImapConnection-44846] davmail.exchange.ExchangeSession  - Connect exception: javax.net.ssl.SSLException Read timed out
+2026-11-12 21:58:58,197 ERROR [ImapConnection-44846] davmail  - DavMail configuration exception:
+Connect exception: javax.net.ssl.SSLException Read timed out
+davmail.exception.DavMailException: DavMail configuration exception:
+Connect exception: javax.net.ssl.SSLException Read timed out
+	at davmail.exchange.ExchangeSessionFactory.handleNetworkDown(ExchangeSessionFactory.java:376)
+	at davmail.exchange.ExchangeSessionFactory.checkConfig(ExchangeSessionFactory.java:353)
+	at davmail.imap.ImapConnection.run(ImapConnection.java:112)
+2026-11-12 21:58:58,198 DEBUG [ImapConnection-44846] davmail  - > * BAD unable to handle request: DavMail configuration exception: Connect exception: javax.net.ssl.SSLException Read timed out
+2026-11-12 21:58:58,198 INFO  [ImapConnection-44846] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:44846 
+2026-11-12 22:31:03,694 DEBUG [Shutdown] davmail  - Stopping DavMail gateway
+2026-11-12 22:31:03,694 INFO  [davmail.imap.ImapServer] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:44846 
+2026-11-12 22:31:03,695 INFO  [Shutdown] davmail  - DavMail gateway stopped
+2026-11-12 22:31:05,826 DEBUG [main] davmail.DavGateway  - Start DavMail headless EWS null
+2026-11-12 22:31:05,837 INFO  [main] davmail  - DavMail Gateway 7.0.0-4403 listening on SMTP port 1025 POP port 1110 IMAP port 1143 CALDAV port 1080 LDAP port 1389 
+2026-11-12 22:31:05,896 DEBUG [CheckRelease] davmail.http.HttpClientAdapter  - GET https://davmail.sourceforge.net/version.txt
+2026-11-12 22:31:10,701 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /0:0:0:0:0:0:0:1 on port 1143
+2026-11-12 22:31:10,707 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 0:0:0:0:0:0:0:1:36936 
+2026-11-12 22:31:10,967 DEBUG [CheckRelease] davmail.http.DavGatewaySSLSocketFactory  - createSocket davmail.sourceforge.net 443
+2026-11-12 22:31:17,773 DEBUG [CheckRelease] davmail.DavGateway  - DavMail released version: 7.1.0-4498
+2026-11-12 22:31:17,774 INFO  [CheckRelease] davmail  - A new version (7.1.0-4498) of DavMail Gateway is available !
+2026-11-12 22:32:13,818 DEBUG [ImapConnection-36936] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-12 22:32:27,877 ERROR [ImapConnection-36936] davmail.exchange.ExchangeSession  - Connect exception: javax.net.ssl.SSLException Connection reset
+2026-11-12 22:32:27,877 ERROR [ImapConnection-36936] davmail  - DavMail configuration exception:
+Connect exception: javax.net.ssl.SSLException Connection reset
+davmail.exception.DavMailException: DavMail configuration exception:
+Connect exception: javax.net.ssl.SSLException Connection reset
+	at davmail.exchange.ExchangeSessionFactory.handleNetworkDown(ExchangeSessionFactory.java:376)
+	at davmail.exchange.ExchangeSessionFactory.checkConfig(ExchangeSessionFactory.java:353)
+	at davmail.imap.ImapConnection.run(ImapConnection.java:112)
+2026-11-12 22:32:27,878 DEBUG [ImapConnection-36936] davmail  - > * BAD unable to handle request: DavMail configuration exception: Connect exception: javax.net.ssl.SSLException Connection reset
+2026-11-12 22:32:27,878 INFO  [ImapConnection-36936] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:36936 
+2026-11-12 22:38:11,362 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /0:0:0:0:0:0:0:1 on port 1143
+2026-11-12 22:38:11,362 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 0:0:0:0:0:0:0:1:51100 
+2026-11-12 22:40:51,384 WARN  [ImapConnection-51100] davmail.exchange.ExchangeSession  - Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.172.98, outlook.office365.com/52.96.122.66, outlook.office365.com/52.96.183.226, outlook.office365.com/52.96.222.178, outlook.office365.com/52.96.185.210, outlook.office365.com/52.96.165.34, outlook.office365.com/52.96.173.226, outlook.office365.com/52.96.165.194, outlook.office365.com/2603:1036:303:3c18:0:0:0:2, outlook.office365.com/2603:1036:303:3838:0:0:0:2, outlook.office365.com/2603:1036:303:3c05:0:0:0:2, outlook.office365.com/2603:1036:303:3c00:0:0:0:2, outlook.office365.com/2603:1036:303:3802:0:0:0:2, outlook.office365.com/2603:1036:303:3839:0:0:0:2, outlook.office365.com/2603:1036:303:3c34:0:0:0:2, outlook.office365.com/2603:1036:303:3c38:0:0:0:2] failed: connect timed out
+2026-11-12 22:40:51,385 WARN  [ImapConnection-51100] davmail  - DavMail configuration exception:
+Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.172.98, outlook.office365.com/52.96.122.66, outlook.office365.com/52.96.183.226, outlook.office365.com/52.96.222.178, outlook.office365.com/52.96.185.210, outlook.office365.com/52.96.165.34, outlook.office365.com/52.96.173.226, outlook.office365.com/52.96.165.194, outlook.office365.com/2603:1036:303:3c18:0:0:0:2, outlook.office365.com/2603:1036:303:3838:0:0:0:2, outlook.office365.com/2603:1036:303:3c05:0:0:0:2, outlook.office365.com/2603:1036:303:3c00:0:0:0:2, outlook.office365.com/2603:1036:303:3802:0:0:0:2, outlook.office365.com/2603:1036:303:3839:0:0:0:2, outlook.office365.com/2603:1036:303:3c34:0:0:0:2, outlook.office365.com/2603:1036:303:3c38:0:0:0:2] failed: connect timed out
+2026-11-12 22:40:51,385 DEBUG [ImapConnection-51100] davmail  - > * BAD unable to handle request: DavMail configuration exception: Connect exception: org.apache.http.conn.ConnectTimeoutException Connect to outlook.office365.com:443 [outlook.office365.com/52.96.172.98, outlook.office365.com/52.96.122.66, outlook.office365.com/52.96.183.226, outlook.office365.com/52.96.222.178, outlook.office365.com/52.96.185.210, outlook.office365.com/52.96.165.34, outlook.office365.com/52.96.173.226, outlook.office365.com/52.96.165.194, outlook.office365.com/2603:1036:303:3c18:0:0:0:2, outlook.office365.com/2603:1036:303:3838:0:0:0:2, outlook.office365.com/2603:1036:303:3c05:0:0:0:2, outlook.office365.com/2603:1036:303:3c00:0:0:0:2, outlook.office365.com/2603:1036:303:3802:0:0:0:2, outlook.office365.com/2603:1036:303:3839:0:0:0:2, outlook.office365.com/2603:1036:303:3c34:0:0:0:2, outlook.office365.com/2603:1036:303:3c38:0:0:0:2] failed: connect timed out
+2026-11-12 22:40:51,385 INFO  [ImapConnection-51100] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:51100 
+2026-11-13 05:53:33,156 DEBUG [Shutdown] davmail  - Stopping DavMail gateway
+2026-11-13 05:53:33,160 INFO  [davmail.imap.ImapServer] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:51100 
+2026-11-13 05:53:33,162 INFO  [Shutdown] davmail  - DavMail gateway stopped
+2026-11-13 05:53:35,282 DEBUG [main] davmail.DavGateway  - Start DavMail headless EWS null
+2026-11-13 05:53:35,295 INFO  [main] davmail  - DavMail Gateway 7.0.0-4403 listening on SMTP port 1025 POP port 1110 IMAP port 1143 CALDAV port 1080 LDAP port 1389 
+2026-11-13 05:53:35,352 DEBUG [CheckRelease] davmail.http.HttpClientAdapter  - GET https://davmail.sourceforge.net/version.txt
+2026-11-13 05:53:35,427 DEBUG [CheckRelease] davmail.http.DavGatewaySSLSocketFactory  - createSocket davmail.sourceforge.net 443
+2026-11-13 05:53:36,105 DEBUG [CheckRelease] davmail.DavGateway  - DavMail released version: 7.1.0-4498
+2026-11-13 05:53:36,106 INFO  [CheckRelease] davmail  - A new version (7.1.0-4498) of DavMail Gateway is available !
+2026-11-13 05:53:40,155 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /0:0:0:0:0:0:0:1 on port 1143
+2026-11-13 05:53:40,161 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 0:0:0:0:0:0:0:1:44630 
+2026-11-13 05:53:40,258 DEBUG [ImapConnection-44630] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 05:53:40,898 DEBUG [ImapConnection-44630] davmail.exchange.ExchangeSession  - Test configuration status: 401
+2026-11-13 05:53:40,899 DEBUG [ImapConnection-44630] davmail  - > * OK [CAPABILITY IMAP4REV1 AUTH=LOGIN MOVE SPECIAL-USE UIDPLUS] IMAP4rev1 DavMail 7.0.0-4403 server ready
+2026-11-13 05:53:40,899 DEBUG [ImapConnection-44630] davmail  - < LOGIN ********
+2026-11-13 05:53:40,900 DEBUG [ImapConnection-44630] davmail.exchange.ExchangeSession  - Direct EWS authentication
+2026-11-13 05:53:40,909 DEBUG [ImapConnection-44630] davmail.http.HttpClientAdapter  - Creating NTCredentials for user jwilkeson@databank.com workstation ryzen domain 
+2026-11-13 05:53:40,987 DEBUG [ImapConnection-44630] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 05:53:41,774 INFO  [ImapConnection-44630] davmail.connection  - FAILED - 0:0:0:0:0:0:0:1:44630 jwilkeson@databank.com
+2026-11-13 05:53:41,775 ERROR [ImapConnection-44630] davmail  - Authentication failed: invalid user or password
+davmail.exception.DavMailAuthenticationException: Authentication failed: invalid user or password
+	at davmail.exchange.ews.EwsExchangeSession.checkEndPointUrl(EwsExchangeSession.java:252)
+	at davmail.exchange.ews.EwsExchangeSession.buildSessionInfo(EwsExchangeSession.java:261)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:200)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:229)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:195)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:94)
+	at davmail.imap.ImapConnection.run(ImapConnection.java:143)
+2026-11-13 05:53:41,777 DEBUG [ImapConnection-44630] davmail  - > a1 NO LOGIN failed
+2026-11-13 05:57:40,151 INFO  [ImapConnection-44630] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:44630 
+2026-11-13 06:13:36,197 DEBUG [Shutdown] davmail  - Stopping DavMail gateway
+2026-11-13 06:13:36,197 INFO  [davmail.imap.ImapServer] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:44630 
+2026-11-13 06:13:36,197 INFO  [Shutdown] davmail  - DavMail gateway stopped
+2026-11-13 06:13:38,307 DEBUG [main] davmail.DavGateway  - Start DavMail headless EWS null
+2026-11-13 06:13:38,318 INFO  [main] davmail  - DavMail Gateway 7.0.0-4403 listening on SMTP port 1025 POP port 1110 IMAP port 1143 CALDAV port 1080 LDAP port 1389 
+2026-11-13 06:13:38,362 DEBUG [CheckRelease] davmail.http.HttpClientAdapter  - GET https://davmail.sourceforge.net/version.txt
+2026-11-13 06:13:38,429 DEBUG [CheckRelease] davmail.http.DavGatewaySSLSocketFactory  - createSocket davmail.sourceforge.net 443
+2026-11-13 06:13:39,016 DEBUG [CheckRelease] davmail.DavGateway  - DavMail released version: 7.1.0-4498
+2026-11-13 06:13:39,016 INFO  [CheckRelease] davmail  - A new version (7.1.0-4498) of DavMail Gateway is available !
+2026-11-13 06:13:43,201 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /0:0:0:0:0:0:0:1 on port 1143
+2026-11-13 06:13:43,205 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 0:0:0:0:0:0:0:1:43512 
+2026-11-13 06:13:43,252 DEBUG [ImapConnection-43512] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 06:13:43,820 DEBUG [ImapConnection-43512] davmail.exchange.ExchangeSession  - Test configuration status: 401
+2026-11-13 06:13:43,821 DEBUG [ImapConnection-43512] davmail  - > * OK [CAPABILITY IMAP4REV1 AUTH=LOGIN MOVE SPECIAL-USE UIDPLUS] IMAP4rev1 DavMail 7.0.0-4403 server ready
+2026-11-13 06:13:43,821 DEBUG [ImapConnection-43512] davmail  - < LOGIN ********
+2026-11-13 06:13:43,822 DEBUG [ImapConnection-43512] davmail.exchange.ExchangeSession  - Direct EWS authentication
+2026-11-13 06:13:43,829 DEBUG [ImapConnection-43512] davmail.http.HttpClientAdapter  - Creating NTCredentials for user jwilkeson@databank.com workstation ryzen domain 
+2026-11-13 06:13:43,873 DEBUG [ImapConnection-43512] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 06:13:44,765 INFO  [ImapConnection-43512] davmail.connection  - FAILED - 0:0:0:0:0:0:0:1:43512 jwilkeson@databank.com
+2026-11-13 06:13:44,765 ERROR [ImapConnection-43512] davmail  - Authentication failed: invalid user or password
+davmail.exception.DavMailAuthenticationException: Authentication failed: invalid user or password
+	at davmail.exchange.ews.EwsExchangeSession.checkEndPointUrl(EwsExchangeSession.java:252)
+	at davmail.exchange.ews.EwsExchangeSession.buildSessionInfo(EwsExchangeSession.java:261)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:200)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:229)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:195)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:94)
+	at davmail.imap.ImapConnection.run(ImapConnection.java:143)
+2026-11-13 06:13:44,771 DEBUG [ImapConnection-43512] davmail  - > a1 NO LOGIN failed
+2026-11-13 06:17:43,200 INFO  [ImapConnection-43512] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:43512 
+2026-11-13 06:22:59,507 DEBUG [Shutdown] davmail  - Stopping DavMail gateway
+2026-11-13 06:22:59,507 INFO  [davmail.imap.ImapServer] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:43512 
+2026-11-13 06:22:59,508 INFO  [Shutdown] davmail  - DavMail gateway stopped
+2026-11-13 06:23:01,619 DEBUG [main] davmail.DavGateway  - Start DavMail headless EWS null
+2026-11-13 06:23:01,629 INFO  [main] davmail  - DavMail Gateway 7.0.0-4403 listening on SMTP port 1025 POP port 1110 IMAP port 1143 CALDAV port 1080 LDAP port 1389 
+2026-11-13 06:23:01,675 DEBUG [CheckRelease] davmail.http.HttpClientAdapter  - GET https://davmail.sourceforge.net/version.txt
+2026-11-13 06:23:01,727 DEBUG [CheckRelease] davmail.http.DavGatewaySSLSocketFactory  - createSocket davmail.sourceforge.net 443
+2026-11-13 06:23:02,314 DEBUG [CheckRelease] davmail.DavGateway  - DavMail released version: 7.1.0-4498
+2026-11-13 06:23:02,315 INFO  [CheckRelease] davmail  - A new version (7.1.0-4498) of DavMail Gateway is available !
+2026-11-13 06:23:06,511 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /0:0:0:0:0:0:0:1 on port 1143
+2026-11-13 06:23:06,515 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 0:0:0:0:0:0:0:1:45940 
+2026-11-13 06:23:06,559 DEBUG [ImapConnection-45940] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 06:23:07,024 DEBUG [ImapConnection-45940] davmail.exchange.ExchangeSession  - Test configuration status: 401
+2026-11-13 06:23:07,024 DEBUG [ImapConnection-45940] davmail  - > * OK [CAPABILITY IMAP4REV1 AUTH=LOGIN MOVE SPECIAL-USE UIDPLUS] IMAP4rev1 DavMail 7.0.0-4403 server ready
+2026-11-13 06:23:07,024 DEBUG [ImapConnection-45940] davmail  - < LOGIN ********
+2026-11-13 06:23:07,025 DEBUG [ImapConnection-45940] davmail.exchange.ExchangeSession  - Direct EWS authentication
+2026-11-13 06:23:07,033 DEBUG [ImapConnection-45940] davmail.http.HttpClientAdapter  - Creating NTCredentials for user jwilkeson@databank.com workstation ryzen domain 
+2026-11-13 06:23:07,075 DEBUG [ImapConnection-45940] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 06:23:07,581 INFO  [ImapConnection-45940] davmail.connection  - FAILED - 0:0:0:0:0:0:0:1:45940 jwilkeson@databank.com
+2026-11-13 06:23:07,581 ERROR [ImapConnection-45940] davmail  - Authentication failed: invalid user or password
+davmail.exception.DavMailAuthenticationException: Authentication failed: invalid user or password
+	at davmail.exchange.ews.EwsExchangeSession.checkEndPointUrl(EwsExchangeSession.java:252)
+	at davmail.exchange.ews.EwsExchangeSession.buildSessionInfo(EwsExchangeSession.java:261)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:200)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:229)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:195)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:94)
+	at davmail.imap.ImapConnection.run(ImapConnection.java:143)
+2026-11-13 06:23:07,582 DEBUG [ImapConnection-45940] davmail  - > a1 NO LOGIN failed
+2026-11-13 06:27:06,510 INFO  [ImapConnection-45940] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:45940 
+2026-11-13 06:32:22,817 DEBUG [Shutdown] davmail  - Stopping DavMail gateway
+2026-11-13 06:32:22,817 INFO  [davmail.imap.ImapServer] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:45940 
+2026-11-13 06:32:22,817 INFO  [Shutdown] davmail  - DavMail gateway stopped
+2026-11-13 06:32:24,930 DEBUG [main] davmail.DavGateway  - Start DavMail headless EWS null
+2026-11-13 06:32:24,941 INFO  [main] davmail  - DavMail Gateway 7.0.0-4403 listening on SMTP port 1025 POP port 1110 IMAP port 1143 CALDAV port 1080 LDAP port 1389 
+2026-11-13 06:32:24,988 DEBUG [CheckRelease] davmail.http.HttpClientAdapter  - GET https://davmail.sourceforge.net/version.txt
+2026-11-13 06:32:25,057 DEBUG [CheckRelease] davmail.http.DavGatewaySSLSocketFactory  - createSocket davmail.sourceforge.net 443
+2026-11-13 06:32:25,629 DEBUG [CheckRelease] davmail.DavGateway  - DavMail released version: 7.1.0-4498
+2026-11-13 06:32:25,630 INFO  [CheckRelease] davmail  - A new version (7.1.0-4498) of DavMail Gateway is available !
+2026-11-13 06:32:29,821 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /0:0:0:0:0:0:0:1 on port 1143
+2026-11-13 06:32:29,825 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 0:0:0:0:0:0:0:1:60446 
+2026-11-13 06:32:29,893 DEBUG [ImapConnection-60446] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 06:32:30,397 DEBUG [ImapConnection-60446] davmail.exchange.ExchangeSession  - Test configuration status: 401
+2026-11-13 06:32:30,398 DEBUG [ImapConnection-60446] davmail  - > * OK [CAPABILITY IMAP4REV1 AUTH=LOGIN MOVE SPECIAL-USE UIDPLUS] IMAP4rev1 DavMail 7.0.0-4403 server ready
+2026-11-13 06:32:30,398 DEBUG [ImapConnection-60446] davmail  - < LOGIN ********
+2026-11-13 06:32:30,399 DEBUG [ImapConnection-60446] davmail.exchange.ExchangeSession  - Direct EWS authentication
+2026-11-13 06:32:30,406 DEBUG [ImapConnection-60446] davmail.http.HttpClientAdapter  - Creating NTCredentials for user jwilkeson@databank.com workstation ryzen domain 
+2026-11-13 06:32:30,449 DEBUG [ImapConnection-60446] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 06:32:30,901 INFO  [ImapConnection-60446] davmail.connection  - FAILED - 0:0:0:0:0:0:0:1:60446 jwilkeson@databank.com
+2026-11-13 06:32:30,901 ERROR [ImapConnection-60446] davmail  - Authentication failed: invalid user or password
+davmail.exception.DavMailAuthenticationException: Authentication failed: invalid user or password
+	at davmail.exchange.ews.EwsExchangeSession.checkEndPointUrl(EwsExchangeSession.java:252)
+	at davmail.exchange.ews.EwsExchangeSession.buildSessionInfo(EwsExchangeSession.java:261)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:200)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:229)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:195)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:94)
+	at davmail.imap.ImapConnection.run(ImapConnection.java:143)
+2026-11-13 06:32:30,902 DEBUG [ImapConnection-60446] davmail  - > a1 NO LOGIN failed
+2026-11-13 06:36:29,820 INFO  [ImapConnection-60446] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:60446 
+2026-11-13 06:41:46,269 DEBUG [Shutdown] davmail  - Stopping DavMail gateway
+2026-11-13 06:41:46,269 INFO  [davmail.imap.ImapServer] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:60446 
+2026-11-13 06:41:46,269 INFO  [Shutdown] davmail  - DavMail gateway stopped
+2026-11-13 06:41:48,383 DEBUG [main] davmail.DavGateway  - Start DavMail headless EWS null
+2026-11-13 06:41:48,393 INFO  [main] davmail  - DavMail Gateway 7.0.0-4403 listening on SMTP port 1025 POP port 1110 IMAP port 1143 CALDAV port 1080 LDAP port 1389 
+2026-11-13 06:41:48,437 DEBUG [CheckRelease] davmail.http.HttpClientAdapter  - GET https://davmail.sourceforge.net/version.txt
+2026-11-13 06:41:48,512 DEBUG [CheckRelease] davmail.http.DavGatewaySSLSocketFactory  - createSocket davmail.sourceforge.net 443
+2026-11-13 06:41:49,107 DEBUG [CheckRelease] davmail.DavGateway  - DavMail released version: 7.1.0-4498
+2026-11-13 06:41:49,108 INFO  [CheckRelease] davmail  - A new version (7.1.0-4498) of DavMail Gateway is available !
+2026-11-13 06:41:53,273 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /0:0:0:0:0:0:0:1 on port 1143
+2026-11-13 06:41:53,277 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 0:0:0:0:0:0:0:1:43470 
+2026-11-13 06:41:53,348 DEBUG [ImapConnection-43470] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 06:41:53,828 DEBUG [ImapConnection-43470] davmail.exchange.ExchangeSession  - Test configuration status: 401
+2026-11-13 06:41:53,828 DEBUG [ImapConnection-43470] davmail  - > * OK [CAPABILITY IMAP4REV1 AUTH=LOGIN MOVE SPECIAL-USE UIDPLUS] IMAP4rev1 DavMail 7.0.0-4403 server ready
+2026-11-13 06:41:53,829 DEBUG [ImapConnection-43470] davmail  - < LOGIN ********
+2026-11-13 06:41:53,829 DEBUG [ImapConnection-43470] davmail.exchange.ExchangeSession  - Direct EWS authentication
+2026-11-13 06:41:53,837 DEBUG [ImapConnection-43470] davmail.http.HttpClientAdapter  - Creating NTCredentials for user jwilkeson@databank.com workstation ryzen domain 
+2026-11-13 06:41:53,881 DEBUG [ImapConnection-43470] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 06:41:54,359 INFO  [ImapConnection-43470] davmail.connection  - FAILED - 0:0:0:0:0:0:0:1:43470 jwilkeson@databank.com
+2026-11-13 06:41:54,359 ERROR [ImapConnection-43470] davmail  - Authentication failed: invalid user or password
+davmail.exception.DavMailAuthenticationException: Authentication failed: invalid user or password
+	at davmail.exchange.ews.EwsExchangeSession.checkEndPointUrl(EwsExchangeSession.java:252)
+	at davmail.exchange.ews.EwsExchangeSession.buildSessionInfo(EwsExchangeSession.java:261)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:200)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:229)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:195)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:94)
+	at davmail.imap.ImapConnection.run(ImapConnection.java:143)
+2026-11-13 06:41:54,360 DEBUG [ImapConnection-43470] davmail  - > a1 NO LOGIN failed
+2026-11-13 06:45:53,272 INFO  [ImapConnection-43470] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:43470 
+2026-11-13 06:51:09,678 DEBUG [Shutdown] davmail  - Stopping DavMail gateway
+2026-11-13 06:51:09,678 INFO  [davmail.imap.ImapServer] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:43470 
+2026-11-13 06:51:09,679 INFO  [Shutdown] davmail  - DavMail gateway stopped
+2026-11-13 06:51:11,786 DEBUG [main] davmail.DavGateway  - Start DavMail headless EWS null
+2026-11-13 06:51:11,795 INFO  [main] davmail  - DavMail Gateway 7.0.0-4403 listening on SMTP port 1025 POP port 1110 IMAP port 1143 CALDAV port 1080 LDAP port 1389 
+2026-11-13 06:51:11,842 DEBUG [CheckRelease] davmail.http.HttpClientAdapter  - GET https://davmail.sourceforge.net/version.txt
+2026-11-13 06:51:11,907 DEBUG [CheckRelease] davmail.http.DavGatewaySSLSocketFactory  - createSocket davmail.sourceforge.net 443
+2026-11-13 06:51:12,496 DEBUG [CheckRelease] davmail.DavGateway  - DavMail released version: 7.1.0-4498
+2026-11-13 06:51:12,497 INFO  [CheckRelease] davmail  - A new version (7.1.0-4498) of DavMail Gateway is available !
+2026-11-13 06:51:16,683 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /0:0:0:0:0:0:0:1 on port 1143
+2026-11-13 06:51:16,686 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 0:0:0:0:0:0:0:1:58554 
+2026-11-13 06:51:16,757 DEBUG [ImapConnection-58554] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 06:51:17,224 DEBUG [ImapConnection-58554] davmail.exchange.ExchangeSession  - Test configuration status: 401
+2026-11-13 06:51:17,224 DEBUG [ImapConnection-58554] davmail  - > * OK [CAPABILITY IMAP4REV1 AUTH=LOGIN MOVE SPECIAL-USE UIDPLUS] IMAP4rev1 DavMail 7.0.0-4403 server ready
+2026-11-13 06:51:17,224 DEBUG [ImapConnection-58554] davmail  - < LOGIN ********
+2026-11-13 06:51:17,225 DEBUG [ImapConnection-58554] davmail.exchange.ExchangeSession  - Direct EWS authentication
+2026-11-13 06:51:17,233 DEBUG [ImapConnection-58554] davmail.http.HttpClientAdapter  - Creating NTCredentials for user jwilkeson@databank.com workstation ryzen domain 
+2026-11-13 06:51:17,273 DEBUG [ImapConnection-58554] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 06:51:17,746 INFO  [ImapConnection-58554] davmail.connection  - FAILED - 0:0:0:0:0:0:0:1:58554 jwilkeson@databank.com
+2026-11-13 06:51:17,746 ERROR [ImapConnection-58554] davmail  - Authentication failed: invalid user or password
+davmail.exception.DavMailAuthenticationException: Authentication failed: invalid user or password
+	at davmail.exchange.ews.EwsExchangeSession.checkEndPointUrl(EwsExchangeSession.java:252)
+	at davmail.exchange.ews.EwsExchangeSession.buildSessionInfo(EwsExchangeSession.java:261)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:200)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:229)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:195)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:94)
+	at davmail.imap.ImapConnection.run(ImapConnection.java:143)
+2026-11-13 06:51:17,747 DEBUG [ImapConnection-58554] davmail  - > a1 NO LOGIN failed
+2026-11-13 06:55:16,681 INFO  [ImapConnection-58554] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:58554 
+2026-11-13 07:00:32,876 DEBUG [Shutdown] davmail  - Stopping DavMail gateway
+2026-11-13 07:00:32,876 INFO  [davmail.imap.ImapServer] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:58554 
+2026-11-13 07:00:32,876 INFO  [Shutdown] davmail  - DavMail gateway stopped
+2026-11-13 07:00:34,992 DEBUG [main] davmail.DavGateway  - Start DavMail headless EWS null
+2026-11-13 07:00:35,002 INFO  [main] davmail  - DavMail Gateway 7.0.0-4403 listening on SMTP port 1025 POP port 1110 IMAP port 1143 CALDAV port 1080 LDAP port 1389 
+2026-11-13 07:00:35,047 DEBUG [CheckRelease] davmail.http.HttpClientAdapter  - GET https://davmail.sourceforge.net/version.txt
+2026-11-13 07:00:35,117 DEBUG [CheckRelease] davmail.http.DavGatewaySSLSocketFactory  - createSocket davmail.sourceforge.net 443
+2026-11-13 07:00:35,704 DEBUG [CheckRelease] davmail.DavGateway  - DavMail released version: 7.1.0-4498
+2026-11-13 07:00:35,705 INFO  [CheckRelease] davmail  - A new version (7.1.0-4498) of DavMail Gateway is available !
+2026-11-13 07:00:39,880 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /0:0:0:0:0:0:0:1 on port 1143
+2026-11-13 07:00:39,884 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 0:0:0:0:0:0:0:1:48096 
+2026-11-13 07:00:39,951 DEBUG [ImapConnection-48096] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 07:00:40,424 DEBUG [ImapConnection-48096] davmail.exchange.ExchangeSession  - Test configuration status: 401
+2026-11-13 07:00:40,424 DEBUG [ImapConnection-48096] davmail  - > * OK [CAPABILITY IMAP4REV1 AUTH=LOGIN MOVE SPECIAL-USE UIDPLUS] IMAP4rev1 DavMail 7.0.0-4403 server ready
+2026-11-13 07:00:40,425 DEBUG [ImapConnection-48096] davmail  - < LOGIN ********
+2026-11-13 07:00:40,425 DEBUG [ImapConnection-48096] davmail.exchange.ExchangeSession  - Direct EWS authentication
+2026-11-13 07:00:40,433 DEBUG [ImapConnection-48096] davmail.http.HttpClientAdapter  - Creating NTCredentials for user jwilkeson@databank.com workstation ryzen domain 
+2026-11-13 07:00:40,475 DEBUG [ImapConnection-48096] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 07:00:40,919 INFO  [ImapConnection-48096] davmail.connection  - FAILED - 0:0:0:0:0:0:0:1:48096 jwilkeson@databank.com
+2026-11-13 07:00:40,920 ERROR [ImapConnection-48096] davmail  - Authentication failed: invalid user or password
+davmail.exception.DavMailAuthenticationException: Authentication failed: invalid user or password
+	at davmail.exchange.ews.EwsExchangeSession.checkEndPointUrl(EwsExchangeSession.java:252)
+	at davmail.exchange.ews.EwsExchangeSession.buildSessionInfo(EwsExchangeSession.java:261)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:200)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:229)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:195)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:94)
+	at davmail.imap.ImapConnection.run(ImapConnection.java:143)
+2026-11-13 07:00:40,921 DEBUG [ImapConnection-48096] davmail  - > a1 NO LOGIN failed
+2026-11-13 07:04:39,879 INFO  [ImapConnection-48096] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:48096 
+2026-11-13 07:09:56,174 DEBUG [Shutdown] davmail  - Stopping DavMail gateway
+2026-11-13 07:09:56,174 INFO  [davmail.imap.ImapServer] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:48096 
+2026-11-13 07:09:56,175 INFO  [Shutdown] davmail  - DavMail gateway stopped
+2026-11-13 07:09:58,286 DEBUG [main] davmail.DavGateway  - Start DavMail headless EWS null
+2026-11-13 07:09:58,296 INFO  [main] davmail  - DavMail Gateway 7.0.0-4403 listening on SMTP port 1025 POP port 1110 IMAP port 1143 CALDAV port 1080 LDAP port 1389 
+2026-11-13 07:09:58,342 DEBUG [CheckRelease] davmail.http.HttpClientAdapter  - GET https://davmail.sourceforge.net/version.txt
+2026-11-13 07:09:58,409 DEBUG [CheckRelease] davmail.http.DavGatewaySSLSocketFactory  - createSocket davmail.sourceforge.net 443
+2026-11-13 07:09:58,988 DEBUG [CheckRelease] davmail.DavGateway  - DavMail released version: 7.1.0-4498
+2026-11-13 07:09:58,989 INFO  [CheckRelease] davmail  - A new version (7.1.0-4498) of DavMail Gateway is available !
+2026-11-13 07:10:03,178 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /0:0:0:0:0:0:0:1 on port 1143
+2026-11-13 07:10:03,183 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 0:0:0:0:0:0:0:1:33010 
+2026-11-13 07:10:03,251 DEBUG [ImapConnection-33010] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 07:10:03,741 DEBUG [ImapConnection-33010] davmail.exchange.ExchangeSession  - Test configuration status: 401
+2026-11-13 07:10:03,741 DEBUG [ImapConnection-33010] davmail  - > * OK [CAPABILITY IMAP4REV1 AUTH=LOGIN MOVE SPECIAL-USE UIDPLUS] IMAP4rev1 DavMail 7.0.0-4403 server ready
+2026-11-13 07:10:03,741 DEBUG [ImapConnection-33010] davmail  - < LOGIN ********
+2026-11-13 07:10:03,742 DEBUG [ImapConnection-33010] davmail.exchange.ExchangeSession  - Direct EWS authentication
+2026-11-13 07:10:03,750 DEBUG [ImapConnection-33010] davmail.http.HttpClientAdapter  - Creating NTCredentials for user jwilkeson@databank.com workstation ryzen domain 
+2026-11-13 07:10:03,790 DEBUG [ImapConnection-33010] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 07:10:04,301 INFO  [ImapConnection-33010] davmail.connection  - FAILED - 0:0:0:0:0:0:0:1:33010 jwilkeson@databank.com
+2026-11-13 07:10:04,301 ERROR [ImapConnection-33010] davmail  - Authentication failed: invalid user or password
+davmail.exception.DavMailAuthenticationException: Authentication failed: invalid user or password
+	at davmail.exchange.ews.EwsExchangeSession.checkEndPointUrl(EwsExchangeSession.java:252)
+	at davmail.exchange.ews.EwsExchangeSession.buildSessionInfo(EwsExchangeSession.java:261)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:200)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:229)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:195)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:94)
+	at davmail.imap.ImapConnection.run(ImapConnection.java:143)
+2026-11-13 07:10:04,302 DEBUG [ImapConnection-33010] davmail  - > a1 NO LOGIN failed
+2026-11-13 07:14:03,177 INFO  [ImapConnection-33010] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:33010 
+2026-11-13 07:19:19,393 DEBUG [Shutdown] davmail  - Stopping DavMail gateway
+2026-11-13 07:19:19,394 INFO  [davmail.imap.ImapServer] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:33010 
+2026-11-13 07:19:19,394 INFO  [Shutdown] davmail  - DavMail gateway stopped
+2026-11-13 07:19:21,517 DEBUG [main] davmail.DavGateway  - Start DavMail headless EWS null
+2026-11-13 07:19:21,528 INFO  [main] davmail  - DavMail Gateway 7.0.0-4403 listening on SMTP port 1025 POP port 1110 IMAP port 1143 CALDAV port 1080 LDAP port 1389 
+2026-11-13 07:19:21,580 DEBUG [CheckRelease] davmail.http.HttpClientAdapter  - GET https://davmail.sourceforge.net/version.txt
+2026-11-13 07:19:21,652 DEBUG [CheckRelease] davmail.http.DavGatewaySSLSocketFactory  - createSocket davmail.sourceforge.net 443
+2026-11-13 07:19:22,254 DEBUG [CheckRelease] davmail.DavGateway  - DavMail released version: 7.1.0-4498
+2026-11-13 07:19:22,255 INFO  [CheckRelease] davmail  - A new version (7.1.0-4498) of DavMail Gateway is available !
+2026-11-13 07:19:26,398 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /0:0:0:0:0:0:0:1 on port 1143
+2026-11-13 07:19:26,402 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 0:0:0:0:0:0:0:1:59622 
+2026-11-13 07:19:26,479 DEBUG [ImapConnection-59622] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 07:19:26,965 DEBUG [ImapConnection-59622] davmail.exchange.ExchangeSession  - Test configuration status: 401
+2026-11-13 07:19:26,965 DEBUG [ImapConnection-59622] davmail  - > * OK [CAPABILITY IMAP4REV1 AUTH=LOGIN MOVE SPECIAL-USE UIDPLUS] IMAP4rev1 DavMail 7.0.0-4403 server ready
+2026-11-13 07:19:26,965 DEBUG [ImapConnection-59622] davmail  - < LOGIN ********
+2026-11-13 07:19:26,966 DEBUG [ImapConnection-59622] davmail.exchange.ExchangeSession  - Direct EWS authentication
+2026-11-13 07:19:26,974 DEBUG [ImapConnection-59622] davmail.http.HttpClientAdapter  - Creating NTCredentials for user jwilkeson@databank.com workstation ryzen domain 
+2026-11-13 07:19:27,015 DEBUG [ImapConnection-59622] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 07:19:27,489 INFO  [ImapConnection-59622] davmail.connection  - FAILED - 0:0:0:0:0:0:0:1:59622 jwilkeson@databank.com
+2026-11-13 07:19:27,489 ERROR [ImapConnection-59622] davmail  - Authentication failed: invalid user or password
+davmail.exception.DavMailAuthenticationException: Authentication failed: invalid user or password
+	at davmail.exchange.ews.EwsExchangeSession.checkEndPointUrl(EwsExchangeSession.java:252)
+	at davmail.exchange.ews.EwsExchangeSession.buildSessionInfo(EwsExchangeSession.java:261)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:200)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:229)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:195)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:94)
+	at davmail.imap.ImapConnection.run(ImapConnection.java:143)
+2026-11-13 07:19:27,490 DEBUG [ImapConnection-59622] davmail  - > a1 NO LOGIN failed
+2026-11-13 07:23:26,397 INFO  [ImapConnection-59622] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:59622 
+2026-11-13 07:28:42,701 DEBUG [Shutdown] davmail  - Stopping DavMail gateway
+2026-11-13 07:28:42,702 INFO  [davmail.imap.ImapServer] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:59622 
+2026-11-13 07:28:42,702 INFO  [Shutdown] davmail  - DavMail gateway stopped
+2026-11-13 07:28:44,818 DEBUG [main] davmail.DavGateway  - Start DavMail headless EWS null
+2026-11-13 07:28:44,828 INFO  [main] davmail  - DavMail Gateway 7.0.0-4403 listening on SMTP port 1025 POP port 1110 IMAP port 1143 CALDAV port 1080 LDAP port 1389 
+2026-11-13 07:28:44,877 DEBUG [CheckRelease] davmail.http.HttpClientAdapter  - GET https://davmail.sourceforge.net/version.txt
+2026-11-13 07:28:44,937 DEBUG [CheckRelease] davmail.http.DavGatewaySSLSocketFactory  - createSocket davmail.sourceforge.net 443
+2026-11-13 07:28:45,568 DEBUG [CheckRelease] davmail.DavGateway  - DavMail released version: 7.1.0-4498
+2026-11-13 07:28:45,568 INFO  [CheckRelease] davmail  - A new version (7.1.0-4498) of DavMail Gateway is available !
+2026-11-13 07:28:49,706 DEBUG [davmail.imap.ImapServer] davmail  - Connection from /0:0:0:0:0:0:0:1 on port 1143
+2026-11-13 07:28:49,710 INFO  [davmail.imap.ImapServer] davmail.connection  - CONNECT - 0:0:0:0:0:0:0:1:54418 
+2026-11-13 07:28:49,774 DEBUG [ImapConnection-54418] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 07:28:50,291 DEBUG [ImapConnection-54418] davmail.exchange.ExchangeSession  - Test configuration status: 401
+2026-11-13 07:28:50,291 DEBUG [ImapConnection-54418] davmail  - > * OK [CAPABILITY IMAP4REV1 AUTH=LOGIN MOVE SPECIAL-USE UIDPLUS] IMAP4rev1 DavMail 7.0.0-4403 server ready
+2026-11-13 07:28:50,291 DEBUG [ImapConnection-54418] davmail  - < LOGIN ********
+2026-11-13 07:28:50,292 DEBUG [ImapConnection-54418] davmail.exchange.ExchangeSession  - Direct EWS authentication
+2026-11-13 07:28:50,300 DEBUG [ImapConnection-54418] davmail.http.HttpClientAdapter  - Creating NTCredentials for user jwilkeson@databank.com workstation ryzen domain 
+2026-11-13 07:28:50,344 DEBUG [ImapConnection-54418] davmail.http.DavGatewaySSLSocketFactory  - createSocket outlook.office365.com 443
+2026-11-13 07:28:50,861 INFO  [ImapConnection-54418] davmail.connection  - FAILED - 0:0:0:0:0:0:0:1:54418 jwilkeson@databank.com
+2026-11-13 07:28:50,861 ERROR [ImapConnection-54418] davmail  - Authentication failed: invalid user or password
+davmail.exception.DavMailAuthenticationException: Authentication failed: invalid user or password
+	at davmail.exchange.ews.EwsExchangeSession.checkEndPointUrl(EwsExchangeSession.java:252)
+	at davmail.exchange.ews.EwsExchangeSession.buildSessionInfo(EwsExchangeSession.java:261)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:200)
+	at davmail.exchange.ews.EwsExchangeSession.<init>(EwsExchangeSession.java:229)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:195)
+	at davmail.exchange.ExchangeSessionFactory.getInstance(ExchangeSessionFactory.java:94)
+	at davmail.imap.ImapConnection.run(ImapConnection.java:143)
+2026-11-13 07:28:50,862 DEBUG [ImapConnection-54418] davmail  - > a1 NO LOGIN failed
+2026-11-13 07:32:49,704 INFO  [ImapConnection-54418] davmail.connection  - DISCONNECT - 0:0:0:0:0:0:0:1:54418 

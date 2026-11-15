@@ -1,0 +1,9 @@
+[user]
+	email = 5651215+xeon826@users.noreply.github.com
+	name = Joshua
+[credential]
+	helper = store
+[push]
+	autoSetupRemote = true
+[init]
+	defaultBranch = main
