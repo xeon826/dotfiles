@@ -59,6 +59,36 @@ Super+R still opens the grid overview.
 - The panel window has no fixed `screen`: it opens on the focused monitor.
 
 
+## Super-hold workspace deck (`modules/ii/bar/WorkspaceDeck.qml`)
+
+While Super is held (`GlobalStates.superDown` → `Workspaces.showNumbers`),
+each workspace button's main icon fades and a per-monitor overlay window
+(`quickshell:workspaceDeck`) stacks the workspace's windows straight downward
+under the bar flush against it — fully opaque icons, edge-to-edge (no overlap
+or jitter; user preference), biggest window first, cap 5. Layout facts:
+
+- A PanelWindow CAN be declared nested inside the bar's widget tree
+  (`Workspaces.qml` instantiates it via a Loader) — it maps as an independent
+  layer surface per monitor. `mask: Region {}` = fully click-through
+  (mandatory: Super is held for keybinds), `exclusiveZone: -1`.
+- Horizontal alignment comes from `Workspaces.deckGlobalX`
+  (`mapToItem(null, 0, 0)` — scene coords == screen coords because the bar
+  window spans from screen origin). Snapshot on superDown/showNumbers, not a
+  live binding (mapToItem is not reactive).
+- The window stays mapped 220ms past hide (`collapseDelay`) so cards animate
+  out; cards reveal top→bottom via `Workspaces.revealedCount` ticking.
+- **Binding-loop trap:** `AppSearch.windowIconSource()` must never mutate
+  `_findQueue` during binding evaluation (read+write of the same property in
+  one eval → QML loop detector permanently disables the binding). The
+  service defers queueing via `Qt.callLater`; call sites keep per-item
+  bindings (one call per button/card). Never call it inside an aggregate
+  binding that resolves many windows (that froze `Workspaces.deckCards`
+  once) — aggregate bindings there carry window objects only, and each card
+  resolves its own icon.
+- Multi-file edits race quickshell's hot reload (it reloads per file save;
+  intermediate states fail with "Type X unavailable"). After a batch edit,
+  `touch` one file and check `qs -p … log` for a clean reload line.
+
 ## Overview grid (`modules/ii/overview/`)
 
 Super+R (`quickshell:overviewWorkspacesToggle`) opens one panel per monitor

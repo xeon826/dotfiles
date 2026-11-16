@@ -47,7 +47,11 @@ Singleton {
         const guessed = AppSearch.guessIcon(windowClass);
         if (guessed === "image-missing") return "";
         const file = root._resolvedIconFiles[guessed];
-        if (file === undefined) root.resolveIconFile(guessed);
+        // Defer queueing: resolveIconFile reads+writes _findQueue, and doing
+        // that inside a binding's evaluation trips the loop detector. The
+        // deferred call runs outside; once the find completes, callers that
+        // read _resolvedIconFiles re-evaluate and pick the file up.
+        if (file === undefined) Qt.callLater(() => root.resolveIconFile(guessed));
         return file ? "file://" + file : "";
     }
 

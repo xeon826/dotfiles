@@ -27,9 +27,11 @@ Item {
     property int workspaceButtonWidth: 26
     property real activeWorkspaceMargin: 2
     property real workspaceIconSize: workspaceButtonWidth * 0.69
-    property real workspaceIconSizeShrinked: workspaceButtonWidth * 0.55
-    property real workspaceIconOpacityShrinked: 1
-    property real workspaceIconMarginShrinked: -4
+    // Super-hold deck (WorkspaceDeck.qml): while Super is held, the workspace
+    // icon "moves down" into an overlay below the bar and the remaining
+    // windows of each workspace splay under it as overlapping cards.
+    readonly property int deckMaxCards: 5
+    readonly property bool deckEnabled: Config.options?.bar.workspaces.showAppIcons ?? false
     property int workspaceIndexInGroup: (effectiveActiveWorkspaceId - 1) % root.workspacesShown
 
     property bool showNumbers: false
@@ -38,6 +40,7 @@ Item {
         interval: (Config?.options.bar.autoHide.showWhenPressingSuper.delay ?? 100)
         repeat: false
         onTriggered: {
+            root.updateDeckGeometry();
             root.showNumbers = true
         }
     }
@@ -45,8 +48,10 @@ Item {
         target: GlobalStates
         function onSuperDownChanged() {
             if (!Config?.options.bar.autoHide.showWhenPressingSuper.enable) return;
-            if (GlobalStates.superDown) showNumbersTimer.restart();
-            else {
+            if (GlobalStates.superDown) {
+                Qt.callLater(root.updateDeckGeometry);
+                showNumbersTimer.restart();
+            } else {
                 showNumbersTimer.stop();
                 root.showNumbers = false;
             }
@@ -263,32 +268,21 @@ Item {
                         anchors.centerIn: parent
                         width: workspaceButtonWidth
                         height: workspaceButtonWidth
-                        opacity: !Config.options?.bar.workspaces.showAppIcons || !workspaceButtonBackground.hasAppIcon ? 0 :
-                            (workspaceButtonBackground.biggestWindow && !root.showNumbers && Config.options?.bar.workspaces.showAppIcons) ? 
-                            1 : workspaceButtonBackground.biggestWindow ? workspaceIconOpacityShrinked : 0
-                            visible: opacity > 0
+                        // While Super is held this icon fades out: it "moves down"
+                        // into the deck overlay (WorkspaceDeck) instead of
+                        // shrinking into the bottom-right corner.
+                        opacity: !Config.options?.bar.workspaces.showAppIcons
+                            || !workspaceButtonBackground.hasAppIcon
+                            || root.showNumbers
+                            || !workspaceButtonBackground.biggestWindow ? 0 : 1
+                        visible: opacity > 0
                         IconImage {
                             id: mainAppIcon
-                            anchors.bottom: parent.bottom
-                            anchors.right: parent.right
-                            anchors.bottomMargin: (!root.showNumbers && Config.options?.bar.workspaces.showAppIcons) ? 
-                                (workspaceButtonWidth - workspaceIconSize) / 2 : workspaceIconMarginShrinked
-                            anchors.rightMargin: (!root.showNumbers && Config.options?.bar.workspaces.showAppIcons) ? 
-                                (workspaceButtonWidth - workspaceIconSize) / 2 : workspaceIconMarginShrinked
-
+                            anchors.centerIn: parent
                             source: workspaceButtonBackground.mainAppIconSource
-                            implicitSize: (!root.showNumbers && Config.options?.bar.workspaces.showAppIcons) ? workspaceIconSize : workspaceIconSizeShrinked
+                            implicitSize: workspaceIconSize
 
                             Behavior on opacity {
-                                animation: Appearance.animation.elementMoveFast.numberAnimation.createObject(this)
-                            }
-                            Behavior on anchors.bottomMargin {
-                                animation: Appearance.animation.elementMoveFast.numberAnimation.createObject(this)
-                            }
-                            Behavior on anchors.rightMargin {
-                                animation: Appearance.animation.elementMoveFast.numberAnimation.createObject(this)
-                            }
-                            Behavior on implicitSize {
                                 animation: Appearance.animation.elementMoveFast.numberAnimation.createObject(this)
                             }
                         }
@@ -313,12 +307,47 @@ Item {
                         }
                     }
                 }
-                
+
 
             }
 
         }
 
+    }
+
+    // Super-hold deck: per-workspace windows, biggest first, then the rest by
+    // area, capped. Icon sources are NOT resolved here: windowIconSource()
+    // mutates AppSearch's find queue, and calling it inside this binding
+    // trips QML's loop detector (read+write of _findQueue in one eval). The
+    // deck resolves each card's icon in its own per-card binding instead.
+    readonly property var deckCards: {
+        if (!root.deckEnabled) return [];
+        const cards = [];
+        for (let i = 0; i < root.workspacesShown; i++) {
+            const wsValue = root.workspaceGroup * root.workspacesShown + i + 1;
+            const biggest = HyprlandData.biggestWindowForWorkspace(wsValue);
+            const others = HyprlandData.hyprlandClientsForWorkspace(wsValue)
+                .filter(w => !w.hidden && w !== biggest)
+                .sort((a, b) => (b.size?.[0] ?? 0) * (b.size?.[1] ?? 0) - (a.size?.[0] ?? 0) * (a.size?.[1] ?? 0));
+            const wins = biggest ? [biggest, ...others] : others;
+            wins.slice(0, root.deckMaxCards).forEach((win, slot) => cards.push({ workspaceIndex: i, slot, win }));
+        }
+        return cards;
+    }
+
+    // Global screen x of this widget so the deck window can align under it
+    property real deckGlobalX: 0
+    function updateDeckGeometry() {
+        const win = root.QsWindow.window;
+        if (!win) return;
+        root.deckGlobalX = root.mapToItem(null, 0, 0).x;
+    }
+
+    Loader {
+        active: root.deckEnabled && root.QsWindow.window !== null
+        sourceComponent: WorkspaceDeck {
+            workspacesRoot: root
+        }
     }
 
 }
