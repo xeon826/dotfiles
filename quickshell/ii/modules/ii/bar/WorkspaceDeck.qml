@@ -22,8 +22,8 @@ PanelWindow {
 
     readonly property bool downward: !(Config.options?.bar.bottom ?? false)
     readonly property real buttonW: workspacesRoot.workspaceButtonWidth
-    readonly property real mainCardSize: workspacesRoot.workspaceIconSize
-    readonly property real cardSize: buttonW * 0.55
+    readonly property real mainCardSize: workspacesRoot.workspaceIconSize * 1.12
+    readonly property real cardSize: buttonW * 0.62
     readonly property real firstStep: 0 // flush under the bar, no gap
     readonly property real deckExtent: firstStep + workspacesRoot.deckMaxCards * cardSize
     readonly property bool deckVisible: (workspacesRoot?.showNumbers ?? false) && workspacesRoot.deckCards.length > 0
@@ -126,7 +126,7 @@ PanelWindow {
                         y: shown ? root.cardY(slot, size) : (root.downward ? -size : root.deckExtent)
                         width: size
                         height: size
-                        opacity: shown ? 1 : 0
+                        opacity: shown ? 0.95 : 0
                         scale: shown ? 1 : 0.5
                         visible: opacity > 0
 
