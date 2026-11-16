@@ -9,6 +9,9 @@ SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}" || echo "${BASH_SOURCE[0]}")"
 CONFIG_DIR="$(cd "$(dirname "$SCRIPT_PATH")/../.." && pwd)"
 # monitors.conf needs to be in the main hypr config directory, not in custom/
 MONITORS_CONF="${HOME}/.config/hypr/monitors.conf"
+MONITORS_LUA="${HOME}/.config/hypr/monitors.lua"
+DECADES_FILE="${CONFIG_DIR}/decades.lua"
+CONF_TO_LUA="${CONFIG_DIR}/scripts/switch-monitors/conf_to_lua.py"
 TRIPLE_CONF="${CONFIG_DIR}/scripts/switch-monitors/triple.monitors.conf"
 BIGSCREEN_CONF="${CONFIG_DIR}/scripts/switch-monitors/bigscreen.monitors.conf"
 ALL_CONF="${CONFIG_DIR}/scripts/switch-monitors/all.monitors.conf"
@@ -57,6 +60,20 @@ detect_current_config() {
 get_monitor_id() {
     local monitor_name="$1"
     hyprctl monitors -j | jq -r ".[] | select(.name == \"$monitor_name\") | .id"
+}
+
+# Apply a monitor configuration: Hyprland 0.57 dropped hyprlang, so the live
+# config reads monitors.lua (dofile'd from hyprland.lua) — monitors.conf is
+# kept in sync only for script state (detect_current_config) and nwg-displays.
+# Also sets the matching per-mode decade workspace rules (hypr-custom/decades.lua).
+write_monitor_configs() {
+    local conf_src="$1"
+    cp -f "$conf_src" "$MONITORS_CONF"
+    "$CONF_TO_LUA" "$conf_src" > "$MONITORS_LUA"
+}
+
+write_decades() {
+    cp -f "${CONFIG_DIR}/scripts/switch-monitors/$1.decades.lua" "$DECADES_FILE"
 }
 
 # Function to wait for a monitor to become available
@@ -156,7 +173,8 @@ case "$1" in
                 echo "Error: Intermediate configuration file $ALL_CONF not found." >&2
                 exit 1
             fi
-            cp -f "$ALL_CONF" "$MONITORS_CONF"
+            write_monitor_configs "$ALL_CONF"
+            write_decades all
             hyprctl reload
             sleep 2
             echo "Waiting for DP-1 monitor to become available..."
@@ -165,7 +183,8 @@ case "$1" in
             move_clients_between_monitors "HDMI-A-1" "DP-1" || true
         fi
 
-        cp -f "$TRIPLE_CONF" "$MONITORS_CONF"
+        write_monitor_configs "$TRIPLE_CONF"
+        write_decades triple
         ;;
     bigscreen)
         echo "Switching to bigscreen monitor configuration..."
@@ -181,7 +200,8 @@ case "$1" in
                 echo "Error: Intermediate configuration file $ALL_CONF not found." >&2
                 exit 1
             fi
-            cp -f "$ALL_CONF" "$MONITORS_CONF"
+            write_monitor_configs "$ALL_CONF"
+            write_decades all
             hyprctl reload
             sleep 2
             echo "Waiting for HDMI-A-1 monitor to become available..."
@@ -192,7 +212,8 @@ case "$1" in
             done
         fi
 
-        cp -f "$BIGSCREEN_CONF" "$MONITORS_CONF"
+        write_monitor_configs "$BIGSCREEN_CONF"
+        write_decades bigscreen
         ;;
     all)
         echo "Switching to all monitors configuration..."
@@ -200,7 +221,8 @@ case "$1" in
             echo "Error: Source file $ALL_CONF not found." >&2
             exit 1
         fi
-        cp -f "$ALL_CONF" "$MONITORS_CONF"
+        write_monitor_configs "$ALL_CONF"
+        write_decades all
         ;;
     *)
         echo "Invalid argument: $1"

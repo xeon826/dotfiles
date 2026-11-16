@@ -6,6 +6,11 @@ local dsp = hl.dsp
 
 hl.bind("CTRL + SUPER + SLASH", dsp.exec_cmd("xdg-open ~/.config/illogical-impulse/config.json"),
     { description = "Edit shell config" })
+
+-- Window list sidebar (Super+Tab or Super+Shift+Tab; Tab replaces the overview grid bind)
+hl.unbind("SUPER + TAB")
+hl.bind("SUPER + TAB", dsp.global("quickshell:windowListToggle"), { description = "Toggle window list sidebar" })
+hl.bind("SUPER + SHIFT + TAB", dsp.global("quickshell:windowListToggle"), { description = "Toggle window list sidebar" })
 hl.bind("CTRL + SUPER + ALT + SLASH", dsp.exec_cmd("xdg-open ~/.config/hypr/custom/keybinds.conf"),
     { description = "Edit extra keybinds" })
 
@@ -127,3 +132,17 @@ hl.bind("SUPER + ALT + B", dsp.exec_cmd("~/.local/bin/switch-monitors.sh bigscre
 
 hl.bind("SUPER + PERIOD", dsp.focus({ workspace = "r+1" }), { locked = true })
 hl.bind("SUPER + COMMA",  dsp.focus({ workspace = "r-1" }), { locked = true })
+
+--#! Fullscreen screenshots — focused monitor only
+-- `grim` without -o stitches ALL monitors into one image; pin it to the
+-- focused output instead (three-monitor setup).
+hl.unbind("PRINT")
+hl.unbind("CTRL + PRINT")
+hl.unbind("CTRL + PRINT") -- framework registers two binds on this key
+local focusedOutput = "\"$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')\""
+hl.bind("PRINT", dsp.exec_cmd("grim -o " .. focusedOutput .. " - | wl-copy"),
+    { locked = true }) -- Screenshot (focused monitor) >> clipboard
+hl.bind("CTRL + PRINT", dsp.exec_cmd("mkdir -p $(xdg-user-dir PICTURES)/Screenshots && grim -o " .. focusedOutput .. " $(xdg-user-dir PICTURES)/Screenshots/Screenshot_\"$(date '+%Y-%m-%d_%H.%M.%S')\".png"),
+    { locked = true, non_consuming = true }) -- Screenshot (focused monitor) >> clipboard & file (file)
+hl.bind("CTRL + PRINT", dsp.exec_cmd("grim -o " .. focusedOutput .. " - | wl-copy"),
+    { locked = true, non_consuming = true }) -- Screenshot (focused monitor) >> clipboard & file (clipboard)

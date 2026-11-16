@@ -23,6 +23,7 @@
     ~/.config/opencode/: opencode
     ~/.config/hypr/hyprland.lua: hyprland.lua
     ~/.config/hypr/custom: hypr-custom
+    ~/.config/hypr/hyprland/scripts/workspace_action.sh: hypr-custom/scripts/workspace_action.sh
     ~/.config/alacritty: alacritty.toml
     ~/.config/ranger: ranger
     ~/.bashrc: bashrc

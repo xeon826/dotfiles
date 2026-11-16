@@ -518,6 +518,7 @@ Singleton {
                     property bool visualize: false
                     property bool clicklessCornerEnd: true
                     property int clicklessCornerVerticalOffset: 1
+                    property list<string> screenList: [] // Monitor names with hot-corner triggers; empty = all screens. Find names with 'hyprctl monitors'
                 }
 
                 property JsonObject quickToggles: JsonObject {

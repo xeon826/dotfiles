@@ -138,7 +138,13 @@ Scope {
     }
 
     Variants {
-        model: Quickshell.screens
+        // Per-monitor; filterable like bar.screenList
+        model: {
+            const list = Config.options.sidebar.cornerOpen.screenList;
+            if (!list || list.length === 0)
+                return Quickshell.screens;
+            return Quickshell.screens.filter(screen => list.includes(screen.name));
+        }
 
         Scope {
             id: monitorScope

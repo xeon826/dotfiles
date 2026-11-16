@@ -2,6 +2,14 @@
 
 Symlinked from `~/.config/quickshell`. This is the end-4 style Quickshell shell.
 
+## Hot corners
+
+`modules/ii/screenCorners/ScreenCorners.qml` filters its per-monitor corner
+windows by `Config.options.sidebar.cornerOpen.screenList` (empty = all
+screens; currently `["DP-3"]` in `~/.config/illogical-impulse/config.json`).
+Corner windows also hide while that monitor's active workspace has a
+fullscreen window — don't mistake that for the filter misbehaving.
+
 ## Lock screen temp workspaces (important)
 
 `modules/ii/lock/Lock.qml` parks every monitor on a temporary workspace with a
@@ -18,6 +26,27 @@ monitor on unlock. If you touch this logic:
 
 Hyprland 0.56.x has no `deleteworkspace` dispatcher; leftover empty temp
 workspaces can only be cleared by restarting Hyprland.
+
+## Window list sidebar (`modules/ii/windowList/`)
+
+Super+Tab (or Super+Shift+Tab) toggles a left-docked list of windows grouped
+by workspace (`quickshell:windowListToggle`; rows are drag-and-droppable
+between sections). Super+Tab previously opened the overview grid — it is
+rebound in `custom/keybinds.lua` via `hl.unbind("SUPER + TAB")` + rebind;
+Super+R still opens the grid overview.
+
+- **Hyprland 0.57 special workspaces have NO `workspace.id`** in
+  `hyprctl clients -j` / `hyprctl workspaces -j` — only
+  `address` (`special:browser`) + `name`. Old code assuming negative ids
+  silently breaks. `WindowListContent.wsKeyFor()` keys sections by numeric id
+  or address accordingly; moves/focuses for specials use
+  `workspace="special:browser"` / `{workspace="name:special:browser"}` (verified
+  dispatch syntax).
+- `StyledToolTip.extraVisibleCondition` defaults to `true` — a tooltip child of
+  a plain MouseArea (no `hovered` property) is ALWAYS visible. Always pass
+  `extraVisibleCondition: false` when using `alternativeVisibleCondition`.
+- The panel window has no fixed `screen`: it opens on the focused monitor.
+
 
 ## Screen recording (`scripts/videos/record.sh`)
 
