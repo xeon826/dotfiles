@@ -7,6 +7,7 @@ Exec=/home/dan/.local/bin/helium %U
 StartupNotify=true
 Terminal=false
 Icon=net.imput.helium
+StartupWMClass=helium
 Type=Application
 Categories=Network;WebBrowser;
 Actions=new-window;new-private-window;

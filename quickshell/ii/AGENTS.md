@@ -2,6 +2,17 @@
 
 Symlinked from `~/.config/quickshell`. This is the end-4 style Quickshell shell.
 
+## Icon installs
+
+User icons go in `~/.local/share/icons/hicolor/scalable/apps/`. **Delete
+`~/.local/share/icons/hicolor/icon-theme.cache` after adding files** — that
+dir has no `index.theme`, so the cache can never be regenerated and GTK/Qt
+serve the stale file list from it indefinitely (new icons silently don't
+resolve). Verify with a fresh `python3` + `Gtk.IconTheme` lookup, and restart
+quickshell to clear its in-memory icon caches. The bar's window list resolves
+icons via `AppSearch.guessIcon` (desktop entry by window class → its icon
+name), whose own `find` searches `$HOME/.local/share/icons/hicolor` first.
+
 ## Hot corners
 
 `modules/ii/screenCorners/ScreenCorners.qml` filters its per-monitor corner
