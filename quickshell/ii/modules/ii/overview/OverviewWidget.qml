@@ -47,6 +47,86 @@ Item {
     property int draggingFromWorkspace: -1
     property int draggingTargetWorkspace: -1
 
+    // ---- Cross-monitor drag & drop (see services/OverviewDnd.qml) ----
+    // QML DropAreas only fire inside the window the drag started in. While a
+    // pill is dragged, OverviewDnd polls the global cursor; when it is over
+    // THIS monitor's panel (and the drag originated elsewhere), we hit-test
+    // our cells and publish the hovered one for the origin to dispatch.
+    readonly property bool isDragOrigin: OverviewDnd.dragOriginMonitor === monitor.name
+    property var _cells: [] // workspace Rectangle registry for cursor hit-testing
+
+    function registerCell(cell) {
+        _cells.push(cell);
+    }
+    function unregisterCell(cell) {
+        const idx = _cells.indexOf(cell);
+        if (idx !== -1) _cells.splice(idx, 1);
+    }
+    // Cursor position within the cell, as percentages (0-100), for exact
+    // floating-window placement on the target monitor.
+    function targetFor(cell) {
+        let pctX = 50, pctY = 50;
+        const p = OverviewDnd.pointer;
+        if (p && monitorData) {
+            const local = cell.mapFromItem(null, p.x - monitorData.x, p.y - monitorData.y);
+            pctX = Math.max(0, Math.min(100, Math.round(local.x / cell.width * 100)));
+            pctY = Math.max(0, Math.min(100, Math.round(local.y / cell.height * 100)));
+        }
+        return { monitor: monitor.name, workspace: cell.workspaceValue, pctX, pctY };
+    }
+    function setCrossHover(cell) {
+        for (let i = 0; i < _cells.length; i++)
+            if (_cells[i] !== cell) _cells[i].hoveredWhileDragging = false;
+        if (cell) {
+            cell.hoveredWhileDragging = true;
+            OverviewDnd.hoveredTarget = root.targetFor(cell);
+        } else if (OverviewDnd.hoveredTarget && OverviewDnd.hoveredTarget.monitor === monitor.name) {
+            OverviewDnd.hoveredTarget = null;
+        }
+    }
+    function updateCrossHover() {
+        const p = OverviewDnd.pointer;
+        if (!OverviewDnd.dragActive || root.isDragOrigin || !p || !monitorData) return;
+        // monitorData.width/height are physical pixels; cursor is in logical layout coords.
+        const right = monitorData.x + monitorData.width / monitorData.scale;
+        const bottom = monitorData.y + monitorData.height / monitorData.scale;
+        if (p.x < monitorData.x || p.x >= right || p.y < monitorData.y || p.y >= bottom) {
+            if (OverviewDnd.hoveredTarget && OverviewDnd.hoveredTarget.monitor === monitor.name)
+                root.setCrossHover(null);
+            return;
+        }
+        const sceneX = p.x - monitorData.x;
+        const sceneY = p.y - monitorData.y;
+        let hit = null;
+        for (let i = 0; i < _cells.length; i++) {
+            const cell = _cells[i];
+            if (!cell.parent) continue;
+            const local = cell.mapFromItem(null, sceneX, sceneY);
+            if (local.x >= 0 && local.y >= 0 && local.x < cell.width && local.y < cell.height) {
+                hit = cell;
+                break;
+            }
+        }
+        const cur = OverviewDnd.hoveredTarget;
+        if (hit) {
+            if (!(cur && cur.monitor === monitor.name && cur.workspace === hit.workspaceValue))
+                root.setCrossHover(hit);
+        } else if (cur && cur.monitor === monitor.name) {
+            root.setCrossHover(null);
+        }
+    }
+
+    Connections {
+        target: OverviewDnd
+        function onPointerChanged() {
+            root.updateCrossHover();
+        }
+        function onDragActiveChanged() {
+            if (!OverviewDnd.dragActive) root.setCrossHover(null);
+            else root.updateCrossHover();
+        }
+    }
+
     implicitWidth: overviewBackground.implicitWidth + Appearance.sizes.elevationMargin * 2
     implicitHeight: overviewBackground.implicitHeight + Appearance.sizes.elevationMargin * 2
 
@@ -107,6 +187,8 @@ Item {
                             property color hoveredWorkspaceColor: ColorUtils.mix(defaultWorkspaceColor, Appearance.colors.colLayer1Hover, 0.1)
                             property color hoveredBorderColor: Appearance.colors.colLayer2Hover
                             property bool hoveredWhileDragging: false
+                            Component.onCompleted: root.registerCell(workspace)
+                            Component.onDestruction: root.unregisterCell(workspace)
 
                             implicitWidth: root.workspaceImplicitWidth
                             implicitHeight: root.workspaceImplicitHeight
@@ -179,8 +261,9 @@ Item {
                         return ToplevelManager.toplevels.values.filter((toplevel) => {
                             const address = `0x${toplevel.HyprlandToplevel?.address}`
                             var win = windowByAddress[address]
+                            const onThisMonitor = (win?.monitor === root.monitor.id)
                             const inWorkspaceGroup = (root.workspaceGroup * root.workspacesShown < win?.workspace?.id && win?.workspace?.id <= (root.workspaceGroup + 1) * root.workspacesShown)
-                            return inWorkspaceGroup;
+                            return onThisMonitor && inWorkspaceGroup;
                         })
                     }
                 }
@@ -253,6 +336,7 @@ Item {
                         drag.target: parent
                         onPressed: (mouse) => {
                             root.draggingFromWorkspace = windowData?.workspace.id
+                            OverviewDnd.startDrag(window.windowData?.address, windowData?.workspace.id, root.monitor.name)
                             window.pressed = true
                             window.Drag.active = true
                             window.Drag.source = window
@@ -262,10 +346,34 @@ Item {
                         }
                         onReleased: {
                             const targetWorkspace = root.draggingTargetWorkspace
+                            const crossTarget = (OverviewDnd.hoveredTarget && OverviewDnd.hoveredTarget.monitor !== root.monitor.name)
+                                ? OverviewDnd.hoveredTarget : null
                             window.pressed = false
                             window.Drag.active = false
                             root.draggingFromWorkspace = -1
-                            if (targetWorkspace !== -1 && targetWorkspace !== windowData?.workspace.id) {
+                            OverviewDnd.endDrag()
+                            if (crossTarget) {
+                                // Drop on another monitor's overview panel
+                                const tMon = HyprlandData.monitors.find(m => m.name === crossTarget.monitor)
+                                if (tMon && window.windowData?.address) {
+                                    const arg = `window="address:${window.windowData.address}",workspace=${crossTarget.workspace},monitor="${crossTarget.monitor}"`
+                                    Hyprland.dispatch(`hl.dsp.window.move({${arg},follow=false})`)
+                                    if (windowData?.floating) {
+                                        const reserved = tMon.reserved ?? [0, 0, 0, 0]
+                                        const logicalW = ((tMon.transform % 2 === 1)
+                                            ? (tMon.height - reserved[0] - reserved[2])
+                                            : (tMon.width - reserved[0] - reserved[2])) / tMon.scale
+                                        const logicalH = ((tMon.transform % 2 === 1)
+                                            ? (tMon.width - reserved[1] - reserved[3])
+                                            : (tMon.height - reserved[1] - reserved[3])) / tMon.scale
+                                        const exactX = Math.round(tMon.x + reserved[0] + crossTarget.pctX / 100 * logicalW)
+                                        const exactY = Math.round(tMon.y + reserved[1] + crossTarget.pctY / 100 * logicalH)
+                                        Hyprland.dispatch(`hl.dsp.window.move({window="address:${window.windowData.address}",x=${exactX},y=${exactY}})`)
+                                    }
+                                }
+                                updateWindowPosition.restart()
+                            }
+                            else if (targetWorkspace !== -1 && targetWorkspace !== windowData?.workspace.id) {
                                 Hyprland.dispatch(`hl.dsp.window.move({window="address:${window.windowData?.address}",workspace=${targetWorkspace},follow=false})`)
                                 updateWindowPosition.restart()
                             }
@@ -282,6 +390,14 @@ Item {
                                 const exactY = Math.round((root.monitorData?.y ?? 0) + reserved[1] + percentageY / 100 * root.workspaceImplicitHeight * scaleFix)
                                 Hyprland.dispatch(`hl.dsp.window.move({window="address:${window.windowData?.address}",x=${exactX},y=${exactY}})`)
                             }
+                        }
+                        onCanceled: {
+                            window.pressed = false
+                            window.Drag.active = false
+                            root.draggingFromWorkspace = -1
+                            root.draggingTargetWorkspace = -1
+                            OverviewDnd.endDrag()
+                            updateWindowPosition.restart()
                         }
                         onClicked: (event) => {
                             if (!windowData) return;

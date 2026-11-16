@@ -2,16 +2,98 @@ pragma Singleton
 
 import qs.modules.common
 import qs.modules.common.functions
+import QtQuick
 import Quickshell
+import Quickshell.Io
 
 /**
  * - Eases fuzzy searching for applications by name
  * - Guesses icon name for window class name
+ * - Resolves window icons to file:// URLs (see windowIconSource)
  */
 Singleton {
     id: root
     property bool sloppySearch: Config.options?.search.sloppy ?? false
     property real scoreThreshold: 0.2
+
+    /**
+     * Bumped ~once a second for the first 8s after each engine (re)load.
+     * DesktopEntries.byId() is a non-reactive Q_INVOKABLE and returns null
+     * until the entries scan finishes, so icon bindings read this property to
+     * re-evaluate once guesses improve (e.g. "org.mozilla.Thunderbird" →
+     * "thunderbird" via the entry's icon key).
+     */
+    property int entriesGeneration: 0
+    Timer {
+        running: root.entriesGeneration < 8
+        interval: 1000
+        repeat: true
+        onTriggered: root.entriesGeneration++
+    }
+
+    // --- Window icon resolution (QIcon-free) ---
+    // On this quickshell build (0.3.2.r11.g9b0f339 + Qt 6.12.0-3), QIcon::
+    // fromTheme goes per-name flaky after the first engine reload — the first
+    // engine of a fresh process resolves fine, later engines miss common
+    // hicolor icons (kitty, application-x-executable, even image-missing).
+    // Therefore window icons NEVER go through QIcon: we locate the icon file
+    // on disk (cached per name) and serve it as a file:// URL, which
+    // Quickshell's IconImage (a plain Image alias) renders directly.
+    property var _resolvedIconFiles: ({}) // icon name -> absolute file path
+    property var _findQueue: []
+
+    function windowIconSource(windowClass) {
+        const generation = AppSearch.entriesGeneration; // re-run while entries settle
+        const guessed = AppSearch.guessIcon(windowClass);
+        if (guessed === "image-missing") return "";
+        const file = root._resolvedIconFiles[guessed];
+        if (file === undefined) root.resolveIconFile(guessed);
+        return file ? "file://" + file : "";
+    }
+
+    function resolveIconFile(name) {
+        const safe = name.replace(/[^a-zA-Z0-9._-]/g, "");
+        if (!safe || root._resolvedIconFiles[safe] !== undefined || root._findQueue.includes(safe)) return;
+        root._findQueue = [...root._findQueue, safe];
+        root.drainFindQueue();
+    }
+
+    function drainFindQueue() {
+        if (findProc.running || root._findQueue.length === 0) return;
+        const name = root._findQueue[0];
+        findProc.name = name;
+        findProc.command = ["bash", "-c",
+            `find "$HOME/.local/share/icons/hicolor" /usr/share/icons/hicolor /usr/share/icons/Adwaita /usr/share/pixmaps -maxdepth 4 \\( -name '${name}.svg' -o -name '${name}.svgz' -o -name '${name}.png' -o -name '${name}.xpm' \\) -print 2>/dev/null`];
+        findProc.running = true;
+    }
+
+    function _pickIconFile(output) {
+        const files = output.trim().split("\n").filter(f => f.length > 0);
+        if (files.length === 0) return "";
+        const svg = files.find(f => f.endsWith(".svg") || f.endsWith(".svgz")); // scales best
+        if (svg) return svg;
+        return files.reduce((best, f) => { // prefer the largest size directory
+            const sizeOf = p => (p.match(/\/(\d+)x\1\//) ?? [])[1] ?? "0";
+            return (parseInt(sizeOf(f)) > parseInt(sizeOf(best))) ? f : best;
+        }, files[0]);
+    }
+
+    Process {
+        id: findProc
+        property string name: ""
+        command: []
+        stdout: StdioCollector {
+            id: findCollector
+            onStreamFinished: {
+                const map = {};
+                for (const k in root._resolvedIconFiles) map[k] = root._resolvedIconFiles[k];
+                map[findProc.name] = root._pickIconFile(findCollector.text);
+                root._resolvedIconFiles = map;
+                root._findQueue = root._findQueue.filter(n => n !== findProc.name);
+                root.drainFindQueue();
+            }
+        }
+    }
     property var substitutions: ({
         "code-url-handler": "visual-studio-code",
         "Code": "visual-studio-code",

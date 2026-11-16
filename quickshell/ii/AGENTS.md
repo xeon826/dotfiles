@@ -48,6 +48,43 @@ Super+R still opens the grid overview.
 - The panel window has no fixed `screen`: it opens on the focused monitor.
 
 
+## Overview grid (`modules/ii/overview/`)
+
+Super+R (`quickshell:overviewWorkspacesToggle`) opens one panel per monitor
+(`Variants` over `Quickshell.screens` in `Overview.qml`; instance registry on
+the Scope for IPC-driven search text). Each panel shows its own workspace
+group and only its own windows — the model filter checks `win.monitor ===
+monitor.id`; special workspaces (no `workspace.id` in 0.57) stay excluded.
+The search bar renders only on the focused monitor's panel.
+
+Cross-monitor drag & drop: QML DropAreas are scene-local, so
+`services/OverviewDnd.qml` polls `hyprctl cursorpos -j` (25ms) while a pill
+is dragged; non-origin monitors hit-test their cells and publish
+`hoveredTarget {monitor, workspace, pctX, pctY}`; on release the origin
+dispatches `hl.dsp.window.move({window=..., workspace=N, monitor="DP-X",
+follow=false})` (workspace+monitor combo verified on 0.57), then a second
+`{window=..., x=, y=}` dispatch for floating windows — the Lua dsp does NOT
+accept x/y together with workspace/monitor. Gotchas: `hyprctl monitors -j`
+width/height are physical pixels (logical = /scale), but window `at[]` and
+`cursorpos` are already logical; cells register themselves with the widget
+root for cursor hit-testing (`Component.onDestruction`, not `onDestroyed`).
+
+Window icons (`OverviewWindow.iconPath`, `Workspaces.mainAppIconSource`) go
+through `AppSearch.windowIconSource()`: guessIcon for the name, then a cached
+filesystem lookup (`find` over hicolor/Adwaita/pixmaps, svg preferred) served
+as a `file://` URL — **never route them through `Quickshell.iconPath`/QIcon**.
+On this build (quickshell 0.3.2.r11.g9b0f339 + Qt 6.12.0-3), `QIcon::fromTheme`
+goes per-name flaky after every engine reload: the first engine of a fresh
+process resolves fine, later engines miss even stock hicolor icons (kitty,
+application-x-executable, image-missing) while others (thunderbird) survive —
+the 2026-11-16 red-cross saga. Rebuilding the binary does not fix it; the
+file:// resolver does. Misses return "" (icon hidden; bar shows dot/number) —
+never pass "image-missing" as a fallback there. `DesktopEntries.byId()` is
+non-reactive and null until the async scan completes, so `AppSearch.
+entriesGeneration` (8×1s bumps after each reload) re-runs icon bindings while
+guesses improve.
+
+
 ## Screen recording (`scripts/videos/record.sh`)
 
 wf-recorder 0.6.x on this 3-monitor setup (DP-1 rotated 270°, DP-3 scale 1.25):

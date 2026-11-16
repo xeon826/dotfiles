@@ -208,7 +208,11 @@ Item {
                     implicitWidth: workspaceButtonWidth
                     implicitHeight: workspaceButtonWidth
                     property var biggestWindow: HyprlandData.biggestWindowForWorkspace(button.workspaceValue)
-                    property var mainAppIconSource: Quickshell.iconPath(AppSearch.guessIcon(biggestWindow?.class), "image-missing")
+                    // AppSearch.windowIconSource: file:// URL (QIcon-free),
+                    // "" when unresolvable — dot/number shows instead of a
+                    // red-cross placeholder.
+                    property var mainAppIconSource: AppSearch.windowIconSource(biggestWindow?.class)
+                    property bool hasAppIcon: mainAppIconSource !== ""
 
                     StyledText { // Workspace number text
                         opacity: root.showNumbers
@@ -239,7 +243,7 @@ Item {
                         id: wsDot
                         opacity: (Config.options?.bar.workspaces.alwaysShowNumbers
                             || root.showNumbers
-                            || (Config.options?.bar.workspaces.showAppIcons && workspaceButtonBackground.biggestWindow)
+                            || (Config.options?.bar.workspaces.showAppIcons && workspaceButtonBackground.biggestWindow && workspaceButtonBackground.hasAppIcon)
                             ) ? 0 : 1
                         visible: opacity > 0
                         anchors.centerIn: parent
@@ -259,7 +263,7 @@ Item {
                         anchors.centerIn: parent
                         width: workspaceButtonWidth
                         height: workspaceButtonWidth
-                        opacity: !Config.options?.bar.workspaces.showAppIcons ? 0 :
+                        opacity: !Config.options?.bar.workspaces.showAppIcons || !workspaceButtonBackground.hasAppIcon ? 0 :
                             (workspaceButtonBackground.biggestWindow && !root.showNumbers && Config.options?.bar.workspaces.showAppIcons) ? 
                             1 : workspaceButtonBackground.biggestWindow ? workspaceIconOpacityShrinked : 0
                             visible: opacity > 0
