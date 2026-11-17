@@ -39,7 +39,10 @@ Scope {
             screen: modelData
             readonly property HyprlandMonitor monitor: Hyprland.monitorFor(panelWindow.screen)
 
-            property string searchingText: ""
+            // Mirrors the runner text of this panel's SearchWidget instance;
+            // unfocused panels have no instance (Loader) so this stays "",
+            // keeping their layout view visible while another monitor searches.
+            readonly property string searchingText: searchWidgetLoader.item ? searchWidgetLoader.item.searchingText : ""
             visible: GlobalStates.overviewOpen
 
             WlrLayershell.namespace: "quickshell:overview"
@@ -65,21 +68,26 @@ Scope {
             }
 
             function setSearchingText(text) {
-                searchWidget.setSearchingText(text);
-                searchWidget.focusFirstItem();
+                searchWidgetLoader.item?.setSearchingText(text);
+                searchWidgetLoader.item?.focusFirstItem();
             }
 
             Connections {
                 target: GlobalStates
                 function onOverviewOpenChanged() {
                     if (!GlobalStates.overviewOpen) {
-                        searchWidget.disableExpandAnimation();
+                        searchWidgetLoader.item?.disableExpandAnimation();
                         overviewScope.dontAutoCancelSearch = false;
                         GlobalFocusGrab.dismiss();
                     } else {
                         if (!overviewScope.dontAutoCancelSearch) {
-                            searchWidget.cancelSearch();
+                            searchWidgetLoader.item?.cancelSearch();
                         }
+                        // The compositor's keyboard may land on any panel; only
+                        // the focused monitor's panel has a runner — pull
+                        // keyboard to its input explicitly (callLater so the
+                        // window has mapped first).
+                        Qt.callLater(() => searchWidgetLoader.item?.focusSearchInput());
                         GlobalFocusGrab.addDismissable(panelWindow);
                     }
                 }
@@ -115,12 +123,16 @@ Scope {
                     }
                 }
 
-                SearchWidget {
-                    id: searchWidget
+                // Runner input lives only on the focused monitor's panel —
+                // other panels keep just the layout view. One runner also means
+                // one results rebuild per keystroke instead of one per monitor.
+                // Keep active independent of overviewOpen so IPC search prefixes
+                // (clipboard/emoji toggles) can prefill before the overview opens.
+                Loader {
+                    id: searchWidgetLoader
                     anchors.horizontalCenter: parent.horizontalCenter
-                    Synchronizer on searchingText {
-                        property alias source: panelWindow.searchingText
-                    }
+                    active: panelWindow.screen.name === (Hyprland.focusedMonitor?.name ?? "")
+                    sourceComponent: SearchWidget {}
                 }
 
                 Loader {

@@ -47,6 +47,14 @@ Item { // Wrapper
         LauncherSearch.query = text;
     }
 
+    // Only instantiated on the focused monitor's panel (Loader in Overview.qml).
+    // On focus change mid-query the runner migrates: text survives via the
+    // LauncherSearch.query binding, results need an explicit reseed.
+    Component.onCompleted: {
+        if (root.searchingText !== "")
+            resultModel.values = LauncherSearch.results.slice(0, root.typingResultLimit);
+    }
+
     Keys.onPressed: event => {
         // Prevent Esc and Backspace from registering
         if (event.key === Qt.Key_Escape)

@@ -96,7 +96,21 @@ Super+R (`quickshell:overviewWorkspacesToggle`) opens one panel per monitor
 the Scope for IPC-driven search text). Each panel shows its own workspace
 group and only its own windows — the model filter checks `win.monitor ===
 monitor.id`; special workspaces (no `workspace.id` in 0.57) stay excluded.
-The search bar renders only on the focused monitor's panel.
+The runner (`SearchWidget`) is instantiated only on the focused monitor's
+panel: a `Loader` in `Overview.qml` gated on `Hyprland.focusedMonitor` (perf:
+one results rebuild per keystroke instead of one per monitor; keep `active`
+independent of `overviewOpen` so IPC clipboard/emoji toggles can prefill a
+prefix before the overview opens). On focus change mid-query the runner
+migrates — text survives via the shared `LauncherSearch.query` binding,
+results reseed in `Component.onCompleted`, and the panel's `searchingText`
+resets on loader deactivation so stale text can't keep the layout view
+hidden. On open the focus grab may hand keyboard to any panel, so
+`Overview.qml` explicitly pulls focus to the runner input
+(`Qt.callLater(() => searchWidgetLoader.item?.focusSearchInput())`) — don't
+drop that line or the input starts unfocused. Gotcha: inside a Loader
+`sourceComponent`, a `property alias` referencing the enclosing panel's id
+fails to compile (`Invalid alias reference. Unable to find id`) — mirror
+panel state with plain bindings declared on the panel instead.
 
 Cross-monitor drag & drop: QML DropAreas are scene-local, so
 `services/OverviewDnd.qml` polls `hyprctl cursorpos -j` (25ms) while a pill
