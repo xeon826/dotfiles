@@ -201,7 +201,7 @@ PanelWindow {
     Process {
         id: checkRecordingProc
         running: isRecording
-        command: ["pidof", "wf-recorder"]
+        command: ["pidof", "gpu-screen-recorder"]
         onExited: (exitCode, exitStatus) => {
             root.preparationDone = !screenshotProc.running
             root.recordingShouldStop = (exitCode === 0);
@@ -279,9 +279,10 @@ PanelWindow {
         const screenshotDir = Config.options.screenSnip.savePath !== "" ? //
             Config.options.screenSnip.savePath : "";
         var screenshotAction = root.getScreenshotAction();
-        // wf-recorder -g validates regions against the output's global logical
-        // rect, so record actions need global logical coords (origin offset),
-        // while magick screenshot crops need monitor-local device px (scaled).
+        // gpu-screen-recorder -region takes WxH+X+Y in global logical coords
+        // (slurp-compatible positionally) and must lie within one monitor, so
+        // record actions need global logical coords (origin offset), while
+        // magick screenshot crops need monitor-local device px (scaled).
         const x = root.isRecording ? root.regionX + root.monitorOffsetX : root.regionX * root.monitorScale;
         const y = root.isRecording ? root.regionY + root.monitorOffsetY : root.regionY * root.monitorScale;
         const w = root.isRecording ? root.regionWidth : root.regionWidth * root.monitorScale;

@@ -148,30 +148,24 @@ guesses improve.
 
 ## Screen recording (`scripts/videos/record.sh`)
 
-wf-recorder 0.6.x on this 3-monitor setup (DP-1 rotated 270°, DP-3 scale 1.25):
+gpu-screen-recorder 6.1.7 (official `extra` repo) on this 3-monitor setup (DP-1 rotated 270°, DP-3 scale 1.25). Final choice Nov 2026 after two failures: wf-recorder wedges Hyprland 0.57.0 at 100% CPU (expired screencopy-session timer, twice on this box), and wl-screenrec is hard-blocked on NVIDIA (dmabuf-only, needs LINEAR modifiers + XRGB fourccs; Hyprland/NVIDIA offers only NVIDIA_BLOCK_LINEAR — and `hl.env("AQ_NO_MODIFIERS")` is provably too late, the DRM backend initializes before config parsing).
 
-- `-o` is always required; without it wf-recorder prompts interactively and
-  detached runs (no stdin) die instantly, producing no file.
-- `-g/--geometry <x,y WxH>` expects **global logical** coords (slurp-style): it
-  validates the region against the output's global rect and fails silently to
-  full-output capture on mismatch. Monitor-local or scaled coords will not crop.
-- The quickshell region selector therefore sends global logical coords
-  (`RegionSelection.qml` offsets by `monitorOffset`) plus `--screen <name>`;
-  record.sh uses `--screen` for `-o` directly, and `getregionmonitor` only for
-  the slurp/CLI path. Screenshot crops keep monitor-local scaled coords.
-- Encoding uses `-c h264_nvenc -r 60` (GPU NVENC, constant 60 fps) on all four
-  wf-recorder invocations — ffmpeg on this box has h264_nvenc.
-- Audio must be exactly one source: `pactl get-default-sink.monitor` — never
-  enumerate all monitor sources (AudioRelay/pw-loopback add several).
-- Recordings of transformed (rotated) monitors come out transposed with no
-  rotation metadata (DP-1 → e.g. 400x500 for a 500x400 region). wf-recorder
-  0.6.0's `-F transpose=…` is unreliable here (transpose=2 produced
-  byte-identical output). Unfixed; would need post-encode rotation metadata.
+gsr captures monitors at the **KMS/DRM level** via the setcap'd `gsr-kms-server` helper (`cap_sys_admin`, no password prompt) — it never touches Hyprland's capture protocols, so it is immune to the CScreenshareManager wedges. Verified: Hyprland utime stays ~0 during recording (vs 95–97/s in both wedge states). Encodes NVENC h264 by default.
+
+- Fullscreen: `-w <monitor> -f 60`. Region: `-w region -region WxH+X+Y` — coords are global logical (same positional convention as slurp) and **must lie within one monitor** (cross-monitor regions exit 51; record.sh converts slurp-format `X,Y WxH` → `WxH+X+Y` into `$gsrRegion`). Output is the physical-px crop (500x400 logical at scale 1.25 → 626x500, rounded even) — crisper than requested, fine for playback.
+- The region's monitor (`--screen` from the selector, or `getregionmonitor` for slurp/CLI) is only used for the indicator state file, not the recorder.
+- The quickshell region selector sends global logical coords (`RegionSelection.qml` offsets by `monitorOffset`); screenshot crops keep monitor-local scaled coords.
+- Audio: `-a "$(pactl get-default-sink).monitor"` — exactly one source; never enumerate all monitor sources (AudioRelay/pw-loopback add several).
+- Stop = SIGINT: re-running record.sh bare does `pkill -INT -f '^gpu-screen-recorder'` — clean MP4 finalize, exit 0. The `pidof`/`pgrep` name lives in three places — record.sh, `services/ScreenRecorder.qml`, `RegionSelection.qml` (`checkRecordingProc`) — keep in sync.
+- `start_recorder()` wrapper: recorder exits <2s → state file removed + "Recording failed" notification (catches gsr's exit-51 bad-region case).
+- First gsr install wants one reboot for `gsr-nvidia.conf` (CUDA suspend fix; pacman installs it). `gpu-screen-recorder-ui` (optional, not installed) adds ShadowPlay-style overlay/hotkeys/replay.
+- Recordings of rotated DP-1 not yet verified with gsr (wf-recorder produced transposed output; KMS capture should be rotation-correct since it grabs scanout directly, but check the first DP-1 recording).
+- History: wf-recorder and wl-screenrec are both still installed but unused — **don't launch wf-recorder** (re-wedges the compositor). wl-screenrec could be revived only by setting `AQ_NO_MODIFIERS=1` in the pre-launch session environment (e.g. `~/.config/environment.d/` or shell profile — NOT `hl.env`), at the cost of compositor-wide linear buffers.
 - `snip()` dismisses the selector on every monitor for all actions. The
   dashed-border indicator is `RecordingIndicator.qml` (per-screen, click-through),
-  driven by `services/ScreenRecorder.qml`, which polls `pidof wf-recorder` and
+  driven by `services/ScreenRecorder.qml`, which polls `pidof gpu-screen-recorder` and
   `$XDG_RUNTIME_DIR/quickshell-recorder-state.json` — the state file that
   record.sh writes on start (`write_state`: monitor + global logical region,
-  whole monitor rect for fullscreen) and removes on stop. wf-recorder is
+  whole monitor rect for fullscreen) and removes on stop. gpu-screen-recorder is
   stopped by re-running record.sh bare (pgrep branch) — overlay Stop button,
   Super+Shift+Ctrl+R (`record.sh --stop`), or any record trigger while live.

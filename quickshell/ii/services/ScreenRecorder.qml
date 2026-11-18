@@ -6,9 +6,9 @@ import Quickshell
 import Quickshell.Io
 
 /**
- * Screen recording state (wf-recorder), polled via pidof. The recording
- * region/monitor is published by record.sh as a JSON state file so every
- * start path (selector, keybinds, CLI) reports the same info.
+ * Screen recording state (gpu-screen-recorder), polled via pidof. The
+ * recording region/monitor is published by record.sh as a JSON state file
+ * so every start path (selector, keybinds, CLI) reports the same info.
  */
 Singleton {
     id: root
@@ -36,7 +36,7 @@ Singleton {
 
     Process {
         id: checkProc
-        command: ["pidof", "wf-recorder"]
+        command: ["pidof", "gpu-screen-recorder"]
         onExited: (exitCode, exitStatus) => root.recording = (exitCode === 0)
     }
 

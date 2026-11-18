@@ -19,17 +19,17 @@ getdate() {
 }
 getaudiooutput() {
     # Exactly one source: the default sink's monitor. Enumerating all monitor
-    # sources expands into extra argv tokens and wf-recorder exits instantly.
+    # sources would feed gsr extra/invalid -a audio inputs.
     echo "$(pactl get-default-sink).monitor"
 }
 getactivemonitor() {
     hyprctl monitors -j | jq -r '.[] | select(.focused == true) | .name'
 }
 getregionmonitor() {
-    # wf-recorder 0.6.x prompts interactively for an output on multi-monitor
-    # setups unless -o is given; detached runs have no stdin and die instantly.
-    # Pick the monitor containing the region origin. Region is "X,Y WxH" in
-    # global logical coords; hyprctl width/height are physical px, so /scale.
+    # Only used to publish the indicator state file — the recorder itself gets
+    # the region via -g (slurp-compatible, global logical) and needs no output.
+    # Region is "X,Y WxH" in global logical coords; hyprctl width/height are
+    # physical px, so /scale.
     local rx ry monitor
     rx="${1%%,*}"
     ry="${1#*,}"
@@ -43,6 +43,18 @@ write_state() {
     # recording indicator; the ScreenRecorder service polls this file.
     jq -n --arg m "$1" --argjson x "$2" --argjson y "$3" --argjson w "$4" --argjson h "$5" \
         '{monitor:$m,x:$x,y:$y,w:$w,h:$h}' > "$STATE_FILE" 2>/dev/null
+}
+
+start_recorder() {
+    # The recorder dies fast on capture errors (gsr exits 51 when a region
+    # doesn't lie within one monitor). Detect that, clean up the indicator
+    # state and say so instead of a silent no-op.
+    local t0=$SECONDS
+    "$@"
+    if (( SECONDS - t0 < 2 )); then
+        rm -f "$STATE_FILE"
+        notify-send "Recording failed" "Recorder exited immediately (bad region or capture setup)" -a 'Recorder' & disown
+    fi
 }
 
 mkdir -p "$RECORDING_DIR"
@@ -77,10 +89,10 @@ for ((i=0;i<${#ARGS[@]};i++)); do
     fi
 done
 
-if pgrep wf-recorder > /dev/null; then
+if pgrep -f '^gpu-screen-recorder' > /dev/null; then
     rm -f "$STATE_FILE"
     notify-send "Recording Stopped" "Stopped" -a 'Recorder' &
-    pkill wf-recorder &
+    pkill -INT -f '^gpu-screen-recorder' &
 elif [[ $STOP_FLAG -eq 1 ]]; then
     rm -f "$STATE_FILE"
     notify-send "Recorder" "No recording in progress" -a 'Recorder' & disown
@@ -95,9 +107,9 @@ else
         write_state "$fullscreenMonitor" "$fx" "$fy" "$fw" "$fh"
         notify-send "Starting recording" 'recording_'"$(getdate)"'.mp4' -a 'Recorder' & disown
         if [[ $SOUND_FLAG -eq 1 ]]; then
-            wf-recorder -o "$fullscreenMonitor" -c h264_nvenc -r 60 --pixel-format yuv420p -f './recording_'"$(getdate)"'.mp4' --audio="$(getaudiooutput)"
+            start_recorder gpu-screen-recorder -w "$fullscreenMonitor" -f 60 -o './recording_'"$(getdate)"'.mp4' -a "$(getaudiooutput)"
         else
-            wf-recorder -o "$fullscreenMonitor" -c h264_nvenc -r 60 --pixel-format yuv420p -f './recording_'"$(getdate)"'.mp4'
+            start_recorder gpu-screen-recorder -w "$fullscreenMonitor" -f 60 -o './recording_'"$(getdate)"'.mp4'
         fi
     else
         # If a manual region was provided via --region, use it; otherwise run slurp as before.
@@ -124,10 +136,14 @@ else
         rx="${regionXY%%,*}"; ry="${regionXY#*,}"
         rw="${wh%%x*}"; rh="${wh#*x}"
         write_state "$regionMonitor" "$rx" "$ry" "$rw" "$rh"
+        # gsr wants X11-style geometry WxH+X+Y (global logical, same coords as
+        # slurp); must lie within one monitor — cross-monitor regions exit 51
+        # and get caught by start_recorder.
+        gsrRegion="${wh}+${regionXY/,/+}"
         if [[ $SOUND_FLAG -eq 1 ]]; then
-            wf-recorder -o "$regionMonitor" -c h264_nvenc -r 60 --pixel-format yuv420p -f './recording_'"$(getdate)"'.mp4' --geometry "$region" --audio="$(getaudiooutput)"
+            start_recorder gpu-screen-recorder -w region -region "$gsrRegion" -f 60 -o './recording_'"$(getdate)"'.mp4' -a "$(getaudiooutput)"
         else
-            wf-recorder -o "$regionMonitor" -c h264_nvenc -r 60 --pixel-format yuv420p -f './recording_'"$(getdate)"'.mp4' --geometry "$region"
+            start_recorder gpu-screen-recorder -w region -region "$gsrRegion" -f 60 -o './recording_'"$(getdate)"'.mp4'
         fi
     fi
 fi
