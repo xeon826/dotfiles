@@ -30,6 +30,35 @@ Scope {
         panel.setSearchingText(text);
     }
 
+    // Keyboard race: the focus grab may park keyboard on a runner-less panel,
+    // leaving the runner input unfocused (the "have to click to focus" bug).
+    // While the overview is open, keep pulling keyboard to the focused panel's
+    // runner until something inside that panel actually holds activeFocus.
+    // The hasActive guard means it never fights the user once any overview
+    // item (input, result row) is focused. Exclusive keyboardFocus is NOT an
+    // alternative: it clears the HyprlandFocusGrab (onCleared -> dismiss).
+    Timer {
+        id: focusRetryTimer
+        interval: 120
+        repeat: true
+        triggeredOnStart: true
+        property int remaining: 0
+        function kick() {
+            remaining = 12;
+            restart();
+        }
+        onTriggered: {
+            const panel = overviewScope.focusedPanel();
+            if (!GlobalStates.overviewOpen || !panel || GlobalFocusGrab.hasActive(panel.contentItem)) {
+                stop();
+                return;
+            }
+            panel.focusRunner();
+            remaining -= 1;
+            if (remaining <= 0) stop();
+        }
+    }
+
     Variants {
         model: Quickshell.screens
 
@@ -72,6 +101,10 @@ Scope {
                 searchWidgetLoader.item?.focusFirstItem();
             }
 
+            function focusRunner() {
+                searchWidgetLoader.item?.focusSearchInput();
+            }
+
             Connections {
                 target: GlobalStates
                 function onOverviewOpenChanged() {
@@ -83,11 +116,8 @@ Scope {
                         if (!overviewScope.dontAutoCancelSearch) {
                             searchWidgetLoader.item?.cancelSearch();
                         }
-                        // The compositor's keyboard may land on any panel; only
-                        // the focused monitor's panel has a runner — pull
-                        // keyboard to its input explicitly (callLater so the
-                        // window has mapped first).
-                        Qt.callLater(() => searchWidgetLoader.item?.focusSearchInput());
+                        // Immediate attempt + bounded retries (see focusRetryTimer).
+                        focusRetryTimer.kick();
                         GlobalFocusGrab.addDismissable(panelWindow);
                     }
                 }

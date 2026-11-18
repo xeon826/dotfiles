@@ -104,13 +104,19 @@ prefix before the overview opens). On focus change mid-query the runner
 migrates — text survives via the shared `LauncherSearch.query` binding,
 results reseed in `Component.onCompleted`, and the panel's `searchingText`
 resets on loader deactivation so stale text can't keep the layout view
-hidden. On open the focus grab may hand keyboard to any panel, so
-`Overview.qml` explicitly pulls focus to the runner input
-(`Qt.callLater(() => searchWidgetLoader.item?.focusSearchInput())`) — don't
-drop that line or the input starts unfocused. Gotcha: inside a Loader
+hidden. On open the focus grab may park keyboard on a runner-less panel, so
+`Overview.qml` starts `focusRetryTimer`: every 120ms (max ~20 ticks) it pulls
+keyboard to the focused panel's runner (`panel.focusRunner()`) until done —
+don't drop that or the input sometimes starts unfocused. Note
+`GlobalFocusGrab.hasActive()` has been observed returning false even when
+focus IS inside the panel, so the timer reliably exhausts its attempts
+(harmless no-ops). Gotcha: inside a Loader
 `sourceComponent`, a `property alias` referencing the enclosing panel's id
 fails to compile (`Invalid alias reference. Unable to find id`) — mirror
-panel state with plain bindings declared on the panel instead.
+panel state with plain bindings declared on the panel instead. Also:
+`WlrKeyboardFocus.Exclusive` on the overview panels clears the
+HyprlandFocusGrab (`onCleared` → dismiss) — the overview self-closes; keep
+keyboard focus `OnDemand`.
 
 Cross-monitor drag & drop: QML DropAreas are scene-local, so
 `services/OverviewDnd.qml` polls `hyprctl cursorpos -j` (25ms) while a pill

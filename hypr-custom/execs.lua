@@ -12,6 +12,5 @@ hl.on("hyprland.start", function()
     -- VNC server on the center monitor (wayvnc grabs one output; -o keeps the
     -- pin stable across monitor-mode switches; switch live with `wayvnc ctl`)
     hl.exec_cmd("wayvnc -o DP-3 0.0.0.0 5900")
-    hl.exec_cmd("~/.local/bin/open-whisper")
     hl.exec_cmd("keepassxc ~/Passwords.kdbx --keyfile ~/Documents/keyfile.keyx")
 end)
