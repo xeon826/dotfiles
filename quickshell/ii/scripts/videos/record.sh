@@ -95,9 +95,9 @@ else
         write_state "$fullscreenMonitor" "$fx" "$fy" "$fw" "$fh"
         notify-send "Starting recording" 'recording_'"$(getdate)"'.mp4' -a 'Recorder' & disown
         if [[ $SOUND_FLAG -eq 1 ]]; then
-            wf-recorder -o "$fullscreenMonitor" --pixel-format yuv420p -f './recording_'"$(getdate)"'.mp4' --audio="$(getaudiooutput)"
+            wf-recorder -o "$fullscreenMonitor" -c h264_nvenc -r 60 --pixel-format yuv420p -f './recording_'"$(getdate)"'.mp4' --audio="$(getaudiooutput)"
         else
-            wf-recorder -o "$fullscreenMonitor" --pixel-format yuv420p -f './recording_'"$(getdate)"'.mp4'
+            wf-recorder -o "$fullscreenMonitor" -c h264_nvenc -r 60 --pixel-format yuv420p -f './recording_'"$(getdate)"'.mp4'
         fi
     else
         # If a manual region was provided via --region, use it; otherwise run slurp as before.
@@ -125,9 +125,9 @@ else
         rw="${wh%%x*}"; rh="${wh#*x}"
         write_state "$regionMonitor" "$rx" "$ry" "$rw" "$rh"
         if [[ $SOUND_FLAG -eq 1 ]]; then
-            wf-recorder -o "$regionMonitor" --pixel-format yuv420p -f './recording_'"$(getdate)"'.mp4' --geometry "$region" --audio="$(getaudiooutput)"
+            wf-recorder -o "$regionMonitor" -c h264_nvenc -r 60 --pixel-format yuv420p -f './recording_'"$(getdate)"'.mp4' --geometry "$region" --audio="$(getaudiooutput)"
         else
-            wf-recorder -o "$regionMonitor" --pixel-format yuv420p -f './recording_'"$(getdate)"'.mp4' --geometry "$region"
+            wf-recorder -o "$regionMonitor" -c h264_nvenc -r 60 --pixel-format yuv420p -f './recording_'"$(getdate)"'.mp4' --geometry "$region"
         fi
     fi
 fi

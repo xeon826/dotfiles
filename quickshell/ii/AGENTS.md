@@ -159,6 +159,8 @@ wf-recorder 0.6.x on this 3-monitor setup (DP-1 rotated 270°, DP-3 scale 1.25):
   (`RegionSelection.qml` offsets by `monitorOffset`) plus `--screen <name>`;
   record.sh uses `--screen` for `-o` directly, and `getregionmonitor` only for
   the slurp/CLI path. Screenshot crops keep monitor-local scaled coords.
+- Encoding uses `-c h264_nvenc -r 60` (GPU NVENC, constant 60 fps) on all four
+  wf-recorder invocations — ffmpeg on this box has h264_nvenc.
 - Audio must be exactly one source: `pactl get-default-sink.monitor` — never
   enumerate all monitor sources (AudioRelay/pw-loopback add several).
 - Recordings of transformed (rotated) monitors come out transposed with no
