@@ -8,3 +8,7 @@ hl.workspace_rule({
     gaps_out = 30,
 })
 hl.workspace_rule({ workspace = "special:browser", gaps_out = 30 })
+
+-- Window list sidebar (Super+Tab): matches the sideleft/sideright slide rules
+-- in framework rules.lua; namespace is set in quickshell WindowList.qml
+hl.layer_rule({ match = { namespace = "quickshell:windowList" }, animation = "slide left" })

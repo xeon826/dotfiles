@@ -46,6 +46,14 @@ between sections). Super+Tab previously opened the overview grid — it is
 rebound in `custom/keybinds.lua` via `hl.unbind("SUPER + TAB")` + rebind;
 Super+R still opens the grid overview.
 
+- Slide-in animation is a Hyprland layer rule in `~/dotfiles/hypr-custom/rules.lua`
+  (`quickshell:windowList → animation "slide left"`), same mechanism as the
+  framework's `quickshell:sidebarRight`/`sidebarLeft` rules — not QML code.
+- The panel uses `exclusiveZone: 0` (not `ExclusionMode.Ignore`) so the
+  compositor pushes it below the bar's reserved zone like the sidebars; Escape
+  works because `windowListBackground` binds `focus: GlobalStates.windowListOpen`
+  (without active focus the `Keys.onPressed` never fires).
+
 - **Hyprland 0.57 special workspaces have NO `workspace.id`** in
   `hyprctl clients -j` / `hyprctl workspaces -j` — only
   `address` (`special:browser`) + `name`. Old code assuming negative ids

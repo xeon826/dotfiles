@@ -20,7 +20,8 @@ Scope { // Scope
             GlobalStates.windowListOpen = false;
         }
 
-        exclusionMode: ExclusionMode.Ignore
+        exclusionMode: ExclusionMode.Normal
+        exclusiveZone: 0
         implicitWidth: Appearance.sizes.sidebarWidth + Appearance.sizes.elevationMargin
         WlrLayershell.namespace: "quickshell:windowList"
         WlrLayershell.layer: WlrLayer.Top
@@ -59,6 +60,7 @@ Scope { // Scope
         }
         Rectangle {
             id: windowListBackground
+            focus: GlobalStates.windowListOpen
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.bottom: parent.bottom

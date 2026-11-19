@@ -138,11 +138,15 @@ Item {
 
                                     Image {
                                         id: rowIcon
+                                        // file:// resolver (QIcon-free) — Quickshell.iconPath
+                                        // goes per-name flaky after engine reloads
+                                        readonly property string iconSource: AppSearch.windowIconSource(windowRow.modelData.class ?? "")
+                                        visible: iconSource !== ""
                                         width: rowContent.iconSize
                                         height: rowContent.iconSize
                                         anchors.verticalCenter: parent.verticalCenter
                                         anchors.left: parent.left
-                                        source: Quickshell.iconPath(AppSearch.guessIcon(windowRow.modelData.class), "image-missing")
+                                        source: iconSource
                                         asynchronous: true
                                         fillMode: Image.PreserveAspectFit
                                         smooth: true
