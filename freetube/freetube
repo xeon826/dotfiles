@@ -1,0 +1,18 @@
+#!/bin/sh
+# Launch FreeTube inside the IPv4-only 'freetube4' network namespace.
+# Why: YouTube rate-limits/bans IPv6 addresses for logged-out API clients
+# (FreeTubeApp/FreeTube#7906); residential IPv4 is unaffected.
+# Elevation goes through /etc/sudoers.d/freetube-netns (NOPASSWD, scoped),
+# NOT the opencode-sudo plugin — scripts don't get plugin rewrites.
+NETNS=freetube4
+
+if ! ip netns list 2>/dev/null | grep -q "^$NETNS "; then
+    sudo -n /usr/local/sbin/freetube4-netns.sh up
+fi
+
+exec sudo -n /usr/local/sbin/freetube4-launch \
+    ${DISPLAY:+DISPLAY=$DISPLAY} \
+    ${WAYLAND_DISPLAY:+WAYLAND_DISPLAY=$WAYLAND_DISPLAY} \
+    ${XDG_RUNTIME_DIR:+XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR} \
+    ${XAUTHORITY:+XAUTHORITY=$XAUTHORITY} \
+    "$@"

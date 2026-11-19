@@ -1,0 +1,3 @@
+# FreeTube IPv4-only namespace launcher (YouTube IPv6 bans, FreeTubeApp/FreeTube#7906).
+# Scoped root: entering the freetube4 netns and (re)creating it. Managed in dotfiles.
+dan ALL=(root) NOPASSWD: /usr/local/sbin/freetube4-launch, /usr/local/sbin/freetube4-netns.sh up

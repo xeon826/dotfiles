@@ -1,0 +1,34 @@
+#!/bin/bash
+# Fixed root helper: enter the IPv4-only 'freetube4' namespace, drop to user dan,
+# and run FreeTube. Called via sudo (see /etc/sudoers.d/freetube-netns).
+# Leading KEY=VALUE args (before "--") are injected into the app environment;
+# remaining args are forwarded to FreeTube.
+set -euo pipefail
+
+NS=freetube4
+USER_NAME=dan
+USER_UID=$(id -u dan)
+USER_GID=$(id -g dan)
+APP=/home/dan/.local/opt/freetube/freetube
+
+# Args matching KEY=VALUE (no leading dash) set app env; everything else is
+# forwarded to FreeTube (its CLI flags all start with -).
+ENV_ARGS=()
+APP_ARGS=()
+for a in "$@"; do
+  if [[ $a == *=* && $a != -* ]]; then
+    ENV_ARGS+=("$a")
+  else
+    APP_ARGS+=("$a")
+  fi
+done
+
+exec ip netns exec "$NS" env \
+  HOME=/home/dan \
+  USER=dan \
+  LOGNAME=dan \
+  XDG_RUNTIME_DIR="/run/user/$USER_UID" \
+  DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$USER_UID/bus" \
+  "${ENV_ARGS[@]}" \
+  setpriv --reuid "$USER_NAME" --regid "$USER_GID" --init-groups \
+  "$APP" --ozone-platform=x11 "${APP_ARGS[@]}"

@@ -45,6 +45,9 @@
     ~/.local/bin/mkrep: mkrep.py
     ~/.local/bin/helium: helium-wrapper.sh
     ~/.local/share/applications/helium.desktop: helium.desktop
+    ~/.local/bin/freetube: freetube/freetube
+    ~/.local/bin/freetube-update: freetube/freetube-update
+    ~/.local/share/applications/freetube.desktop: freetube/freetube.desktop
     ~/.Xmodmap: Xmodmap
     ~/.config/lazygit/config.yml: lazygit.yml
     ~/.config/systemd/user/everos.service: systemd/everos.service
@@ -61,3 +64,16 @@
 
 - shell:
     - [./Tokyonight-GTK-Theme/install.sh -d ~/.config/gtk-4.0 -c dark -l, Installing gtk 4.0 theme]
+
+- shell:
+    - command: |
+        sudo install -m 755 freetube/freetube4-netns.sh /usr/local/sbin/freetube4-netns.sh
+        sudo install -m 755 freetube/freetube4-launch /usr/local/sbin/freetube4-launch
+        sudo install -m 440 freetube/freetube-netns-sudoers /etc/sudoers.d/freetube-netns
+        sudo visudo -cf /etc/sudoers.d/freetube-netns
+        sudo install -m 644 freetube/freetube4-netns.service /etc/systemd/system/freetube4-netns.service
+        sudo systemctl daemon-reload
+        sudo systemctl enable --now freetube4-netns.service
+      description: FreeTube IPv4-netns (root scripts, sudoers rule, system unit)
+      stdin: true
+      stdout: true

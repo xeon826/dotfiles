@@ -1,0 +1,45 @@
+#!/bin/bash
+# Update the manually-extracted FreeTube in ~/.local/opt/freetube.
+# Downloads the latest GitHub release deb, verifies it runs, swaps dirs.
+# Keeps one previous generation at ~/.local/opt/freetube.prev.
+set -euo pipefail
+
+DATA="$HOME/.local/opt"
+CUR_DIR="$DATA/freetube"
+
+api="https://api.github.com/repos/FreeTubeApp/FreeTube/releases?per_page=1"
+json=$(curl -sf "$api") || { echo "error: GitHub API fetch failed (rate limit?)"; exit 1; }
+tag=$(echo "$json" | python3 -c 'import json,sys; print(json.load(sys.stdin)[0]["tag_name"])')
+asset=$(echo "$json" | python3 -c 'import json,sys; rel=json.load(sys.stdin)[0]; print(next(a["browser_download_url"] for a in rel["assets"] if a["name"].endswith("amd64.deb")))')
+
+current=$("$CUR_DIR/freetube" --version 2>/dev/null | head -1 || true)
+cur_n=${current#v}; cur_n=${cur_n%% *}
+tag_n=${tag#v}; tag_n=${tag_n%-beta}
+
+echo "current: ${current:-none} | latest: $tag"
+if [ "$cur_n" = "$tag_n" ]; then
+  echo "already up to date"
+  exit 0
+fi
+
+tmp=$(mktemp -d /tmp/opencode/ft-update.XXXXXX)
+trap 'rm -rf "$tmp"' EXIT
+
+echo "downloading $asset"
+curl -sL -o "$tmp/ft.deb" "$asset"
+(cd "$tmp" && ar x ft.deb data.tar.xz && mkdir x && tar -xf data.tar.xz -C x)
+new=$("$tmp/x/opt/FreeTube/freetube" --version 2>/dev/null | head -1)
+echo "downloaded: $new"
+
+if pgrep -f "$CUR_DIR/freetube" >/dev/null; then
+  echo "WARNING: FreeTube is running — restart it after the update."
+fi
+
+rm -rf "$DATA/freetube.prev"
+if [ -d "$CUR_DIR" ]; then
+  mv "$CUR_DIR" "$DATA/freetube.prev"
+fi
+mv "$tmp/x/opt/FreeTube" "$CUR_DIR"
+
+echo "updated: $("$CUR_DIR/freetube" --version 2>/dev/null | head -1)"
+echo "previous version kept at $DATA/freetube.prev (delete when happy)"

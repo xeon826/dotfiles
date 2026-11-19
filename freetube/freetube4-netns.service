@@ -1,0 +1,13 @@
+[Unit]
+Description=IPv4-only network namespace for FreeTube (freetube4)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/freetube4-netns.sh up
+ExecStop=/usr/local/sbin/freetube4-netns.sh down
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

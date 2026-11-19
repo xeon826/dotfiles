@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=FreeTube
+Comment=A private YouTube client
+GenericName[en-US]=YouTube Client
+Exec=/home/dan/.local/bin/freetube %U
+Terminal=false
+Type=Application
+Icon=freetube
+StartupWMClass=FreeTube
+MimeType=x-scheme-handler/freetube;
+Categories=Network;
