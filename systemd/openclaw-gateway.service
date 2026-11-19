@@ -19,7 +19,7 @@ EnvironmentFile=-/home/dan/.openclaw/gateway.systemd.env
 Environment=HOME=/home/dan
 Environment=TMPDIR=/tmp
 Environment=NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
-Environment=PATH=/usr/bin:/home/dan/.npm-global/bin:/usr/local/bin:/bin:/home/dan/.local/share/pnpm:/home/dan/.local/share/pnpm/bin:/home/dan/.bun/bin:/home/dan/.nvm/current/bin:/home/dan/.local/bin:/home/dan/bin:/home/dan/.nix-profile/bin:/nix/var/nix/profiles/default/bin
+Environment=PATH=/home/dan/.opencode/bin:/usr/bin:/home/dan/.npm-global/bin:/usr/local/bin:/bin:/home/dan/.local/share/pnpm:/home/dan/.local/share/pnpm/bin:/home/dan/.bun/bin:/home/dan/.nvm/current/bin:/home/dan/.local/bin:/home/dan/bin:/home/dan/.nix-profile/bin:/nix/var/nix/profiles/default/bin
 Environment=NODE_OPTIONS=
 Environment=OPENCLAW_GATEWAY_PORT=18789
 Environment=OPENCLAW_SYSTEMD_UNIT=openclaw-gateway.service
