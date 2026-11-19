@@ -47,6 +47,7 @@ Singleton {
     property int _cmdTabId: 0
     property bool _cmdFailed: false
     property bool _cmdIsFocus: false
+    property var _cmdDone: null
 
     function refresh() {
         if (root._busy)
@@ -71,6 +72,7 @@ Singleton {
         root._cmdTabId = tabId;
         root._cmdFailed = !inst;
         root._cmdIsFocus = true;
+        root._cmdDone = null;
         let queue = [];
         if (inst) {
             queue = [["kitten", "@", "--to", inst.socket, "focus-tab", "--match", `id:${tabId}`]];
@@ -96,7 +98,37 @@ Singleton {
         root._cmdTabId = tabId;
         root._cmdFailed = false;
         root._cmdIsFocus = false;
+        root._cmdDone = null;
         root._cmdQueue = [["kitten", "@", "--to", inst.socket, "close-tab", "--match", `id:${tabId}`]];
+        root._runNextCmd();
+    }
+
+    /**
+     * Merge the OS window srcOswId into dstOswId of the same kitty process:
+     * every source tab is detached whole (panes + layout preserved) into the
+     * destination OS window via detach-tab, appended in order after the
+     * destination's first tab (the anchor id stays valid as tabs append).
+     * The emptied source OS window closes itself. Cross-instance merge is
+     * impossible over remote control (separate sockets) — same pid only.
+     */
+    function mergeOsWindow(srcPid, srcOswId, dstOswId) {
+        const inst = root._instanceForPid(srcPid);
+        if (!inst || srcOswId === dstOswId)
+            return;
+        const src = inst.osWindows.find(o => o.id === srcOswId);
+        const dst = inst.osWindows.find(o => o.id === dstOswId);
+        if (!src || !dst || dst.tabs.length === 0)
+            return;
+        const anchorTabId = dst.tabs[0].id;
+        root._cmdPid = srcPid;
+        root._cmdOswId = 0;
+        root._cmdTabId = 0;
+        root._cmdFailed = false;
+        root._cmdIsFocus = false;
+        root._cmdDone = () => root.refresh();
+        root._cmdQueue = src.tabs.map(t =>
+            ["kitten", "@", "--to", inst.socket, "detach-tab",
+             "--match", `id:${t.id}`, "--target-tab", `id:${anchorTabId}`]);
         root._runNextCmd();
     }
 
@@ -113,8 +145,12 @@ Singleton {
 
     function _runNextCmd() {
         if (root._cmdQueue.length === 0) {
+            const done = root._cmdDone;
+            root._cmdDone = null;
             if (root._cmdFailed && root._cmdIsFocus)
                 fallbackTimer.restart();
+            if (done)
+                done();
             return;
         }
         kittyCmdProc.command = root._cmdQueue.shift();

@@ -26,6 +26,12 @@ Item {
     // Absent = expanded (tabs are expanded by default); lives while the panel is open.
     property var expandedTabs: ({})
 
+    // Kitty merge (feature E): a kitty row dragged onto another kitty row of
+    // the same process merges its tabs into the hovered row's OS window.
+    property string mergeTargetAddress: ""
+    readonly property var draggedKittyMatch: root.draggingAddress !== ""
+        ? (root.kittyTabByAddress[root.draggingAddress] ?? null) : null
+
     function wsKeyFor(win) {
         // Hyprland 0.57: normal workspaces have numeric id; special workspaces have address like "special:browser"
         const ws = win?.workspace;
@@ -119,6 +125,7 @@ Item {
     function resetDragging() {
         root.draggingTargetKey = "";
         root.draggingAddress = "";
+        root.mergeTargetAddress = "";
     }
 
     // Feature D: monitor-drop mode
@@ -322,7 +329,9 @@ Item {
                                     width: parent.width
                                     height: section.rowHeight
                                     radius: Appearance.rounding.small
-                                    color: dragArea.containsMouse || expanderMouse.containsMouse ? Appearance.colors.colLayer1Hover : "transparent"
+                                    color: root.mergeTargetAddress === windowUnit.modelData.address
+                                        ? ColorUtils.mix(Appearance.colors.colLayer1Hover, Appearance.colors.colPrimary, 0.35) // merge target feedback
+                                        : (dragArea.containsMouse || expanderMouse.containsMouse ? Appearance.colors.colLayer1Hover : "transparent")
                                     opacity: windowUnit.dimmed ? 0.4 : 1
 
                                     Behavior on color {
@@ -352,6 +361,7 @@ Item {
                                         onReleased: {
                                             const targetKey = root.draggingTargetKey;
                                             const dropMonitor = targetKey === "" ? root.monitorDropTarget : "";
+                                            const dropMergeTarget = root.mergeTargetAddress;
                                             const client = windowUnit.modelData;
                                             windowRow.Drag.active = false;
                                             root.stopRowDrag();
@@ -359,7 +369,12 @@ Item {
                                             windowRow.x = 0;
                                             windowRow.y = 0;
                                             const sourceKey = root.wsKeyFor(client);
-                                            if (targetKey !== "" && targetKey !== sourceKey) {
+                                            if (dropMergeTarget !== "" && dropMergeTarget !== client.address) {
+                                                const srcMatch = root.kittyTabByAddress[client.address];
+                                                const dstMatch = root.kittyTabByAddress[dropMergeTarget];
+                                                if (srcMatch && dstMatch && srcMatch.pid === dstMatch.pid)
+                                                    KittyTabs.mergeOsWindow(srcMatch.pid, srcMatch.osWindow.id, dstMatch.osWindow.id);
+                                            } else if (targetKey !== "" && targetKey !== sourceKey) {
                                                 const targetSection = root.workspaceSections.find(s => s.key === targetKey);
                                                 if (!targetSection) return;
                                                 const wsDesignator = targetSection.special ? `"${targetSection.name}"` : `${targetSection.id}`;
@@ -466,6 +481,24 @@ Item {
                                                 font.variableAxes: Appearance.font.variableAxes.numbers
                                                 color: Appearance.colors.colPrimary
                                             }
+                                        }
+                                    }
+
+                                    DropArea { // kitty merge target — same-process kitty-on-kitty only; the row
+                                        // DropArea is topmost so it takes the drag from the section's
+                                        // workspace DropArea while hovered. Disabled (→ workspace move)
+                                        // for non-kitty sources and cross-instance targets.
+                                        anchors.fill: parent
+                                        enabled: root.draggedKittyMatch !== null
+                                            && windowUnit.kittyMatch !== null
+                                            && root.draggedKittyMatch.pid === windowUnit.kittyMatch.pid
+                                            && windowUnit.modelData.address !== root.draggingAddress
+                                        onEntered: (drag) => {
+                                            root.mergeTargetAddress = windowUnit.modelData.address;
+                                        }
+                                        onExited: {
+                                            if (root.mergeTargetAddress === windowUnit.modelData.address)
+                                                root.mergeTargetAddress = "";
                                         }
                                     }
                                 }

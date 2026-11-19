@@ -87,6 +87,14 @@ Super+R still opens the grid overview.
   uses focused ∪ active tab titles (`titleCandidates`, greedy 1:1 per pid,
   display-only). Exact focus/close always go through kitty ids; failures fall
   back to a Hyprland title scan.
+- Dragging a kitty row onto another kitty row of the same process MERGES the
+  two OS windows: per source tab, `detach-tab --match id:<tab> --target-tab
+  id:<anchorTab>` detaches the whole tab (panes + layout preserved) into the
+  target OS window, appended in order; the emptied source OS window closes
+  itself. Cross-instance merge is impossible over remote control (separate
+  sockets) — the target row's DropArea disables for non-kitty or cross-pid
+  drags and falls through to workspace-move DnD. kitty 0.50 has no
+  `move-window` subcommand; `detach-window`/`detach-tab` are the only movers.
 - Workspace sections are grouped by monitor (`hyprctl workspaces -j` items
   carry `monitor` name + `monitorID`), ordered by monitor x-position
   (left→right; ties by y for vertical stacks); each new group is marked by a
