@@ -32,9 +32,13 @@
         "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_PERSONAL_ACCESS_TOKEN}",
       },
     },
-    "gmaj": {
+    "gmaj-prod": {
       "type": "remote",
       "url": "https://givemeajob.ai/api/mcp",
+    },
+    "gmaj-local": {
+      "type": "remote",
+      "url": "http://localhost:3011/api/mcp",
     },
     "octocode": {
       "type": "local",
