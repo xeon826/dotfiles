@@ -3,22 +3,18 @@
   "mcp": {
     "firecrawl-mcp": {
       "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "firecrawl-mcp"
-      ],
+      "command": ["npx", "-y", "firecrawl-mcp"],
       "enabled": true,
       "environment": {
-        "FIRECRAWL_API_KEY": "{env:FIRECRAWL_API_KEY}"
-      }
+        "FIRECRAWL_API_KEY": "{env:FIRECRAWL_API_KEY}",
+      },
     },
     "context7": {
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
       "headers": {
-        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
-      }
+        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}",
+      },
     },
     "github": {
       "type": "local",
@@ -29,20 +25,21 @@
         "--rm",
         "-e",
         "GITHUB_PERSONAL_ACCESS_TOKEN",
-        "ghcr.io/github/github-mcp-server"
+        "ghcr.io/github/github-mcp-server",
       ],
       "enabled": true,
       "environment": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_PERSONAL_ACCESS_TOKEN}"
-      }
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_PERSONAL_ACCESS_TOKEN}",
+      },
+    },
+    "gmaj": {
+      "type": "remote",
+      "url": "https://givemeajob.ai/api/mcp",
     },
     "octocode": {
       "type": "local",
-      "command": [
-        "npx",
-        "octocode-mcp@latest"
-      ],
-      "enabled": true
+      "command": ["npx", "octocode-mcp@latest"],
+      "enabled": true,
     },
     "aws-mcp": {
       "type": "local",
@@ -51,143 +48,120 @@
         "mcp-proxy-for-aws@latest",
         "https://aws-mcp.us-east-1.api.aws/mcp",
         "--metadata",
-        "AWS_REGION=us-east-1"
+        "AWS_REGION=us-east-1",
       ],
-      "enabled": true
+      "enabled": true,
     },
     "stripe": {
       "type": "remote",
       "url": "https://mcp.stripe.com",
-      "enabled": true
+      "enabled": true,
     },
     "momentum": {
       "type": "local",
       "command": [
         "/home/dan/git_clones/momentum-mcp/.venv/bin/python",
         "-m",
-        "mcp_server.server"
+        "mcp_server.server",
       ],
       "cwd": "/home/dan/git_clones/momentum-mcp",
       "environment": {
-        "MCP_TRANSPORT": "stdio"
+        "MCP_TRANSPORT": "stdio",
       },
-      "enabled": true
+      "enabled": true,
     },
     "alpaca": {
       "type": "local",
-      "command": [
-        "uvx",
-        "alpaca-mcp-server"
-      ],
+      "command": ["uvx", "alpaca-mcp-server"],
       "environment": {
         "ALPACA_API_KEY": "{env:ALPACA_API_KEY}",
-        "ALPACA_SECRET_KEY": "{env:ALPACA_SECRET_KEY}"
+        "ALPACA_SECRET_KEY": "{env:ALPACA_SECRET_KEY}",
       },
-      "enabled": true
+      "enabled": true,
     },
     "danelfin": {
       "type": "remote",
       "url": "https://mcp.danelfin.com/mcp",
       "headers": {
-        "Authorization": "Bearer {env:DANELFIN_API_KEY}"
+        "Authorization": "Bearer {env:DANELFIN_API_KEY}",
       },
       "oauth": false,
-      "enabled": true
+      "enabled": true,
     },
     "tradememory": {
       "type": "local",
-      "command": [
-        "uvx",
-        "tradememory-protocol"
-      ],
-      "enabled": true
+      "command": ["uvx", "tradememory-protocol"],
+      "enabled": true,
     },
     "web-reader": {
       "type": "remote",
       "url": "https://api.z.ai/api/mcp/web_reader/mcp",
       "headers": {
-        "Authorization": "Bearer {env:ZAI_API_KEY}"
+        "Authorization": "Bearer {env:ZAI_API_KEY}",
       },
-      "enabled": true
+      "enabled": true,
     },
     "searxng": {
       "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "mcp-searxng"
-      ],
+      "command": ["npx", "-y", "mcp-searxng"],
       "environment": {
-        "SEARXNG_URL": "http://localhost:8095"
+        "SEARXNG_URL": "http://localhost:8095",
       },
-      "enabled": true
+      "enabled": true,
     },
     "form4api": {
       "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "form4api-mcp"
-      ],
+      "command": ["npx", "-y", "form4api-mcp"],
       "environment": {
-        "FORM4API_KEY": "{env:FORM4_API_KEY}"
+        "FORM4API_KEY": "{env:FORM4_API_KEY}",
       },
-      "enabled": true
+      "enabled": true,
     },
     "perplexity": {
       "type": "remote",
       "url": "https://api.perplexity.ai/mcp",
       "headers": {
-        "Authorization": "Bearer {env:PERPLEXITY_API_KEY}"
+        "Authorization": "Bearer {env:PERPLEXITY_API_KEY}",
       },
-      "enabled": true
+      "enabled": true,
     },
     "firefox-browser-control": {
       "type": "local",
       "command": [
         "node",
-        "/home/dan/git_clones/browser-control-mcp/mcp-server/dist/server.js"
+        "/home/dan/git_clones/browser-control-mcp/mcp-server/dist/server.js",
       ],
       "environment": {
         "EXTENSION_SECRET": "{env:BROWSER_MCP_SECRET}",
-        "EXTENSION_PORT": "8089"
+        "EXTENSION_PORT": "8089",
       },
-      "enabled": false
+      "enabled": false,
     },
     "browsermcp": {
       "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "@browsermcp/mcp@latest"
-      ],
-      "enabled": true
+      "command": ["npx", "-y", "@browsermcp/mcp@latest"],
+      "enabled": true,
     },
     // vercel-labs/agent-browser — typed MCP surface over the same daemon as the CLI.
     // Profiles: core (nav/snapshot/interaction) + network (routes/HAR/credentials).
     "agent-browser": {
       "type": "local",
-      "command": [
-        "agent-browser",
-        "mcp",
-        "--tools",
-        "core,network"
-      ],
-      "enabled": true
+      "command": ["agent-browser", "mcp", "--tools", "core,network"],
+      "enabled": true,
     },
     // FGRibreau/mcp-google-ads (Rust binary, rebuilt from ~/git_clones/mcp-google-ads).
     // Targets account 4666587905; auth via ~/.mcp-google-ads/{credentials,token}.json. See AGENTS.md.
     "google-ads": {
       "type": "local",
       "command": [
-        "/home/dan/git_clones/mcp-google-ads/target/release/mcp-google-ads"
+        "/home/dan/git_clones/mcp-google-ads/target/release/mcp-google-ads",
       ],
       "environment": {
         "GOOGLE_ADS_DEVELOPER_TOKEN": "{env:GOOGLE_ADS_DEVELOPER_TOKEN}",
         "GOOGLE_ADS_CUSTOMER_ID": "{env:GOOGLE_ADS_CUSTOMER_ID}",
-        "GOOGLE_ADS_TOKEN_PATH": "/home/dan/.mcp-google-ads/token.json"
+        "GOOGLE_ADS_TOKEN_PATH": "/home/dan/.mcp-google-ads/token.json",
       },
-      "enabled": true
+      "enabled": true,
     },
     // TKasperczyk/thunderbird-mcp — stdio bridge to the Thunderbird extension's HTTP server.
     // Requires the thunderbird-mcp.xpi installed in Thunderbird and TB running.
@@ -195,9 +169,9 @@
       "type": "local",
       "command": [
         "node",
-        "/home/dan/git_clones/thunderbird-mcp/mcp-bridge.cjs"
+        "/home/dan/git_clones/thunderbird-mcp/mcp-bridge.cjs",
       ],
-      "enabled": true
+      "enabled": true,
     },
     // hao-cyber/phone-mcp — Android via ADB (wireless). Needs `adb connect` first;
     // port changes per wireless-debugging toggle, rediscover via avahi (_adb-tls-connect._tcp).
@@ -205,24 +179,16 @@
     // mcp<2 pinned: package still uses FastMCP v1 API.
     "phone": {
       "type": "local",
-      "command": [
-        "uvx",
-        "--with",
-        "mcp<2",
-        "phone-mcp"
-      ],
-      "enabled": true
+      "command": ["uvx", "--with", "mcp<2", "phone-mcp"],
+      "enabled": true,
     },
     "google-ads-official": {
       "type": "local",
-      "command": [
-        "uvx",
-        "google-ads-mcp"
-      ],
+      "command": ["uvx", "google-ads-mcp"],
       "environment": {
-        "GOOGLE_APPLICATION_CREDENTIALS": "/home/dan/.config/google-ads/user-adc.json"
+        "GOOGLE_APPLICATION_CREDENTIALS": "/home/dan/.config/google-ads/user-adc.json",
       },
-      "enabled": false
+      "enabled": false,
     },
     // speedyapply/JobSpy official MCP — job board scraper (LinkedIn, Indeed,
     // Glassdoor, ZipRecruiter, Bayt, Naukri, BDJobs, HelloWork; Google broken upstream).
@@ -230,18 +196,15 @@
     // Boards rate-limit (LinkedIn 429s ~1min); set HTTPS_PROXY here if ever needed.
     "jobspy": {
       "type": "local",
-      "command": [
-        "uvx",
-        "mcp-jobspy@latest"
-      ],
-      "enabled": true
-    }
+      "command": ["uvx", "mcp-jobspy@latest"],
+      "enabled": true,
+    },
   },
   "plugin": [
     // "opencode-antigravity-auth@latest",
     "@tarquinen/opencode-dcp@latest",
     "oh-my-opencode-slim",
-    "opencode-browser"
+    "opencode-browser",
   ],
   "provider": {
     "google": {
@@ -250,250 +213,197 @@
           "name": "Gemini 3 Pro (Antigravity)",
           "limit": {
             "context": 1048576,
-            "output": 65535
+            "output": 65535,
           },
           "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
           },
           "variants": {
             "low": {
-              "thinkingLevel": "low"
+              "thinkingLevel": "low",
             },
             "high": {
-              "thinkingLevel": "high"
-            }
-          }
+              "thinkingLevel": "high",
+            },
+          },
         },
         "antigravity-gemini-3.1-pro": {
           "name": "Gemini 3.1 Pro (Antigravity)",
           "limit": {
             "context": 1048576,
-            "output": 65535
+            "output": 65535,
           },
           "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
           },
           "variants": {
             "low": {
-              "thinkingLevel": "low"
+              "thinkingLevel": "low",
             },
             "high": {
-              "thinkingLevel": "high"
-            }
-          }
+              "thinkingLevel": "high",
+            },
+          },
         },
         "antigravity-gemini-3-flash": {
           "name": "Gemini 3 Flash (Antigravity)",
           "limit": {
             "context": 1048576,
-            "output": 65536
+            "output": 65536,
           },
           "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
           },
           "variants": {
             "minimal": {
-              "thinkingLevel": "minimal"
+              "thinkingLevel": "minimal",
             },
             "low": {
-              "thinkingLevel": "low"
+              "thinkingLevel": "low",
             },
             "medium": {
-              "thinkingLevel": "medium"
+              "thinkingLevel": "medium",
             },
             "high": {
-              "thinkingLevel": "high"
-            }
-          }
+              "thinkingLevel": "high",
+            },
+          },
         },
         "antigravity-claude-sonnet-4-6": {
           "name": "Claude Sonnet 4.6 (Antigravity)",
           "limit": {
             "context": 200000,
-            "output": 64000
+            "output": 64000,
           },
           "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          }
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
         },
         "antigravity-claude-opus-4-6-thinking": {
           "name": "Claude Opus 4.6 Thinking (Antigravity)",
           "limit": {
             "context": 200000,
-            "output": 64000
+            "output": 64000,
           },
           "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
           },
           "variants": {
             "low": {
               "thinkingConfig": {
-                "thinkingBudget": 8192
-              }
+                "thinkingBudget": 8192,
+              },
             },
             "max": {
               "thinkingConfig": {
-                "thinkingBudget": 32768
-              }
-            }
-          }
+                "thinkingBudget": 32768,
+              },
+            },
+          },
         },
         "gemini-2.5-flash": {
           "name": "Gemini 2.5 Flash (Gemini CLI)",
           "limit": {
             "context": 1048576,
-            "output": 65536
+            "output": 65536,
           },
           "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          }
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
         },
         "gemini-2.5-pro": {
           "name": "Gemini 2.5 Pro (Gemini CLI)",
           "limit": {
             "context": 1048576,
-            "output": 65536
+            "output": 65536,
           },
           "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          }
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
         },
         "gemini-3-flash-preview": {
           "name": "Gemini 3 Flash Preview (Gemini CLI)",
           "limit": {
             "context": 1048576,
-            "output": 65536
+            "output": 65536,
           },
           "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          }
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
         },
         "gemini-3-pro-preview": {
           "name": "Gemini 3 Pro Preview (Gemini CLI)",
           "limit": {
             "context": 1048576,
-            "output": 65535
+            "output": 65535,
           },
           "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          }
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
         },
         "gemini-3.1-pro-preview": {
           "name": "Gemini 3.1 Pro Preview (Gemini CLI)",
           "limit": {
             "context": 1048576,
-            "output": 65535
+            "output": 65535,
           },
           "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          }
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
         },
         "gemini-3.1-pro-preview-customtools": {
           "name": "Gemini 3.1 Pro Preview Custom Tools (Gemini CLI)",
           "limit": {
             "context": 1048576,
-            "output": 65535
+            "output": 65535,
           },
           "modalities": {
-            "input": [
-              "text",
-              "image",
-              "pdf"
-            ],
-            "output": [
-              "text"
-            ]
-          }
-        }
-      }
-    }
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
+        },
+      },
+    },
   },
   "agent": {
     "explore": {
-      "disable": true
+      "disable": true,
     },
     "general": {
-      "disable": true
-    }
+      "disable": true,
+    },
   },
   // Read-only allowlists (no prompt approval). Never blanket-allow write patterns here.
   "permissions": [
-    { "action": "shell", "resource": "AWS_PROFILE=AdministratorAccess-* aws logs tail *", "effect": "allow" },
-    { "action": "shell", "resource": "curl -s http://localhost:*", "effect": "allow" },
-    { "action": "shell", "resource": "docker exec gmaj-db psql -U postgres -tc *", "effect": "allow" }
+    {
+      "action": "shell",
+      "resource": "AWS_PROFILE=AdministratorAccess-* aws logs tail *",
+      "effect": "allow",
+    },
+    {
+      "action": "shell",
+      "resource": "curl -s http://localhost:*",
+      "effect": "allow",
+    },
+    {
+      "action": "shell",
+      "resource": "docker exec gmaj-db psql -U postgres -tc *",
+      "effect": "allow",
+    },
   ],
   "lsp": true,
   "plugins": [
-    "@aerovato/operator-opencode-v2@latest"
-  ]
+    "@aerovato/operator-opencode-v2@latest",
+    "opencode-search-sessions"
+  ],
 }
