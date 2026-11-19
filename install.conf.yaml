@@ -51,6 +51,7 @@
     ~/.Xmodmap: Xmodmap
     ~/.config/lazygit/config.yml: lazygit.yml
     ~/.config/systemd/user/everos.service: systemd/everos.service
+    ~/.config/systemd/user/openclaw-gateway.service: systemd/openclaw-gateway.service
     ~/.config/systemd/user/gwal.service: systemd/gwal.service
     ~/.config/systemd/user/eos-update-notifier.service: systemd/eos-update-notifier.service
     ~/.config/systemd/user/eos-update-notifier.timer: systemd/eos-update-notifier.timer

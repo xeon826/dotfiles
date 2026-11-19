@@ -269,6 +269,11 @@ Item {
 
                     Column {
                         id: sectionContent
+                        // Above the section-level workspace DropArea (declared after this,
+                        // but z wins over declaration order) so row-level kitty-merge
+                        // DropAreas receive drag events; drags over gaps/empty areas still
+                        // fall through to the workspace DropArea below.
+                        z: 1
                         anchors.top: parent.top
                         anchors.left: parent.left
                         anchors.right: parent.right
