@@ -408,6 +408,12 @@
   "lsp": true,
   "plugins": [
     "@aerovato/operator-opencode-v2@latest",
-    "opencode-search-sessions"
+    "opencode-search-sessions",
+    {
+      "package": "ever-opencode",
+      "options": {
+        "everosUrl": "http://127.0.0.1:8000"
+      }
+    }
   ],
 }

@@ -65,6 +65,41 @@ Super+R still opens the grid overview.
   a plain MouseArea (no `hovered` property) is ALWAYS visible. Always pass
   `extraVisibleCondition: false` when using `alternativeVisibleCondition`.
 - The panel window has no fixed `screen`: it opens on the focused monitor.
+- **Kitty tabs** (`services/KittyTabs.qml`, singleton): kitty tabs are
+  invisible to Hyprland (all tabs share one Wayland surface), so the sidebar
+  shows them nested under their kitty row inside a grouping box (rows with
+  >1 tab only, expanded by default; collapse state is keyed by kitty
+  OS-window id and lives only while the panel is open). Left-click a tab =
+  switch + focus + close the sidebar; middle-click = close that tab.
+  `kitty.conf` has `listen_on unix:@mykitty` without `{kitty_pid}` ⇒ each
+  instance listens on `unix:@mykitty-<pid>`; the service enumerates
+  `pidof kitty` and polls each socket's `kitten @ ls` on open + every 1s
+  while open, skipping failing instances.
+- **kitty 0.50 match syntax gotchas** (verified via negative tests): tab
+  commands (`focus-tab`, `close-tab`) match tabs with `--match id:<tabId>` —
+  `tab_id:` is NOT a recognized location. Window-side `id:<N>` matches PANES,
+  never OS-window ids: to raise an OS window, `focus-window --match
+  id:<paneId>` with any pane id from that OS window (there is no
+  `focus-os-window`). `kitten @ ls` top-level entries are OS windows
+  `{id, wm_class, wm_name, tabs[]}`; `wm_name` is just "kitty" and the
+  OS-window Wayland title (= Hyprland client title) tracks the tab last
+  focused and drifts behind `is_active` — client↔OS-window matching therefore
+  uses focused ∪ active tab titles (`titleCandidates`, greedy 1:1 per pid,
+  display-only). Exact focus/close always go through kitty ids; failures fall
+  back to a Hyprland title scan.
+- Workspace sections are grouped by monitor (`hyprctl workspaces -j` items
+  carry `monitor` name + `monitorID`), ordered by monitor x-position
+  (left→right; ties by y for vertical stacks); each new group is marked by a
+  heavier divider + monitor name; specials stay last, ungrouped. Divider lines
+  anchor their right edge to the label (8px gap) so they never strike through
+  the label text.
+- Window rows can also be dragged OUT of the sidebar onto monitor space: while
+  a row drag is active, a 25ms `hyprctl cursorpos -j` poll hit-tests monitor
+  logical rects (monitor `width`/`height` are physical px, `cursorpos` is
+  logical; the dragged row shows a `→ <monitor>` hint). Release dispatches
+  `hl.dsp.window.move({window=…,workspace=<target active ws>,monitor=…,follow=false})`;
+  floating windows need a follow-up `{window=…,x=…,y=…}` dispatch (x/y never
+  together with workspace/monitor in one dispatch).
 
 
 ## Super-hold workspace deck (`modules/ii/bar/WorkspaceDeck.qml`)
