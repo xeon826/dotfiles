@@ -153,6 +153,17 @@
       "command": ["agent-browser", "mcp", "--tools", "core,network"],
       "enabled": true,
     },
+    // tuaris/keepassxc-mcp — KeePassXC browser-integration protocol (NaCl box, same
+    // channel as the Chrome extension). Association identity: ~/.local/share/keepassxc-mcp/identity.json.
+    // KEEPASSXC_SOCKET required: 2.8's BrowserServer path isn't covered by its kpxc_server auto-detect.
+    "keepassxc": {
+      "type": "local",
+      "command": ["keepassxc-mcp"],
+      "enabled": true,
+      "environment": {
+        "KEEPASSXC_SOCKET": "/run/user/1000/app/org.keepassxc.KeePassXC/org.keepassxc.KeePassXC.BrowserServer",
+      },
+    },
     // FGRibreau/mcp-google-ads (Rust binary, rebuilt from ~/git_clones/mcp-google-ads).
     // Targets account 4666587905; auth via ~/.mcp-google-ads/{credentials,token}.json. See AGENTS.md.
     "google-ads": {
@@ -201,6 +212,19 @@
     "jobspy": {
       "type": "local",
       "command": ["uvx", "mcp-jobspy@latest"],
+      "enabled": true,
+    },
+    // keanehatescoding/hyprland-mcp — Hyprland compositor control via hyprctl (80 tools:
+    // windows/workspaces/monitors/keybinds, grim/slurp screenshots, hyprpaper/hypridle/
+    // hyprlock/hyprsunset/hyprpicker/launcher, plus hyprland_dispatch + hyprctl_raw
+    // escape hatches). Source build in ~/git_clones/hyprland-mcp (npm install && npm run
+    // build); must run with the Hyprland session env — inherits from opencode inside the
+    // session, no HYPRLAND_INSTANCE_SIGNATURE override (would go stale per session anyway).
+    // WARNING: unlock_screen bypasses PAM (pkill -USR1 hyprlock); it and exit_hyprland/
+    // exec_* are ask-gated in permissions below.
+    "hyprland": {
+      "type": "local",
+      "command": ["node", "/home/dan/git_clones/hyprland-mcp/build/index.js"],
       "enabled": true,
     },
   },
@@ -403,6 +427,29 @@
       "action": "shell",
       "resource": "docker exec gmaj-db psql -U postgres -tc *",
       "effect": "allow",
+    },
+    // hyprland-mcp dangerous tools need approval (unlock_screen bypasses PAM via
+    // pkill -USR1 hyprlock — treated as screen-lock security boundary). Read-only
+    // hyprland_* tools are ungated. Action = <server>_<tool>, last matching rule wins.
+    {
+      "action": "hyprland_unlock_screen",
+      "resource": "*",
+      "effect": "ask",
+    },
+    {
+      "action": "hyprland_exit_hyprland",
+      "resource": "*",
+      "effect": "ask",
+    },
+    {
+      "action": "hyprland_exec_cmd",
+      "resource": "*",
+      "effect": "ask",
+    },
+    {
+      "action": "hyprland_exec_raw",
+      "resource": "*",
+      "effect": "ask",
     },
   ],
   "lsp": true,
